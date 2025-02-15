@@ -1,0 +1,48 @@
+# Ignora o ambiente virtual
+venv/
+.env/
+
+# Ignora arquivos de cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignora arquivos de configuração local
+*.env
+*.local
+
+# Ignora arquivos de banco de dados SQLite
+*.sqlite3
+*.db
+
+# Ignora arquivos de log
+*.log
+
+# Ignora diretórios de build e distribuição
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Ignora arquivos de IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignora arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignora arquivos de configuração do Flask (se necessário)
+instance/
+
+# Ignora arquivos de cache do pytest
+.pytest_cache/
+
+# Ignora arquivos de cobertura de testes
+.coverage
+htmlcov/
+
+# Ignora arquivos de dependências (se usar pipenv)
+Pipfile.lock
