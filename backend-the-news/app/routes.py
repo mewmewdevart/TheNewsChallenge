@@ -1,10 +1,12 @@
-# app/routes.py
 from flask import Blueprint, render_template, request, jsonify
 from .models import db, NewsletterRead
 
 routes = Blueprint("routes", __name__)
 
-# Rota para o webhook
+@routes.route('/')
+def home():
+    return render_template("index.html")
+
 @routes.route("/webhook", methods=["GET"])
 def webhook():
     email = request.args.get("email")
