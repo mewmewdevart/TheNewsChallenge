@@ -46,7 +46,10 @@ O desafio consiste em criar uma plataforma de **gamificação** para aumentar o 
 
 Lorem ipsum!
 
+## Backlog
+14/02/2025 - Estruturação inicial do projeto, definição da arquitetura e organização dos diretórios.
 
+15/02/2025 - Configuração do repositório e do projeto, definição dos estilos globais, implementação dos ícones favicon e adição do arquivo site.webmanifest, permitindo que o site seja adicionado à tela inicial de dispositivos móveis como um aplicativo.
 
 ## Funcionalidades
 
