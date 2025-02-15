@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <title>Guia de Rotas API</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="header__logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo TheNewsLetterStreaks" />
+        </div>
+        <h1 class="header__title">/ Guia de Rotas API</h1>
+    </header>
+
+    <main class="main">
+        <section class="intro">
+            <p class="intro__text">
+                Bem-vindo ao guia de rotas da API! 👋 <br>
+                Esta página faz parte do backend do <span class="intro__highlight">TheNewsLetterStreaks</span>, um projeto que tem como objetivo processar dados recebidos via webhook e desenvolver funcionalidades específicas com base nessas informações.
+            </p>
+        </section>
+
+        <section class="routes">
+            <h2 class="routes__title">Rotas Disponíveis /</h2>
+            <ul class="routes__list">
+                <li class="routes__item">
+                    <h3 class="routes__route"><code>/</code></h3>
+                    <p class="routes__description">Exibe a página inicial com o guia de rotas.</p>
+                    <span class="routes__method routes__method--get">GET</span>
+                </li>
+                <li class="routes__item">
+                    <h3 class="routes__route"><code>/webhook</code></h3>
+                    <p class="routes__description">Registra os dados enviados via webhook.</p>
+                    <span class="routes__method routes__method--get">GET</span>
+                    <p class="routes__example">Exemplo de requisição GET:</p>
+                    <code class="routes__code">
+                        GET http://127.0.0.1:5000/webhook?email=seu_email&post_id=post_id
+                    </code>
+                    <table class="routes__table">
+                        <thead>
+                            <tr>
+                                <th>Parâmetro</th>
+                                <th>Tipo</th>
+                                <th>Descrição</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>email</td>
+                                <td>String</td>
+                                <td>O endereço de e-mail do usuário.</td>
+                            </tr>
+                            <tr>
+                                <td>post_id</td>
+                                <td>String</td>
+                                <td>O ID do post associado.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
