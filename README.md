@@ -3,10 +3,6 @@
 </p>
 
 
-<h1 align="center">
-  TheNewsLetterStreaks (Em Desenvolvimento)
-</h1>
-
 <p align="center">
 	<b><i>
     🚀 | Minha solução para o desafio técnico da vaga de Desenvolvedor Full Stack Jr (Front-end Specialist) na Waffle.
@@ -18,7 +14,7 @@
     <a href="#" target="_blank">Acesse o Site</a> 
 </p>
 
----
+
 
 ## Sumário
 
@@ -34,7 +30,7 @@
 8. [Referências](#referências)
 9. [Licença](#licença)
 
----
+
 
 ## Desafio
 
@@ -44,13 +40,13 @@ O desafio consiste em criar uma plataforma de **gamificação** para aumentar o 
 2. **Dashboard Administrativo**: Para a equipe da Waffle monitorar métricas de engajamento, como streaks, rankings e padrões de abertura.
 3. **Integração com API**: Utilizando dados fornecidos via webhook da plataforma **Beehiiv**.
 
----
+
 
 ## Sobre o Projeto
 
 Lorem ipsum!
 
----
+
 
 ## Funcionalidades
 
@@ -69,7 +65,7 @@ Lorem ipsum!
 - **Cálculo Automático**: O streak aumenta +1 a cada dia consecutivo de abertura.
 - **Reset**: O streak é zerado se o leitor não abrir a newsletter no dia seguinte.
 
----
+
 
 ## Tecnologias Utilizadas
 
@@ -80,7 +76,7 @@ Lorem ipsum!
 - **Testes**: Pytest (unitários) + Cypress (E2E)
 - **Deploy**: Vercel (Frontend) + Heroku (Backend)
 
----
+
 
 ## Estrutura do Projeto
 
@@ -103,7 +99,7 @@ WaffleNewsletterStreaks/
 └── README.md               # Documentação do projeto
 ```
 
----
+
 
 ## Instruções de Uso
 
@@ -152,7 +148,7 @@ WaffleNewsletterStreaks/
 
 5. Acesse o site em: `http://localhost:3000`.
 
----
+
 
 ## Testes
 
@@ -172,7 +168,7 @@ Para garantir a qualidade do projeto, foram implementados testes unitários e en
      npm run cypress
      ```
 
----
+
 
 ## Referências
 
@@ -183,13 +179,13 @@ Para garantir a qualidade do projeto, foram implementados testes unitários e en
 - [Documentação do Beehiiv API](https://developers.beehiiv.com/)
 - [Documentação do TailwindCSS](https://tailwindcss.com/docs)
 
----
+
 
 ## Licença
 
 Este projeto está licenciado sob a [MIT License](LICENSE).
 
----
+
 
 <p align="center">
   Desenvolvido com 💜 por [Seu Nome]
