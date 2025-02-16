@@ -26,18 +26,21 @@
         <section class="routes">
             <h2 class="routes__title">Rotas Disponíveis /</h2>
             <ul class="routes__list">
+                <!-- Rota / -->
                 <li class="routes__item">
                     <h3 class="routes__route"><code>/</code></h3>
                     <p class="routes__description">Exibe a página inicial com o guia de rotas.</p>
                     <span class="routes__method routes__method--get">GET</span>
                 </li>
+
+                <!-- Rota /webhook -->
                 <li class="routes__item">
                     <h3 class="routes__route"><code>/webhook</code></h3>
                     <p class="routes__description">Registra os dados enviados via webhook.</p>
                     <span class="routes__method routes__method--get">GET</span>
                     <p class="routes__example">Exemplo de requisição GET:</p>
                     <code class="routes__code">
-                        GET http://127.0.0.1:5000/webhook?email=seu_email&post_id=post_id
+                        GET https://thenewsletterstreaks.onrender.com/webhook?email=seu_email&post_id=post_id
                     </code>
                     <table class="routes__table">
                         <thead>
@@ -60,6 +63,177 @@
                             </tr>
                         </tbody>
                     </table>
+                </li>
+
+                <!-- Rota /reads -->
+                <li class="routes__item">
+                    <h3 class="routes__route"><code>/reads</code></h3>
+                    <p class="routes__description">Lista todas as leituras registradas no banco de dados.</p>
+                    <span class="routes__method routes__method--get">GET</span>
+                    <p class="routes__example">Exemplo de requisição GET:</p>
+                    <code class="routes__code">
+                        GET https://thenewsletterstreaks.onrender.com/reads
+                    </code>
+                    <p class="routes__example">Resposta esperada:</p>
+                    <pre class="routes__code">
+[
+    {
+        "email": "larissa@thenews.com",
+        "id": 7,
+        "post_id": "123",
+        "timestamp": "Sun, 16 Feb 2025 23:11:06 GMT",
+        "utm_campaign": null,
+        "utm_channel": null,
+        "utm_medium": null,
+        "utm_source": null
+    }
+]</pre>
+                </li>
+
+                <!-- Rota /metrics -->
+                <li class="routes__item">
+                    <h3 class="routes__route"><code>/metrics</code></h3>
+                    <p class="routes__description">Retorna métricas sobre as leituras, como total de leitores, total de aberturas e média de aberturas por leitor.</p>
+                    <span class="routes__method routes__method--get">GET</span>
+                    <p class="routes__example">Exemplo de requisição GET:</p>
+                    <code class="routes__code">
+                        GET https://thenewsletterstreaks.onrender.com/metrics
+                    </code>
+                    <p class="routes__example">Resposta esperada:</p>
+                    <pre class="routes__code">
+{
+    "total_readers": 10,
+    "total_opens": 50,
+    "average_opens": 5.0
+}</pre>
+                </li>
+
+                <!-- Rota /top-readers -->
+                <li class="routes__item">
+                    <h3 class="routes__route"><code>/top-readers</code></h3>
+                    <p class="routes__description">Retorna os 10 leitores com as maiores sequências de leitura (streaks).</p>
+                    <span class="routes__method routes__method--get">GET</span>
+                    <p class="routes__example">Exemplo de requisição GET:</p>
+                    <code class="routes__code">
+                        GET https://thenewsletterstreaks.onrender.com/top-readers
+                    </code>
+                    <p class="routes__example">Resposta esperada:</p>
+                    <pre class="routes__code">
+[
+    {
+        "email": "larissa@thenews.com",
+        "streak": 10
+    },
+    {
+        "email": "joao@thenews.com",
+        "streak": 8
+    }
+]</pre>
+                </li>
+
+                <!-- Rota /streak -->
+                <li class="routes__item">
+                    <h3 class="routes__route"><code>/streak</code></h3>
+                    <p class="routes__description">Retorna a sequência de leitura (streak) de um e-mail específico.</p>
+                    <span class="routes__method routes__method--get">GET</span>
+                    <p class="routes__example">Exemplo de requisição GET:</p>
+                    <code class="routes__code">
+                        GET https://thenewsletterstreaks.onrender.com/streak?email=larissa@thenews.com
+                    </code>
+                    <table class="routes__table">
+                        <thead>
+                            <tr>
+                                <th>Parâmetro</th>
+                                <th>Tipo</th>
+                                <th>Descrição</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>email</td>
+                                <td>String</td>
+                                <td>O endereço de e-mail do usuário.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="routes__example">Resposta esperada:</p>
+                    <pre class="routes__code">
+{
+    "email": "larissa@thenews.com",
+    "streak": 10
+}</pre>
+                </li>
+
+                <!-- Rota /history -->
+                <li class="routes__item">
+                    <h3 class="routes__route"><code>/history</code></h3>
+                    <p class="routes__description">Retorna o histórico de leituras de um e-mail específico.</p>
+                    <span class="routes__method routes__method--get">GET</span>
+                    <p class="routes__example">Exemplo de requisição GET:</p>
+                    <code class="routes__code">
+                        GET https://thenewsletterstreaks.onrender.com/history?email=larissa@thenews.com
+                    </code>
+                    <table class="routes__table">
+                        <thead>
+                            <tr>
+                                <th>Parâmetro</th>
+                                <th>Tipo</th>
+                                <th>Descrição</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>email</td>
+                                <td>String</td>
+                                <td>O endereço de e-mail do usuário.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="routes__example">Resposta esperada:</p>
+                    <pre class="routes__code">
+[
+    {
+        "post_id": "123",
+        "timestamp": "Sun, 16 Feb 2025 23:11:06 GMT"
+    },
+    {
+        "post_id": "456",
+        "timestamp": "Mon, 17 Feb 2025 10:15:30 GMT"
+    }
+]</pre>
+                </li>
+
+                <!-- Rota /check-email -->
+                <li class="routes__item">
+                    <h3 class="routes__route"><code>/check-email</code></h3>
+                    <p class="routes__description">Verifica se um e-mail está registrado no banco de dados.</p>
+                    <span class="routes__method routes__method--get">GET</span>
+                    <p class="routes__example">Exemplo de requisição GET:</p>
+                    <code class="routes__code">
+                        GET https://thenewsletterstreaks.onrender.com/check-email?email=larissa@thenews.com
+                    </code>
+                    <table class="routes__table">
+                        <thead>
+                            <tr>
+                                <th>Parâmetro</th>
+                                <th>Tipo</th>
+                                <th>Descrição</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>email</td>
+                                <td>String</td>
+                                <td>O endereço de e-mail do usuário.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="routes__example">Resposta esperada:</p>
+                    <pre class="routes__code">
+{
+    "message": "E-mail encontrado",
+    "email": "larissa@thenews.com"
+}</pre>
                 </li>
             </ul>
         </section>
