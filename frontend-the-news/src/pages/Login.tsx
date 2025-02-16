@@ -23,7 +23,7 @@ const Login: React.FC = () => {
     try {
       // Verifica se o e-mail está cadastrado
       const checkEmailResponse = await fetch(
-        `http://localhost:5000/check-email?email=${encodeURIComponent(email)}`
+        `https://thenewsletterstreaks.onrender.com/check-email?email=${encodeURIComponent(email)}`
       );
       if (!checkEmailResponse.ok) {
         throw new Error("E-mail não cadastrado.");
@@ -31,7 +31,7 @@ const Login: React.FC = () => {
 
       // Verifica o streak
       const streakResponse = await fetch(
-        `http://localhost:5000/streak?email=${encodeURIComponent(email)}`
+        `https://thenewsletterstreaks.onrender.com/streak?email=${encodeURIComponent(email)}`
       );
       if (!streakResponse.ok) {
         throw new Error("Erro ao buscar dados.");

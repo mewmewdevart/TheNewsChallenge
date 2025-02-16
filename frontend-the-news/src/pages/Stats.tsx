@@ -35,7 +35,7 @@ const Stats: React.FC = () => {
         try {
           // Busca o streak
           const streakResponse = await fetch(
-            `http://localhost:5000/streak?email=${email}`
+            `https://thenewsletterstreaks.onrender.com/streak?email=${email}`
           );
           if (!streakResponse.ok) {
             throw new Error("Erro ao buscar streak.");
@@ -45,7 +45,7 @@ const Stats: React.FC = () => {
 
           // Busca o histórico
           const historyResponse = await fetch(
-            `http://localhost:5000/history?email=${email}`
+            `https://thenewsletterstreaks.onrender.com/history?email=${email}`
           );
           if (!historyResponse.ok) {
             throw new Error("Erro ao buscar histórico.");
