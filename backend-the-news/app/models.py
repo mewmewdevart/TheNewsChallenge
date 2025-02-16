@@ -9,3 +9,4 @@ class NewsletterRead(db.Model):
     utm_campaign = db.Column(db.String(50))
     utm_channel = db.Column(db.String(50))
     timestamp = db.Column(db.DateTime, default=db.func.current_timestamp())
+    streak = db.Column(db.Integer, default=0)

@@ -1,13 +1,19 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Stats from "./pages/Stats";
+import Dashboard from "./pages/Dashboard";
 
-import './App.css'
-
-function App() {
-
+const App: React.FC = () => {
   return (
-    <>
-    <h1 className='bg-mint-500'>oi</h1>
-    </>
-  )
-}
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/stats" element={<Stats />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App;

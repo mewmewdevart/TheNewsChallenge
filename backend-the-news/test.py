@@ -1,5 +1,5 @@
 from app.database import create_app
-from app.services import calculate_streak
+from app.utils import calculate_streak
 from app.models import NewsletterRead, db
 from datetime import datetime, timedelta
 
