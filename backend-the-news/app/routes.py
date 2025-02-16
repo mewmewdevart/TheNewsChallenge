@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
 from .models import NewsletterRead, db
-from .models import NewsletterRead, db
 from datetime import datetime, timedelta
 from sqlalchemy import func
 from .utils import calculate_streak
