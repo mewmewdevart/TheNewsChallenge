@@ -1,7 +1,7 @@
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5c353b0b-9d46-4cf6-941f-82aa42f0de3f" alt="The News logo" style="width: 200px;">
 </p>
-
 
 <p align="center">
 	<b><i>
@@ -9,12 +9,11 @@
   </i></b><br>
 </p>
 
-
 <p align="center">
-    <a href="#" target="_blank">Acesse o Site</a> 
+    <a href="https://thenewsletterstreaks.onrender.com" target="_blank">Acesse o Site</a> 
 </p>
 
-
+---
 
 ## Sumário
 
@@ -26,33 +25,28 @@
 6. [Instruções de Uso](#instruções-de-uso)
     - [Pré-requisitos](#pré-requisitos)
     - [Rodando o Projeto Localmente](#rodando-o-projeto-localmente)
-7. [Testes](#testes)
-8. [Referências](#referências)
-9. [Licença](#licença)
+7. [Testando o endpoint](#testando-o-endpoint-webhook)
+8. [Testes](#testes)
+9. [Referências](#referências)
+10. [Licença](#licença)
 
-
+---
 
 ## Desafio
 
-O desafio consiste em criar uma plataforma de **gamificação** para aumentar o engajamento dos leitores da newsletter do **the news**. A solução deve incluir:
+O desafio consiste em criar uma plataforma de **gamificação** para aumentar o engajamento dos leitores da newsletter do **The News**. A solução deve incluir:
 
 1. **Área Logada**: Onde os leitores podem visualizar seu **streak** (sequência de aberturas consecutivas) e estatísticas pessoais.
 2. **Dashboard Administrativo**: Para a equipe da Waffle monitorar métricas de engajamento, como streaks, rankings e padrões de abertura.
 3. **Integração com API**: Utilizando dados fornecidos via webhook da plataforma **Beehiiv**.
 
-
+---
 
 ## Sobre o Projeto
 
-Lorem ipsum!
+Este projeto foi desenvolvido para criar uma solução de gamificação que incentiva os leitores da newsletter a manterem um hábito de leitura diário. Através de streaks e métricas de engajamento, os leitores são motivados a abrir as newsletters consecutivamente, enquanto a equipe da Waffle pode monitorar o desempenho das campanhas.
 
-## Backlog
-14/02/2025 - Estruturação inicial do projeto, definição da arquitetura e organização dos diretórios.
-
-15/02/2025 - Configuração do repositório e do projeto, definição dos estilos globais, implementação dos ícones favicon e adição do arquivo site.webmanifest, permitindo que o site seja adicionado à tela inicial de dispositivos móveis como um aplicativo.
-15/02/2025 -
-
-
+---
 
 ## Funcionalidades
 
@@ -71,18 +65,18 @@ Lorem ipsum!
 - **Cálculo Automático**: O streak aumenta +1 a cada dia consecutivo de abertura.
 - **Reset**: O streak é zerado se o leitor não abrir a newsletter no dia seguinte.
 
-
+---
 
 ## Tecnologias Utilizadas
 
 - **Frontend**: React + TypeScript
-- **Backend**: Python (Flask ou FastAPI)
+- **Backend**: Python (Flask)
 - **Banco de Dados**: PostgreSQL
 - **Estilização**: TailwindCSS
 - **Testes**: Pytest (unitários) + Cypress (E2E)
-- **Deploy**: Vercel (Frontend) + Heroku (Backend)
+- **Deploy**: Render (Backend)
 
-
+---
 
 ## Estrutura do Projeto
 
@@ -105,7 +99,7 @@ WaffleNewsletterStreaks/
 └── README.md               # Documentação do projeto
 ```
 
-
+---
 
 ## Instruções de Uso
 
@@ -138,13 +132,27 @@ WaffleNewsletterStreaks/
    ```
 
 3. Configure o banco de dados:
-   - Crie um banco de dados PostgreSQL.
-   - Configure as variáveis de ambiente no arquivo `.env` do backend.
+   - Crie um banco de dados PostgreSQL local:
+     ```sh
+     createdb newsletter_streaks
+     ```
+   - Configure as variáveis de ambiente no arquivo `.env` do backend:
+     ```bash
+     SECRET_KEY=sua_chave_secreta
+     DATABASE_URL=postgresql://usuario:senha@localhost/newsletter_streaks
+     ```
 
-4. Execute o projeto:
+4. Execute as migrações do banco de dados:
+   ```sh
+   cd backend
+   flask db init
+   flask db migrate -m "Criação inicial do banco de dados"
+   flask db upgrade
+   ```
+
+5. Execute o projeto:
    ```sh
    # Backend
-   cd backend
    python app/main.py
 
    # Frontend
@@ -152,9 +160,28 @@ WaffleNewsletterStreaks/
    npm start
    ```
 
-5. Acesse o site em: `http://localhost:3000`.
+6. Acesse o site em: `http://localhost:3000`.
 
+---
 
+## Testando o Endpoint `/webhook
+
+Para testar o endpoint `/webhook` localmente ou em produção, você pode usar ferramentas como `curl`, Postman ou até mesmo o navegador. Exemplo de requisição:
+
+```bash
+curl -X GET "https://thenewsletterstreaks.onrender.com/webhook?email=teste@example.com&id=123&utm_source=teste&utm_medium=email&utm_campaign=newsletter&utm_channel=web"
+```
+
+Resposta esperada:
+```json
+{
+  "message": "Webhook recebido e salvo com sucesso",
+  "email": "teste@example.com",
+  "id": "123"
+}
+```
+
+---
 
 ## Testes
 
@@ -174,26 +201,25 @@ Para garantir a qualidade do projeto, foram implementados testes unitários e en
      npm run cypress
      ```
 
-
+---
 
 ## Referências
 
 - [Documentação do React](https://reactjs.org/docs/getting-started.html)
 - [Documentação do TypeScript](https://www.typescriptlang.org/docs/)
 - [Documentação do Flask](https://flask.palletsprojects.com/)
-- [Documentação do FastAPI](https://fastapi.tiangolo.com/)
-- [Documentação do Beehiiv API](https://developers.beehiiv.com/)
-- [Documentação do TailwindCSS](https://tailwindcss.com/docs)
+- [Documentação do PostgreSQL](https://www.postgresql.org/docs/)
+- [Documentação do Render](https://render.com/docs)
 
-
+---
 
 ## Licença
 
 Este projeto está licenciado sob a [MIT License](LICENSE).
 
-
+---
 
 <p align="center">
-  Desenvolvido com 💜 por [Seu Nome]
+  Desenvolvido com muito ☕ por
+  <a href="https://linktr.ee/mewmewdevart" target="_blank">Larissa Cristina Benedito</a>
 </p>
-
