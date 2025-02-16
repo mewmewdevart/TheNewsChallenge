@@ -13,7 +13,6 @@
     <a href="https://thenewsletterstreaks.onrender.com" target="_blank">Acesse o Site</a> 
 </p>
 
----
 
 ## Sumário
 
@@ -25,12 +24,11 @@
 6. [Instruções de Uso](#instruções-de-uso)
     - [Pré-requisitos](#pré-requisitos)
     - [Rodando o Projeto Localmente](#rodando-o-projeto-localmente)
-7. [Testando o endpoint](#testando-o-endpoint-webhook)
+7. [Endpoints da API](#endpoints-da-api)
 8. [Testes](#testes)
 9. [Referências](#referências)
 10. [Licença](#licença)
 
----
 
 ## Desafio
 
@@ -40,18 +38,16 @@ O desafio consiste em criar uma plataforma de **gamificação** para aumentar o 
 2. **Dashboard Administrativo**: Para a equipe da Waffle monitorar métricas de engajamento, como streaks, rankings e padrões de abertura.
 3. **Integração com API**: Utilizando dados fornecidos via webhook da plataforma **Beehiiv**.
 
----
 
 ## Sobre o Projeto
 
 Este projeto foi desenvolvido para criar uma solução de gamificação que incentiva os leitores da newsletter a manterem um hábito de leitura diário. Através de streaks e métricas de engajamento, os leitores são motivados a abrir as newsletters consecutivamente, enquanto a equipe da Waffle pode monitorar o desempenho das campanhas.
 
----
 
 ## Funcionalidades
 
 ### **Área Logada para Leitores**
-- **Login Simples**: Acesso via e-mail.
+- **Login Simples**: Acesso via e-mail (o email precisa estar cadastrado no sistema)
 - **Streak de Leituras**: Exibição da sequência de aberturas consecutivas.
 - **Histórico de Aberturas**: Visualização das newsletters abertas.
 - **Mensagens Motivacionais**: Incentivos para manter o streak.
@@ -65,7 +61,6 @@ Este projeto foi desenvolvido para criar uma solução de gamificação que ince
 - **Cálculo Automático**: O streak aumenta +1 a cada dia consecutivo de abertura.
 - **Reset**: O streak é zerado se o leitor não abrir a newsletter no dia seguinte.
 
----
 
 ## Tecnologias Utilizadas
 
@@ -76,9 +71,10 @@ Este projeto foi desenvolvido para criar uma solução de gamificação que ince
 - **Testes**: Pytest (unitários) + Cypress (E2E)
 - **Deploy**: Render (Backend)
 
----
 
 ## Estrutura do Projeto
+
+(Mais relevantes)
 
 ```
 WaffleNewsletterStreaks/
@@ -89,17 +85,16 @@ WaffleNewsletterStreaks/
 │   │   └── App.tsx         # Componente principal
 ├── backend/                # Pasta do Backend (Python)
 │   ├── app/                # Aplicação principal
-│   │   ├── routes/         # Endpoints da API
-│   │   ├── models/         # Modelos do banco de dados
-│   │   └── services/       # Lógica de negócio
+│   │   ├── routes.py       # Endpoints da API
+│   │   ├── models.py       # Modelo do banco de dados
+│   │   ├── services.py     # Register do weebhook
+│   │   └── utils.py        # Lógica de negócio
 │   ├── tests/              # Testes unitários
 │   └── requirements.txt    # Dependências do Python
-├── database/               # Scripts e migrações do banco de dados
 ├── tests/                  # Testes E2E (Cypress)
 └── README.md               # Documentação do projeto
 ```
 
----
 
 ## Instruções de Uso
 
@@ -162,26 +157,147 @@ WaffleNewsletterStreaks/
 
 6. Acesse o site em: `http://localhost:3000`.
 
----
 
-## Testando o Endpoint `/webhook
+## Endpoints da API
 
-Para testar o endpoint `/webhook` localmente ou em produção, você pode usar ferramentas como `curl`, Postman ou até mesmo o navegador. Exemplo de requisição:
+A API oferece os seguintes endpoints:
 
-```bash
-curl -X GET "https://thenewsletterstreaks.onrender.com/webhook?email=teste@example.com&id=123&utm_source=teste&utm_medium=email&utm_campaign=newsletter&utm_channel=web"
-```
+### **`/webhook`**
+- **Descrição**: Registra os dados enviados via webhook.
+- **Método**: GET
+- **Parâmetros**:
+  - `email`: O endereço de e-mail do usuário.
+  - `post_id`: O ID do post associado.
+- **Exemplo de Requisição**:
+  ```bash
+  curl -X GET "https://thenewsletterstreaks.onrender.com/webhook?email=teste@example.com&id=123"
+  ```
+- **Resposta Esperada**:
+  ```json
+  {
+    "message": "Webhook recebido e salvo com sucesso",
+    "email": "teste@example.com",
+    "id": "123"
+  }
+  ```
 
-Resposta esperada:
-```json
-{
-  "message": "Webhook recebido e salvo com sucesso",
-  "email": "teste@example.com",
-  "id": "123"
-}
-```
+### **`/reads`**
+- **Descrição**: Lista todas as leituras registradas no banco de dados.
+- **Método**: GET
+- **Exemplo de Requisição**:
+  ```bash
+  curl -X GET "https://thenewsletterstreaks.onrender.com/reads"
+  ```
+- **Resposta Esperada**:
+  ```json
+  [
+    {
+      "email": "larissa@thenews.com",
+      "id": 7,
+      "post_id": "123",
+      "timestamp": "Sun, 16 Feb 2025 23:11:06 GMT",
+      "utm_campaign": null,
+      "utm_channel": null,
+      "utm_medium": null,
+      "utm_source": null
+    }
+  ]
+  ```
 
----
+### **`/metrics`**
+- **Descrição**: Retorna métricas sobre as leituras, como total de leitores, total de aberturas e média de aberturas por leitor.
+- **Método**: GET
+- **Exemplo de Requisição**:
+  ```bash
+  curl -X GET "https://thenewsletterstreaks.onrender.com/metrics"
+  ```
+- **Resposta Esperada**:
+  ```json
+  {
+    "total_readers": 10,
+    "total_opens": 50,
+    "average_opens": 5.0
+  }
+  ```
+
+### **`/top-readers`**
+- **Descrição**: Retorna os 10 leitores com as maiores sequências de leitura (streaks).
+- **Método**: GET
+- **Exemplo de Requisição**:
+  ```bash
+  curl -X GET "https://thenewsletterstreaks.onrender.com/top-readers"
+  ```
+- **Resposta Esperada**:
+  ```json
+  [
+    {
+      "email": "larissa@thenews.com",
+      "streak": 10
+    },
+    {
+      "email": "joao@thenews.com",
+      "streak": 8
+    }
+  ]
+  ```
+
+### **`/streak`**
+- **Descrição**: Retorna a sequência de leitura (streak) de um e-mail específico.
+- **Método**: GET
+- **Parâmetros**:
+  - `email`: O endereço de e-mail do usuário.
+- **Exemplo de Requisição**:
+  ```bash
+  curl -X GET "https://thenewsletterstreaks.onrender.com/streak?email=larissa@thenews.com"
+  ```
+- **Resposta Esperada**:
+  ```json
+  {
+    "email": "larissa@thenews.com",
+    "streak": 10
+  }
+  ```
+
+### **`/history`**
+- **Descrição**: Retorna o histórico de leituras de um e-mail específico.
+- **Método**: GET
+- **Parâmetros**:
+  - `email`: O endereço de e-mail do usuário.
+- **Exemplo de Requisição**:
+  ```bash
+  curl -X GET "https://thenewsletterstreaks.onrender.com/history?email=larissa@thenews.com"
+  ```
+- **Resposta Esperada**:
+  ```json
+  [
+    {
+      "post_id": "123",
+      "timestamp": "Sun, 16 Feb 2025 23:11:06 GMT"
+    },
+    {
+      "post_id": "456",
+      "timestamp": "Mon, 17 Feb 2025 10:15:30 GMT"
+    }
+  ]
+  ```
+
+### **`/check-email`**
+- **Descrição**: Verifica se um e-mail está registrado no banco de dados.
+- **Método**: GET
+- **Parâmetros**:
+  - `email`: O endereço de e-mail do usuário.
+- **Exemplo de Requisição**:
+  ```bash
+  curl -X GET "https://thenewsletterstreaks.onrender.com/check-email?email=larissa@thenews.com"
+  ```
+- **Resposta Esperada**:
+  ```json
+  {
+    "message": "E-mail encontrado",
+    "email": "larissa@thenews.com"
+  }
+  ```
+
 
 ## Testes
 
@@ -201,7 +317,6 @@ Para garantir a qualidade do projeto, foram implementados testes unitários e en
      npm run cypress
      ```
 
----
 
 ## Referências
 
@@ -211,13 +326,11 @@ Para garantir a qualidade do projeto, foram implementados testes unitários e en
 - [Documentação do PostgreSQL](https://www.postgresql.org/docs/)
 - [Documentação do Render](https://render.com/docs)
 
----
 
 ## Licença
 
 Este projeto está licenciado sob a [MIT License](LICENSE).
 
----
 
 <p align="center">
   Desenvolvido com muito ☕ por
