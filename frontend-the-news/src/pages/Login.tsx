@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Login.css';
 
+
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -55,6 +56,8 @@ const Login: React.FC = () => {
   };
 
   return (
+    <>
+
     <div className="min-h-screen flex items-center justify-center bg-white-100">
       <div className="bg-(--color-brand-neutral-100) p-8 rounded-lg shadow-md w-96">
         <h1 className="font-bold text-3xl">Login</h1>
@@ -81,6 +84,7 @@ const Login: React.FC = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 
