@@ -28,9 +28,11 @@ def create_app():
 
     app.register_blueprint(routes)
 
-    @app.route('/')
-    def home():
-        return render_template("index.html")
+    # @routes.route('/documentation')
+    # def documentation():
+    #     # Supondo que o arquivo index.html esteja na pasta 'static' do seu projeto
+    #     return send_from_directory('static', 'index.html')
+
 
     return app
 

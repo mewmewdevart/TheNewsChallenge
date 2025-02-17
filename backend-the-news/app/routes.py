@@ -3,17 +3,20 @@ from .models import NewsletterRead, db
 from datetime import datetime, timedelta
 from sqlalchemy import func
 from .utils import calculate_streak
+import logging
 
 routes = Blueprint("routes", __name__)
 
-@routes.route('/webhook', methods=['GET'])
+@routes.route('/', methods=['GET'])
 def webhook():
     email = request.args.get('email')
     post_id = request.args.get('id')
-    utm_source = request.args.get('utm_source')
-    utm_medium = request.args.get('utm_medium')
-    utm_campaign = request.args.get('utm_campaign')
-    utm_channel = request.args.get('utm_channel')
+    utm_source = request.args.get('utm_source', "")
+    utm_medium = request.args.get('utm_medium', "")
+    utm_campaign = request.args.get('utm_campaign', "")
+    utm_channel = request.args.get('utm_channel', "")
+
+    logging.info(f"Recebido: email={email}, post_id={post_id}, utm_source={utm_source}, utm_medium={utm_medium}, utm_campaign={utm_campaign}, utm_channel={utm_channel}")
 
     if not email or not post_id:
         return jsonify({"error": "Email e ID são obrigatórios"}), 400
