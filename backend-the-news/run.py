@@ -10,16 +10,13 @@ def create_app():
     app = Flask(__name__, template_folder="templates")
     app.config.from_object(Config)
 
-    # Initialize the database
     db.init_app(app)
 
-    # Initialize Flask-Migrate
     migrate = Migrate(app, db)
 
-    # Database Connection Test
     with app.app_context():
         try:
-            db.session.execute(text('SELECT 1'))  # Agora o 'text' está definido
+            db.session.execute(text('SELECT 1'))
             print("Database connection successful!")
         except Exception as e:
             print(f"Error connecting to the database: {e}")
@@ -28,11 +25,9 @@ def create_app():
 
     app.register_blueprint(routes)
 
-    # @routes.route('/documentation')
-    # def documentation():
-    #     # Supondo que o arquivo index.html esteja na pasta 'static' do seu projeto
-    #     return send_from_directory('static', 'index.html')
-
+    @app.route('/documentation', methods=['GET'])
+    def documentation():
+        return render_template('index.html')
 
     return app
 

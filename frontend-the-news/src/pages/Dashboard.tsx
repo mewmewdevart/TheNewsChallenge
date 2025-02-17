@@ -21,7 +21,7 @@ const Dashboard: React.FC = () => {
       try {
         // Busca as métricas gerais
         const metricsResponse = await fetch(
-          `https://thenewsletterstreaks.onrender.com/metrics?newsletter=${selectedNewsletter}&period=${selectedPeriod}&streak_status=${selectedStreakStatus}`
+          `https://thenewsletterstreakschallenge.onrender.com/metrics?newsletter=${selectedNewsletter}&period=${selectedPeriod}&streak_status=${selectedStreakStatus}`
         );
         const metricsData = await metricsResponse.json();
         setTotalReaders(metricsData.total_readers);
@@ -30,7 +30,7 @@ const Dashboard: React.FC = () => {
 
         // Busca o ranking dos leitores mais engajados
         const topReadersResponse = await fetch(
-          `https://thenewsletterstreaks.onrender.com/top-readers?newsletter=${selectedNewsletter}&period=${selectedPeriod}&streak_status=${selectedStreakStatus}`
+          `https://thenewsletterstreakschallenge.onrender.com/top-readers?newsletter=${selectedNewsletter}&period=${selectedPeriod}&streak_status=${selectedStreakStatus}`
         );
         const topReadersData = await topReadersResponse.json();
         setTopReaders(topReadersData);
