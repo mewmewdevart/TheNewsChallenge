@@ -16,7 +16,7 @@ Aqui estão os comandos `curl` para testar as principais rotas do seu backend. E
 Simula o envio de dados de abertura de newsletter.
 
 ```bash
-curl -X GET "http://localhost:5000/webhook?email=test@example.com&id=post_12345&utm_source=tiktok&utm_medium=socialpaid&utm_campaign=12/12/2024&utm_channel=web"
+curl -X GET "https://thenewsletterstreakschallenge.onrender.com/webhook?email=test@example.com&id=post_12345&utm_source=tiktok&utm_medium=socialpaid&utm_campaign=12/12/2024&utm_channel=web"
 ```
 
 **Resposta esperada:**
@@ -34,7 +34,7 @@ curl -X GET "http://localhost:5000/webhook?email=test@example.com&id=post_12345&
 Verifica se um e-mail está cadastrado no sistema.
 
 ```bash
-curl -X GET "http://localhost:5000/check-email?email=test@example.com"
+curl -X GET "https://thenewsletterstreakschallenge.onrender.com/check-email?email=test@example.com"
 ```
 
 **Resposta esperada (e-mail cadastrado):**
@@ -58,7 +58,7 @@ curl -X GET "http://localhost:5000/check-email?email=test@example.com"
 Retorna o streak atual de um e-mail.
 
 ```bash
-curl -X GET "http://localhost:5000/streak?email=test@example.com"
+curl -X GET "https://thenewsletterstreakschallenge.onrender.com/streak?email=test@example.com"
 ```
 
 **Resposta esperada:**
@@ -75,7 +75,7 @@ curl -X GET "http://localhost:5000/streak?email=test@example.com"
 Retorna o histórico de aberturas de um e-mail.
 
 ```bash
-curl -X GET "http://localhost:5000/history?email=test@example.com"
+curl -X GET "https://thenewsletterstreakschallenge.onrender.com/history?email=test@example.com"
 ```
 
 **Resposta esperada:**
@@ -97,7 +97,7 @@ curl -X GET "http://localhost:5000/history?email=test@example.com"
 ### 5. **Testar Erros**
 #### a. **E-mail Inválido**
 ```bash
-curl -X GET "http://localhost:5000/check-email?email=invalid-email"
+curl -X GET "https://thenewsletterstreakschallenge.onrender.com/check-email?email=invalid-email"
 ```
 
 **Resposta esperada:**
@@ -109,7 +109,7 @@ curl -X GET "http://localhost:5000/check-email?email=invalid-email"
 
 #### b. **E-mail Não Cadastrado**
 ```bash
-curl -X GET "http://localhost:5000/check-email?email=unknown@example.com"
+curl -X GET "https://thenewsletterstreakschallenge.onrender.com/check-email?email=unknown@example.com"
 ```
 
 **Resposta esperada:**
@@ -121,7 +121,7 @@ curl -X GET "http://localhost:5000/check-email?email=unknown@example.com"
 
 #### c. **Falta de Parâmetros Obrigatórios**
 ```bash
-curl -X GET "http://localhost:5000/webhook"
+curl -X GET "https://thenewsletterstreakschallenge.onrender.com/webhook"
 ```
 
 **Resposta esperada:**
@@ -138,22 +138,22 @@ Para testar o cálculo do streak, envie várias requisições ao webhook com dif
 
 #### a. **Primeira Abertura**
 ```bash
-curl -X GET "http://localhost:5000/webhook?email=test@example.com&id=post_11111"
+curl -X GET "https://thenewsletterstreakschallenge.onrender.com/webhook?email=test@example.com&id=post_11111"
 ```
 
 #### b. **Segunda Abertura (Dia Seguinte)**
 ```bash
-curl -X GET "http://localhost:5000/webhook?email=test@example.com&id=post_22222"
+curl -X GET "https://thenewsletterstreakschallenge.onrender.com/webhook?email=test@example.com&id=post_22222"
 ```
 
 #### c. **Terceira Abertura (Domingo)**
 ```bash
-curl -X GET "http://localhost:5000/webhook?email=test@example.com&id=post_33333"
+curl -X GET "https://thenewsletterstreakschallenge.onrender.com/webhook?email=test@example.com&id=post_33333"
 ```
 
 #### d. **Verificar o Streak**
 ```bash
-curl -X GET "http://localhost:5000/streak?email=test@example.com"
+curl -X GET "https://thenewsletterstreakschallenge.onrender.com/streak?email=test@example.com"
 ```
 
 **Resposta esperada (se o domingo for ignorado):**
@@ -170,7 +170,7 @@ curl -X GET "http://localhost:5000/streak?email=test@example.com"
 Após enviar várias requisições ao webhook, verifique o histórico:
 
 ```bash
-curl -X GET "http://localhost:5000/history?email=test@example.com"
+curl -X GET "https://thenewsletterstreakschallenge.onrender.com/history?email=test@example.com"
 ```
 
 **Resposta esperada:**
