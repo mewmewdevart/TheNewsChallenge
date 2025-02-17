@@ -78,12 +78,12 @@ Este projeto foi desenvolvido para criar uma solução de gamificação que ince
 
 ```
 WaffleNewsletterStreaks/
-├── frontend/               # Pasta do Frontend (React + TypeScript)
+├── frontend-the-news/               # Pasta do Frontend (React + TypeScript)
 │   ├── src/
 │   │   ├── components/     # Componentes reutilizáveis
 │   │   ├── pages/          # Páginas (Área logada, Dashboard)
 │   │   └── App.tsx         # Componente principal
-├── backend/                # Pasta do Backend (Python)
+├── backend-the-news/                # Pasta do Backend (Python)
 │   ├── app/                # Aplicação principal
 │   │   ├── routes.py       # Endpoints da API
 │   │   ├── models.py       # Modelo do banco de dados
@@ -118,11 +118,11 @@ WaffleNewsletterStreaks/
 2. Instale as dependências:
    ```sh
    # Frontend
-   cd frontend
+   cd frontend-the-news
    npm install
 
    # Backend
-   cd ../backend
+   cd ../backend-the-news
    pip install -r requirements.txt
    ```
 
@@ -147,23 +147,22 @@ WaffleNewsletterStreaks/
 
 5. Execute o projeto:
    ```sh
-   # Backend
-   python app/main.py
+   # Na pasta root do backend
+   python run.py
 
    # Frontend
    cd ../frontend
-   npm start
+   npm run dev
    ```
 
-6. Acesse o site em: `http://localhost:3000`.
+6. Acesse o site frontend em: `http://localhost:3000` e o do backend em `http://127.0.0.1:5000` caso as rotas nao estejam ocupadas.
 
 
 ## Endpoints da API
 
 Para facilitar a visualização e compreensão das rotas implementadas no projeto, criei uma página HTML que oferece um design mais agradável. Acesse a documentação completa das rotas da API clicando no link abaixo:
 
-[Documentação da API - Visualização Melhorada](https://thenewsletterstreakschallenge.onrender.com/documentation)
-
+<a href="https://thenewsletterstreakschallenge.onrender.com/documentation" target="_blank">Documentação da API - Visualização Melhorada</a> 
 
 A API oferece os seguintes endpoints:
 
