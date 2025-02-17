@@ -160,9 +160,14 @@ WaffleNewsletterStreaks/
 
 ## Endpoints da API
 
+Para facilitar a visualização e compreensão das rotas implementadas no projeto, criei uma página HTML que oferece um design mais agradável. Acesse a documentação completa das rotas da API clicando no link abaixo:
+
+[Documentação da API - Visualização Melhorada](https://thenewsletterstreakschallenge.onrender.com/documentation)
+
+
 A API oferece os seguintes endpoints:
 
-### **`/webhook`**
+### **`/`**
 - **Descrição**: Registra os dados enviados via webhook.
 - **Método**: GET
 - **Parâmetros**:
@@ -170,7 +175,7 @@ A API oferece os seguintes endpoints:
   - `post_id`: O ID do post associado.
 - **Exemplo de Requisição**:
   ```bash
-  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/webhook?email=teste@example.com&id=123"
+  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/?email=teste@example.com&id=123"
   ```
 - **Resposta Esperada**:
   ```json
@@ -192,7 +197,7 @@ A API oferece os seguintes endpoints:
   ```json
   [
     {
-      "email": "larissa@thenews.com",
+      "email": "teste@example.com",
       "id": 7,
       "post_id": "123",
       "timestamp": "Sun, 16 Feb 2025 23:11:06 GMT",
@@ -231,7 +236,7 @@ A API oferece os seguintes endpoints:
   ```json
   [
     {
-      "email": "larissa@thenews.com",
+      "email": "teste@example.com",
       "streak": 10
     },
     {
@@ -248,12 +253,12 @@ A API oferece os seguintes endpoints:
   - `email`: O endereço de e-mail do usuário.
 - **Exemplo de Requisição**:
   ```bash
-  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/streak?email=larissa@thenews.com"
+  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/streak?email=teste@example.com"
   ```
 - **Resposta Esperada**:
   ```json
   {
-    "email": "larissa@thenews.com",
+    "email": "teste@example.com",
     "streak": 10
   }
   ```
@@ -265,7 +270,7 @@ A API oferece os seguintes endpoints:
   - `email`: O endereço de e-mail do usuário.
 - **Exemplo de Requisição**:
   ```bash
-  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/history?email=larissa@thenews.com"
+  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/history?email=teste@example.com"
   ```
 - **Resposta Esperada**:
   ```json
@@ -288,13 +293,13 @@ A API oferece os seguintes endpoints:
   - `email`: O endereço de e-mail do usuário.
 - **Exemplo de Requisição**:
   ```bash
-  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/check-email?email=larissa@thenews.com"
+  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/check-email?email=teste@example.com"
   ```
 - **Resposta Esperada**:
   ```json
   {
     "message": "E-mail encontrado",
-    "email": "larissa@thenews.com"
+    "email": "teste@example.com"
   }
   ```
 
