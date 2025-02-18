@@ -5,7 +5,7 @@ interface Reader {
   streak: number;
 }
 
-const Dashboard: React.FC = () => {
+const DashboardPage: React.FC = () => {
   const [totalReaders, setTotalReaders] = useState<number>(0);
   const [totalOpens, setTotalOpens] = useState<number>(0);
   const [averageOpens, setAverageOpens] = useState<number>(0);
@@ -51,7 +51,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6">Dashboard Administrativo</h1>
+        <h1 className="text-2xl font-bold mb-6">DashboardPage Administrativo</h1>
 
         {/* Métricas de Engajamento Geral */}
         <section className="mb-8">
@@ -147,4 +147,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardPage;

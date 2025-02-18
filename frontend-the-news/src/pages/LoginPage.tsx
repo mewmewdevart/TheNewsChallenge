@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './Login.css';
+import './LoginPage.css';
 
 
-const Login: React.FC = () => {
+const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -60,7 +60,7 @@ const Login: React.FC = () => {
 
     <div className="min-h-screen flex items-center justify-center bg-white-100">
       <div className="bg-(--color-brand-neutral-100) p-8 rounded-lg shadow-md w-96">
-        <h1 className="font-bold text-3xl">Login</h1>
+        <h1 className="font-bold text-3xl">LoginPage</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-2" htmlFor="email">
@@ -88,4 +88,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

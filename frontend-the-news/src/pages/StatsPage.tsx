@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import StatsTemplate from "../componenets/templates/StatsTemplate/StatsTemplate";
+import StatsTemplate from "../components/templates/StatsTemplate/StatsTemplate";
 
 interface HistoryEntry {
   post_id: string;
