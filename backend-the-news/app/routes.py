@@ -36,12 +36,16 @@ def webhook():
     try:
         db.session.add(new_read)
         db.session.commit()
+
+        # Consulta o max_streak da leitura mais recente
+        last_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
+
         return jsonify({
             "message": "Webhook recebido e salvo com sucesso",
             "email": email,
             "id": post_id,
             "streak": streak,
-            "max_streak": new_read.max_streak  # Retornando o max_streak
+            "max_streak": last_read.max_streak  # Retornando o max_streak correto
         }), 200
     except Exception as e:
         db.session.rollback()
