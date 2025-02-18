@@ -1,6 +1,6 @@
+import StatsTemplate from "@templates/StatsTemplate/StatsTemplate";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import StatsTemplate from "../components/templates/StatsTemplate/StatsTemplate";
 
 interface HistoryEntry {
   post_id: string;
@@ -10,10 +10,10 @@ interface HistoryEntry {
 const StatsPage: React.FC = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const email = queryParams.get("email");
+  const email = queryParams.get("email"); // Armazenando o email em uma variável
 
   const [streak, setStreak] = useState<number>(0);
-  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [, setHistory] = useState<HistoryEntry[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
@@ -61,7 +61,13 @@ const StatsPage: React.FC = () => {
     return <p className="text-center mt-8 text-red-500">{error}</p>;
   }
 
-  return <StatsTemplate isLoading={isLoading} streak={streak} />;
+  const emailUser = queryParams.get("email") || undefined; 
+  
+  return (
+    <>
+      <StatsTemplate isLoading={isLoading} streak={streak} email={emailUser}/>
+    </>
+  );
 };
 
 export default StatsPage;

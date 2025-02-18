@@ -38,11 +38,11 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     maxValue,
   }) => {
     const normalizedValue = Math.min(Math.max(value, 0), maxValue);
-    const progressText = `${normalizedValue}/${maxValue}`; 
+    const progressText = `${normalizedValue}/${maxValue}`;
   
     return (
-      <div className="border border-gray-100 w-full h-[80px] flex items-center gap-4 px-4 py-14">
-        <img src={icon} alt={label} className="w-[73px]" />
+      <div className="border border-gray-100 w-full h-[80px] flex items-center gap-4 px-4 py-10">
+        <img src={icon} alt={label} className="w-[60px]" />
         <div className="w-full">
           {label}
           <Box sx={{ display: "flex", alignItems: "center" }}>
