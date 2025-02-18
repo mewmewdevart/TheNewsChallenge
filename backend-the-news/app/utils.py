@@ -1,6 +1,11 @@
+from app.database import db
+
+from sqlalchemy.orm import load_only
+from app.models import NewsletterRead
+
 def calculate_streak(email):
     reads = NewsletterRead.query.filter_by(email=email) \
-        .order_by(NewsletterRead.timestamp.desc()).all()
+        .order_by(NewsletterRead.timestamp.desc()).options(load_only("timestamp", "max_streak")).all()
 
     if not reads:
         return 0
@@ -30,12 +35,14 @@ def calculate_streak(email):
 
         prev_date = read_date
 
-    # Log para depuração
-    print(f"Streak calculado: {streak}, Max Streak atual: {reads[0].max_streak}")
+    # Garantindo que max_streak seja atualizado corretamente
+    max_streak = max(streak, reads[0].max_streak or 0)
 
-    if streak > 0 and (reads[0].max_streak is None or streak > reads[0].max_streak):
-        for read in reads:
-            read.max_streak = streak
-        db.session.commit()
+    if streak > 0 and max_streak > reads[0].max_streak:
+        reads[0].max_streak = max_streak  # Atualiza apenas a entrada mais recente
+        db.session.flush()  # Garante que os dados são preparados para commit
+        db.session.commit()  # Persiste as alterações no banco
+        db.session.refresh(reads[0])  # Garante que os dados lidos estão atualizados
+        print(f"Novo Max Streak atualizado no banco: {reads[0].max_streak}")
 
     return streak
