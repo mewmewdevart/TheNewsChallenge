@@ -2,7 +2,7 @@ def calculate_streak(email):
     """
     Calcula o streak de leituras consecutivas de newsletters para um e-mail específico.
     Ignora domingos e reinicia o streak se houver uma quebra na sequência.
-    Atualiza o max_streak se o streak atual for maior que o max_streak armazenado.
+    Atualiza o max_streak para todas as leituras do usuário se o streak atual for maior que o max_streak armazenado.
     """
 
     # Obtém leituras ordenadas do mais recente para o mais antigo
@@ -43,10 +43,10 @@ def calculate_streak(email):
 
         prev_date = read_date
 
-    # Atualiza o max_streak se o streak atual for maior que o max_streak armazenado
-    last_read = reads[0]  # A leitura mais recente
-    if streak > last_read.max_streak:
-        last_read.max_streak = streak
+    # Atualiza o max_streak para todas as leituras do usuário se o streak atual for maior que o max_streak armazenado
+    if streak > reads[0].max_streak:
+        for read in reads:
+            read.max_streak = streak
         db.session.commit()  # Salva a atualização no banco de dados
 
     return streak
