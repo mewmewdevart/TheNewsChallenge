@@ -103,6 +103,9 @@ def get_streak():
     if not last_read:
         return jsonify({"email": email, "streak": 0, "max_streak": 0}), 200
 
+    # Log para depuração
+    print(f"Última leitura: {last_read.timestamp}, Streak: {last_read.streak}, Max Streak: {last_read.max_streak}")
+
     return jsonify({
         "email": email,
         "streak": last_read.streak,
