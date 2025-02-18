@@ -12,3 +12,4 @@ class NewsletterRead(db.Model):
     utm_channel = db.Column(db.String(50), nullable=False, default="")
     timestamp = db.Column(db.DateTime, default=db.func.current_timestamp())
     streak = db.Column(db.Integer, default=0)
+    max_streak = db.Column(db.Integer, default=0)
