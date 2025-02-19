@@ -5,6 +5,7 @@ const StatsSkeleton: React.FC = () => (
   <>
     <Skeleton variant="rectangular" width={500} height={80} />
     <Skeleton variant="rectangular" width={500} height={80} />
+    <Skeleton variant="rectangular" width={500} height={80} />
   </>
 );
 

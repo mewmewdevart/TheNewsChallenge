@@ -42,7 +42,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   
     return (
       <div className="border border-gray-100 w-full h-[80px] flex items-center gap-4 px-4 py-10">
-        <img src={icon} alt={label} className="w-[60px]" />
+        <img src={icon} alt={label} className="w-[50px]" />
         <div className="w-full">
           {label}
           <Box sx={{ display: "flex", alignItems: "center" }}>

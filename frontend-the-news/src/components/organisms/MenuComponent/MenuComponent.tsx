@@ -7,14 +7,17 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
+import { useNavigate } from "react-router-dom";
 
 interface MenuComponentProps {
-  email: string;
+  emailUser: string;
+  imageLogo: string;
 }
 
-export default function MenuComponent({ email }: MenuComponentProps) {
+export default function MenuComponent({ emailUser, imageLogo }: MenuComponentProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -24,11 +27,16 @@ export default function MenuComponent({ email }: MenuComponentProps) {
     setAnchorEl(null);
   };
 
-  const firstLetter = email ? email.charAt(0).toUpperCase() : '';
+  const handleLogout = () => {
+    console.log("User logged out");
+    navigate("/");
+  };
+
+  const firstLetter = emailUser ? emailUser.charAt(0).toUpperCase() : '';
 
   return (
     <div className="w-full flex justify-between items-center px-80 py-2 border-b-1 border-gray-100 fixed bg-(--color-brand-neutral-100)">
-      <h1>Logo /</h1>
+      <img src={imageLogo} alt="" className='w-[150px]'/>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Tooltip title="Account settings">
           <IconButton
@@ -80,11 +88,11 @@ export default function MenuComponent({ email }: MenuComponentProps) {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Logout
+          Sair
         </MenuItem>
       </Menu>
     </div>

@@ -2,17 +2,26 @@ import React from "react";
 import MenuComponent from "../../organisms/MenuComponent/MenuComponent";
 import StatsGrid from "../../organisms/StatsGrid/StatsGrid";
 
-interface StatsTemplateProps {
-  isLoading: boolean;
+import imageLogo from "../../../assets/logo.webp"
+
+interface TopReader {
+  email: string;
   streak: number;
-  email?: string;
 }
 
-const StatsTemplate: React.FC<StatsTemplateProps> = ({ isLoading, streak, email }) => (
+interface StatsTemplateProps {
+  isLoading: boolean;
+  streakUser: number;
+  emailUser?: string;
+  topReaders: TopReader[];
+  maxStreakUser: number;
+}
+
+const StatsTemplate: React.FC<StatsTemplateProps> = ({ isLoading, streakUser, emailUser, topReaders,   maxStreakUser }) => (
   <>
-    <MenuComponent email={email || ''}/>
+    <MenuComponent emailUser={emailUser || ''} imageLogo={imageLogo} />
     <section className="bg-[--color-brand-neutral-100] w-full h-screen px-80 py-4">
-      <StatsGrid isLoading={isLoading} streak={streak} />
+      <StatsGrid isLoading={isLoading} streakUser={streakUser} emailUser={emailUser} maxStreakUser={maxStreakUser} topReaders={topReaders} />
     </section>
   </>
 );

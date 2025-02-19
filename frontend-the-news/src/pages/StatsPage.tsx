@@ -7,15 +7,23 @@ interface HistoryEntry {
   timestamp: string;
 }
 
+interface Reader {
+  email: string;
+  streak: number;
+  max_streak: number;
+}
+
 const StatsPage: React.FC = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const email = queryParams.get("email"); // Armazenando o email em uma variável
+  const email = queryParams.get("email");
 
   const [streak, setStreak] = useState<number>(0);
+  const [maxStreak, setMaxStreak] = useState<number>(0);
   const [, setHistory] = useState<HistoryEntry[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
+  const [topReaders, setTopReaders] = useState<Reader[]>([]);
 
   useEffect(() => {
     if (!email) return;
@@ -25,25 +33,31 @@ const StatsPage: React.FC = () => {
       setError("");
 
       try {
-        const [streakResponse, historyResponse] = await Promise.all([
+        const [streakResponse, historyResponse, topReadersResponse] = await Promise.all([
           fetch(
             `https://thenewsletterstreakschallenge.onrender.com/streak?email=${email}`
           ),
           fetch(
             `https://thenewsletterstreakschallenge.onrender.com/history?email=${email}`
           ),
+          fetch(
+            `https://thenewsletterstreakschallenge.onrender.com/top-readers`
+          ),
         ]);
-
-        if (!streakResponse.ok || !historyResponse.ok) {
+  
+        if (!streakResponse.ok || !historyResponse.ok || !topReadersResponse.ok) {
           throw new Error("Erro ao buscar dados.");
         }
 
         const streakData = await streakResponse.json();
         const historyData = await historyResponse.json();
+        const topReadersData: Reader[] = await topReadersResponse.json();
 
         setTimeout(() => {
           setStreak(streakData.streak);
+          setMaxStreak(streakData.max_streak);
           setHistory(historyData);
+          setTopReaders(topReadersData);
           setIsLoading(false);
         }, 3000);
       } catch (error) {
@@ -61,11 +75,17 @@ const StatsPage: React.FC = () => {
     return <p className="text-center mt-8 text-red-500">{error}</p>;
   }
 
-  const emailUser = queryParams.get("email") || undefined; 
-  
+  const emailUser = queryParams.get("email") || undefined;
+
   return (
     <>
-      <StatsTemplate isLoading={isLoading} streak={streak} email={emailUser}/>
+      <StatsTemplate
+        isLoading={isLoading}
+        emailUser={emailUser}
+        streakUser={streak}
+        maxStreakUser={maxStreak}
+        topReaders={topReaders}
+      />
     </>
   );
 };

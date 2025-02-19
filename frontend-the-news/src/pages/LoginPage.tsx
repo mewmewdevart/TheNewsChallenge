@@ -41,7 +41,7 @@ const LoginPage: React.FC = () => {
       await streakResponse.json();
 
       // Navega para a página de estatísticas
-      navigate(`/statspage?email=${encodeURIComponent(email)}`);
+      navigate(`/statsPage?email=${encodeURIComponent(email)}`);
     } catch (error) {
       setError(
         error instanceof Error
