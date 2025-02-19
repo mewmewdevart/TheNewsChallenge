@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from .models import NewsletterRead
+from .models import NewsletterRead, db
 from sqlalchemy import func
 
 def calculate_streak(email):
@@ -53,5 +53,8 @@ def calculate_streak(email):
     # Atualiza o max_streak se o streak atual for maior
     if streak > max_streak:
         max_streak = streak
+        # Atualiza o max_streak no banco de dados
+        db.session.query(NewsletterRead).filter_by(email=email).update({"max_streak": max_streak})
+        db.session.commit()
 
     return streak, max_streak
