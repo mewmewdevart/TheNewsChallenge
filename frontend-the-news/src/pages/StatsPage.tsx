@@ -1,6 +1,7 @@
 import StatsTemplate from "@templates/StatsTemplate/StatsTemplate";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import Layout from "../Layout";
 
 interface HistoryEntry {
   post_id: string;
@@ -33,20 +34,25 @@ const StatsPage: React.FC = () => {
       setError("");
 
       try {
-        const [streakResponse, historyResponse, topReadersResponse] = await Promise.all([
-          fetch(
-            `https://thenewsletterstreakschallenge.onrender.com/streak?email=${email}`
-          ),
-          fetch(
-            `https://thenewsletterstreakschallenge.onrender.com/history?email=${email}`
-          ),
-          fetch(
-            `https://thenewsletterstreakschallenge.onrender.com/top-readers`
-          ),
-        ]);
-  
-        if (!streakResponse.ok || !historyResponse.ok || !topReadersResponse.ok) {
-          throw new Error("Erro ao buscar dados.");
+        const [streakResponse, historyResponse, topReadersResponse] =
+          await Promise.all([
+            fetch(
+              `https://thenewsletterstreakschallenge.onrender.com/streak?email=${email}`
+            ),
+            fetch(
+              `https://thenewsletterstreakschallenge.onrender.com/history?email=${email}`
+            ),
+            fetch(
+              `https://thenewsletterstreakschallenge.onrender.com/top-readers`
+            ),
+          ]);
+
+        if (
+          !streakResponse.ok ||
+          !historyResponse.ok ||
+          !topReadersResponse.ok
+        ) {
+          throw new Error("Error fetching data.");
         }
 
         const streakData = await streakResponse.json();
@@ -62,7 +68,7 @@ const StatsPage: React.FC = () => {
         }, 3000);
       } catch (error) {
         setError(
-          error instanceof Error ? error.message : "Erro ao carregar dados."
+          error instanceof Error ? error.message : "Error loading data."
         );
         setIsLoading(false);
       }
@@ -78,7 +84,7 @@ const StatsPage: React.FC = () => {
   const emailUser = queryParams.get("email") || undefined;
 
   return (
-    <>
+    <Layout emailUser={emailUser}>
       <StatsTemplate
         isLoading={isLoading}
         emailUser={emailUser}
@@ -86,7 +92,7 @@ const StatsPage: React.FC = () => {
         maxStreakUser={maxStreak}
         topReaders={topReaders}
       />
-    </>
+    </Layout>
   );
 };
 

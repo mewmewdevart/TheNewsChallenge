@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Layout from "../Layout";
 
 interface Reader {
   email: string;
@@ -49,7 +50,8 @@ const DashboardPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <Layout emailUser="">
+    <div className="p-6">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
         <h1 className="text-2xl font-bold mb-6">DashboardPage Administrativo</h1>
 
@@ -144,7 +146,7 @@ const DashboardPage: React.FC = () => {
         </section>
       </div>
     </div>
-  );
+    </Layout>);
 };
 
 export default DashboardPage;
