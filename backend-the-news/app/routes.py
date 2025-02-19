@@ -21,10 +21,8 @@ def webhook():
     if not email or not post_id:
         return jsonify({"error": "Email e ID são obrigatórios"}), 400
 
-    # Calcula o streak e o max_streak
-    streak, max_streak = calculate_streak(email)
+    streak = calculate_streak(email)
 
-    # Cria uma nova leitura
     new_read = NewsletterRead(
         email=email,
         post_id=post_id,
@@ -32,8 +30,7 @@ def webhook():
         utm_medium=utm_medium,
         utm_campaign=utm_campaign,
         utm_channel=utm_channel,
-        streak=streak,
-        max_streak=max_streak  # Adiciona o max_streak ao novo registro
+        streak=streak
     )
 
     try:
@@ -55,11 +52,10 @@ def list_reads():
         "utm_medium": read.utm_medium,
         "utm_campaign": read.utm_campaign,
         "utm_channel": read.utm_channel,
-        "timestamp": read.timestamp,
-        "streak": read.streak,
-        "max_streak": read.max_streak  # Adiciona o max_streak à resposta
+        "timestamp": read.timestamp
     } for read in reads]
     return jsonify(reads_data), 200
+
 
 @routes.route('/metrics', methods=['GET'])
 def get_metrics():
@@ -79,19 +75,10 @@ def get_metrics():
 def get_top_readers():
     top_readers = db.session.query(
         NewsletterRead.email,
-        func.max(NewsletterRead.streak).label('streak'),  # Streak atual
-        func.max(NewsletterRead.max_streak).label('max_streak')  # Max streak
+        func.max(NewsletterRead.streak).label('max_streak')
     ).group_by(NewsletterRead.email).order_by(func.max(NewsletterRead.streak).desc()).limit(10).all()
 
-    # Formata os dados para a resposta
-    readers_data = [
-        {
-            "email": reader.email,
-            "streak": reader.streak,  # Streak atual
-            "max_streak": reader.max_streak  # Max streak
-        }
-        for reader in top_readers
-    ]
+    readers_data = [{"email": reader.email, "streak": reader.max_streak} for reader in top_readers]
 
     return jsonify(readers_data), 200
 
@@ -101,13 +88,12 @@ def get_streak():
     if not email:
         return jsonify({"error": "Email é obrigatório"}), 400
 
-    # Obtém a última leitura do usuário
     last_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
 
     if not last_read:
-        return jsonify({"email": email, "streak": 0, "max_streak": 0}), 200
+        return jsonify({"email": email, "streak": 0}), 200
 
-    return jsonify({"email": email, "streak": last_read.streak, "max_streak": last_read.max_streak}), 200
+    return jsonify({"email": email, "streak": last_read.streak}), 200
 
 @routes.route('/history', methods=['GET'])
 def get_history():
@@ -118,9 +104,7 @@ def get_history():
     history = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).all()
     history_data = [{
         "post_id": entry.post_id,
-        "timestamp": entry.timestamp,
-        "streak": entry.streak,
-        "max_streak": entry.max_streak  # Adiciona o max_streak à resposta
+        "timestamp": entry.timestamp
     } for entry in history]
 
     return jsonify(history_data), 200
