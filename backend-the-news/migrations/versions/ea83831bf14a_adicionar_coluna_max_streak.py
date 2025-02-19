@@ -7,7 +7,7 @@ branch_labels = None
 depends_on = None
 
 def upgrade():
-    op.add_column('newsletter_read', sa.Column('max_streak', sa.Integer(), nullable=False, server_default='0'))
+    op.drop_column('newsletter_read', 'max_streak')
 
 def downgrade():
-    op.drop_column('newsletter_read', 'max_streak')
+    op.add_column('newsletter_read', sa.Column('max_streak', sa.Integer(), nullable=False, server_default='0'))  

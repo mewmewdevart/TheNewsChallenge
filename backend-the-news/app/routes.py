@@ -75,10 +75,10 @@ def get_metrics():
 def get_top_readers():
     top_readers = db.session.query(
         NewsletterRead.email,
-        func.max(NewsletterRead.streak).label('max_streak')
+        func.max(NewsletterRead.streak).label('streak')
     ).group_by(NewsletterRead.email).order_by(func.max(NewsletterRead.streak).desc()).limit(10).all()
 
-    readers_data = [{"email": reader.email, "streak": reader.max_streak} for reader in top_readers]
+    readers_data = [{"email": reader.email, "streak": reader.streak} for reader in top_readers]
 
     return jsonify(readers_data), 200
 
