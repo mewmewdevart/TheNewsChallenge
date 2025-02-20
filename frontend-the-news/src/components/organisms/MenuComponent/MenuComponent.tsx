@@ -39,7 +39,7 @@ export default function MenuComponent({
   const firstLetter = emailUser ? emailUser.charAt(0).toUpperCase() : "";
 
   return (
-    <div className="w-full flex justify-between items-center px-4 sm:px-10 md:px-20 lg:px-40 xl:px-80 py-2 border-b-1 border-gray-100 fixed bg-(--color-brand-neutral-100)">
+    <div className="w-full flex justify-between items-center px-4 sm:px-10 md:px-20 lg:px-40 xl:px-80 py-2 border-b-1 border-gray-100 fixed bg-(--color-brand-neutral-100) z-50">
       <a
         href="https://thenewscc.beehiiv.com/"
         target="_blank"

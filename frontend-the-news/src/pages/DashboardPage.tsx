@@ -1,5 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../Layout";
+import DashboardTemplate from "@templates/DashboardTemplate/DashboardTemplate";
+
+interface Read {
+  email: string;
+  id: number;
+  post_id: string;
+  timestamp: string;
+  utm_campaign: string;
+  utm_channel: string;
+  utm_medium: string;
+  utm_source: string;
+  title: string;
+  content: string;
+}
 
 interface Reader {
   email: string;
@@ -7,20 +21,70 @@ interface Reader {
 }
 
 const DashboardPage: React.FC = () => {
+  const [reads, setReads] = useState<Read[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [chartData, setChartData] = useState<number[]>([]);
+  const [chartLabels, setChartLabels] = useState<string[]>([]);
+  const [selectedPeriod, setSelectedPeriod] = useState<"week" | "month">("week");
+
   const [totalReaders, setTotalReaders] = useState<number>(0);
   const [totalOpens, setTotalOpens] = useState<number>(0);
   const [averageOpens, setAverageOpens] = useState<number>(0);
   const [topReaders, setTopReaders] = useState<Reader[]>([]);
   const [selectedNewsletter, setSelectedNewsletter] = useState<string>("");
-  const [selectedPeriod, setSelectedPeriod] = useState<string>("");
   const [selectedStreakStatus, setSelectedStreakStatus] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const processReadsByPeriod = React.useCallback((reads: Read[], period: "week" | "month") => {
+    const readsByPeriod: { [key: string]: number } = {};
+
+    reads.forEach((read) => {
+      const date = new Date(read.timestamp);
+      let key: string;
+
+      if (period === "week") {
+        key = `${date.getDate()}/${date.getMonth() + 1}`;
+      } else {
+        key = `${date.getMonth() + 1}/${date.getFullYear()}`;
+      }
+
+      if (readsByPeriod[key]) {
+        readsByPeriod[key] += 1;
+      } else {
+        readsByPeriod[key] = 1;
+      }
+    });
+
+    const labels = Object.keys(readsByPeriod);
+
+    const sortedLabels = labels.sort((a, b) => {
+      const dateA = period === "week" ? parseDateToDayMonth(a) : parseDateToMonthYear(a);
+      const dateB = period === "week" ? parseDateToDayMonth(b) : parseDateToMonthYear(b);
+      return dateA.getTime() - dateB.getTime();
+    });
+
+    const sortedData = sortedLabels.map((label) => readsByPeriod[label]);
+
+    return { labels: sortedLabels, data: sortedData };
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        // Busca as métricas gerais
+        // Busca os dados de leituras
+        const readsResponse = await fetch(
+          "https://thenewsletterstreakschallenge.onrender.com/reads"
+        );
+        const readsData = await readsResponse.json();
+
+        // Processa os dados para manter apenas a última leitura de cada leitor
+        const uniqueReads = getUniqueLatestReads(readsData);
+        setReads(uniqueReads);
+
+        const processedData = processReadsByPeriod(readsData, selectedPeriod);
+        setChartLabels(processedData.labels);
+        setChartData(processedData.data);
+
         const metricsResponse = await fetch(
           `https://thenewsletterstreakschallenge.onrender.com/metrics?newsletter=${selectedNewsletter}&period=${selectedPeriod}&streak_status=${selectedStreakStatus}`
         );
@@ -29,7 +93,6 @@ const DashboardPage: React.FC = () => {
         setTotalOpens(metricsData.total_opens);
         setAverageOpens(metricsData.average_opens);
 
-        // Busca o ranking dos leitores mais engajados
         const topReadersResponse = await fetch(
           `https://thenewsletterstreakschallenge.onrender.com/top-readers?newsletter=${selectedNewsletter}&period=${selectedPeriod}&streak_status=${selectedStreakStatus}`
         );
@@ -43,110 +106,51 @@ const DashboardPage: React.FC = () => {
     };
 
     fetchData();
-  }, [selectedNewsletter, selectedPeriod, selectedStreakStatus]);
+  }, [selectedPeriod, selectedNewsletter, selectedStreakStatus, processReadsByPeriod]);
 
-  if (isLoading) {
-    return <p>Carregando...</p>;
-  }
+  const getUniqueLatestReads = (reads: Read[]): Read[] => {
+    const readsByEmail: { [email: string]: Read } = {};
+
+    reads.forEach((read) => {
+      const existingRead = readsByEmail[read.email];
+      if (!existingRead || new Date(read.timestamp) > new Date(existingRead.timestamp)) {
+        readsByEmail[read.email] = read;
+      }
+    });
+
+    return Object.values(readsByEmail);
+  };
+
+  const parseDateToDayMonth = (dateString: string) => {
+    const [day, month] = dateString.split("/");
+    return new Date(new Date().getFullYear(), parseInt(month) - 1, parseInt(day));
+  };
+
+  const parseDateToMonthYear = (dateString: string) => {
+    const [month, year] = dateString.split("/");
+    return new Date(parseInt(year), parseInt(month) - 1, 1);
+  };
 
   return (
-    <Layout emailUser="">
-    <div className="p-6">
-      <div className="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6">DashboardPage Administrativo</h1>
-
-        {/* Métricas de Engajamento Geral */}
-        <section className="mb-8">
-          <h2 className="text-xl font-bold mb-4">Métricas de Engajamento</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-lg font-semibold">Total de Leitores</p>
-              <p className="text-2xl">{totalReaders}</p>
-            </div>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-lg font-semibold">Total de Aberturas</p>
-              <p className="text-2xl">{totalOpens}</p>
-            </div>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-lg font-semibold">Média de Aberturas por Leitor</p>
-              <p className="text-2xl">{averageOpens.toFixed(2)}</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Ranking dos Leitores Mais Engajados */}
-        <section className="mb-8">
-          <h2 className="text-xl font-bold mb-4">Top Leitores</h2>
-          <ul>
-            {topReaders.length > 0 ? (
-              topReaders.map((reader, index) => (
-                <li
-                  key={index}
-                  className={`mb-2 p-2 bg-gray-50 rounded-lg ${
-                    index === 0 ? "border-2 border-yellow-400" : ""
-                  }`}
-                >
-                  <span className="font-semibold">{reader.email}</span> - Streak:{" "}
-                  {reader.streak} dias
-                  {index === 0 && (
-                    <span className="ml-2 text-yellow-600">🏆</span>
-                  )}
-                </li>
-              ))
-            ) : (
-              <p>Nenhum leitor encontrado.</p>
-            )}
-          </ul>
-        </section>
-
-        {/* Mensagens Motivacionais */}
-        <section className="mb-8">
-          <h2 className="text-xl font-bold mb-4">Mensagens Motivacionais</h2>
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <p className="text-lg">
-              {topReaders.length > 0
-                ? `Parabéns, ${topReaders[0].email}! Você está liderando com um streak de ${topReaders[0].streak} dias. Continue assim!`
-                : "Nenhum leitor engajado no momento."}
-            </p>
-          </div>
-        </section>
-
-        {/* Filtros */}
-        <section>
-          <h2 className="text-xl font-bold mb-4">Filtros</h2>
-          <div className="flex gap-4">
-            <select
-              className="p-2 border rounded-lg"
-              value={selectedNewsletter}
-              onChange={(e) => setSelectedNewsletter(e.target.value)}
-            >
-              <option value="">Selecione uma Newsletter</option>
-              <option value="newsletter1">Newsletter 1</option>
-              <option value="newsletter2">Newsletter 2</option>
-            </select>
-            <select
-              className="p-2 border rounded-lg"
-              value={selectedPeriod}
-              onChange={(e) => setSelectedPeriod(e.target.value)}
-            >
-              <option value="">Selecione um Período</option>
-              <option value="last_week">Última Semana</option>
-              <option value="last_month">Último Mês</option>
-            </select>
-            <select
-              className="p-2 border rounded-lg"
-              value={selectedStreakStatus}
-              onChange={(e) => setSelectedStreakStatus(e.target.value)}
-            >
-              <option value="">Selecione o Status do Streak</option>
-              <option value="active">Ativo</option>
-              <option value="inactive">Inativo</option>
-            </select>
-          </div>
-        </section>
-      </div>
-    </div>
-    </Layout>);
+    <Layout emailUser={'☕'}>
+      <DashboardTemplate
+        isLoading={isLoading}
+        chartData={chartData}
+        chartLabels={chartLabels}
+        selectedPeriod={selectedPeriod}
+        onPeriodChange={setSelectedPeriod}
+        totalReaders={totalReaders}
+        totalOpens={totalOpens}
+        averageOpens={averageOpens}
+        topReaders={topReaders}
+        selectedNewsletter={selectedNewsletter}
+        onNewsletterChange={setSelectedNewsletter}
+        selectedStreakStatus={selectedStreakStatus}
+        onStreakStatusChange={setSelectedStreakStatus}
+        reads={reads}
+      />
+    </Layout>
+  );
 };
 
 export default DashboardPage;
