@@ -4,7 +4,7 @@ from .models import NewsletterRead
 def calculate_streak(email):
     """
     Calcula o streak de leituras consecutivas de newsletters para um e-mail específico.
-    Ignora domingos e reinicia o streak se houver uma quebra na sequência.
+    Ignora domingos e múltiplas leituras no mesmo dia.
     """
 
     # Obtém leituras ordenadas do mais recente para o mais antigo
@@ -38,7 +38,9 @@ def calculate_streak(email):
         delta = (prev_date - read_date).days
 
         # Verifica se os dias são consecutivos, ignorando domingos
-        if delta == 1 or (delta == 2 and prev_date.weekday() == 0):  # Segunda-feira após sábado
+        if delta == 1:  # Dias consecutivos (segunda a sábado)
+            streak += 1
+        elif delta == 2 and prev_date.weekday() == 0:  # Segunda-feira após sábado
             streak += 1
         else:
             break  # Interrompe o streak
@@ -46,4 +48,3 @@ def calculate_streak(email):
         prev_date = read_date
 
     return streak
-
