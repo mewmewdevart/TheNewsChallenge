@@ -4,7 +4,8 @@ from flask_migrate import Migrate
 from config import Config
 from app.routes import routes
 from app.database import db
-from sqlalchemy import text  # Adicione esta linha
+from sqlalchemy import text
+from app.services import update_streaks
 
 def create_app():
     app = Flask(__name__, template_folder="templates")
@@ -19,7 +20,7 @@ def create_app():
     # Database Connection Test
     with app.app_context():
         try:
-            db.session.execute(text('SELECT 1'))  # Agora o 'text' está definido
+            db.session.execute(text('SELECT 1'))
             print("Database connection successful!")
         except Exception as e:
             print(f"Error connecting to the database: {e}")
@@ -37,4 +38,5 @@ def create_app():
 app = create_app()
 
 if __name__ == "__main__":
+    update_streaks()
     app.run(debug=True)

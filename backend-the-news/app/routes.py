@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from .models import NewsletterRead, db
 from datetime import datetime, timedelta
 from sqlalchemy import func
-from .utils import calculate_streak
+from app.utils import calculate_streak
 import logging
 
 routes = Blueprint("routes", __name__)

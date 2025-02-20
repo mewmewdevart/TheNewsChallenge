@@ -1,13 +1,11 @@
 from datetime import datetime, timedelta
-from .models import NewsletterRead
+from app.models import NewsletterRead
 
 def calculate_streak(email):
     """
     Calcula o streak de leituras consecutivas de newsletters para um e-mail específico.
     Ignora domingos e múltiplas leituras no mesmo dia.
     """
-
-    # Obtém leituras ordenadas do mais recente para o mais antigo
     reads = NewsletterRead.query.filter_by(email=email) \
         .order_by(NewsletterRead.timestamp.desc()).all()
 
@@ -30,7 +28,6 @@ def calculate_streak(email):
     # Itera sobre as datas para verificar sequência
     for read_date in sorted_dates:
         if prev_date is None:
-            # Primeira leitura válida (não domingo)
             streak = 1
             prev_date = read_date
             continue
