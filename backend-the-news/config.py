@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-# Carrega as variáveis do .env (apenas para desenvolvimento)
+# Carregar variáveis do .env
 load_dotenv()
 
 class Config:
@@ -9,3 +9,4 @@ class Config:
     DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///newsletter_streaks.db')
     SQLALCHEMY_DATABASE_URI = DATABASE_URL
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    REGISTERED_EMAIL = os.getenv('REGISTERED_EMAIL', 'default@email.com')
