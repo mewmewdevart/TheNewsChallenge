@@ -33,6 +33,7 @@ const DashboardPage: React.FC = () => {
   const [topReaders, setTopReaders] = useState<Reader[]>([]);
   const [selectedNewsletter, setSelectedNewsletter] = useState<string>("");
   const [selectedStreakStatus, setSelectedStreakStatus] = useState<string>("");
+  const [phraseOfTheDay, setPhraseOfTheDay] = useState<string>("");
 
   const processReadsByPeriod = React.useCallback((reads: Read[], period: "week" | "month") => {
     const readsByPeriod: { [key: string]: number } = {};
@@ -108,6 +109,26 @@ const DashboardPage: React.FC = () => {
     fetchData();
   }, [selectedPeriod, selectedNewsletter, selectedStreakStatus, processReadsByPeriod]);
 
+  useEffect(() => {
+    const getPhraseOfTheDay = () => {
+      const listPhraseDay = [
+        "A palavra “impossível” foi inventada para ser desafiada.",
+        "Somos capazes de fazer muito mais do que imaginamos!",
+        "Nós somos como o clima: feitos de dias de chuva e de sol!",
+        "Há ainda tanta coisa linda na vida para se descobrir.",
+        "Há tantas pessoas que torcem por você na vida.",
+        "Os dias difíceis são a forma mais rápida de aprendermos a apreciar os bons.",
+        "Os sonhos são a melhor forma de termos uma direção na vida e um motivo para caminhar.",
+        "Só se pode alcançar um grande êxito quando nos mantemos fiéis a nós mesmos."
+      ];
+      const today = new Date().getDate();
+      const index = today % listPhraseDay.length;
+      setPhraseOfTheDay(listPhraseDay[index]);
+    };
+
+    getPhraseOfTheDay();
+  }, []);
+
   const getUniqueLatestReads = (reads: Read[]): Read[] => {
     const readsByEmail: { [email: string]: Read } = {};
 
@@ -148,6 +169,7 @@ const DashboardPage: React.FC = () => {
         selectedStreakStatus={selectedStreakStatus}
         onStreakStatusChange={setSelectedStreakStatus}
         reads={reads}
+        phraseOfTheDay={phraseOfTheDay}
       />
     </Layout>
   );
