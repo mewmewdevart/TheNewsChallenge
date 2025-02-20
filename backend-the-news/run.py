@@ -28,7 +28,7 @@ def create_app():
 
     app.register_blueprint(routes)
 
-    @app.route('/')
+    @app.route('/documentation')
     def home():
         return render_template("index.html")
 

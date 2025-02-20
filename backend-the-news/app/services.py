@@ -1,8 +1,5 @@
 import requests
-from config import Config
-
-REGISTERED_EMAIL = Config.REGISTERED_EMAIL
-
+from config import REGISTERED_EMAIL
 
 def register_webhook():
     payload = {"email": REGISTERED_EMAIL}

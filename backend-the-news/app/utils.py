@@ -46,3 +46,4 @@ def calculate_streak(email):
         prev_date = read_date
 
     return streak
+
