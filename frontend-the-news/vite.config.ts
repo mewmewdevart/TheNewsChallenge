@@ -8,14 +8,14 @@ export default defineConfig({
   resolve: {
     alias: {
       // Atomic Design
-      '@atoms': path.resolve(__dirname, './src/components/atoms'),
-      '@molecules': path.resolve(__dirname, './src/components/molecules'),
-      '@organisms': path.resolve(__dirname, './src/components/organisms'),
-      '@templates': path.resolve(__dirname, './src/components/templates'),
+      '@atoms': path.resolve(__dirname, 'src/components/atoms'),
+      '@molecules': path.resolve(__dirname, 'src/components/molecules'),
+      '@organisms': path.resolve(__dirname, 'src/components/organisms'),
+      '@templates': path.resolve(__dirname, 'src/components/templates'),
 
       // Outras pastas
-      '@pages': path.resolve(__dirname, './src/pages'),
-      '@assets': path.resolve(__dirname, './src/assets'),
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
     },
   },
 });

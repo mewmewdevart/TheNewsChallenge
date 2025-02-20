@@ -1,5 +1,5 @@
 import React from "react";
-import StatCard from "../../atoms/StatCard/StatCard";
+import StatCard from "@atoms/StatCard/StatCard";
 import Skeleton from "@mui/material/Skeleton";
 import StatsRank from "@atoms/StatsRank/StatsRank";
 

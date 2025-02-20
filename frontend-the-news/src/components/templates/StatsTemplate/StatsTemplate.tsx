@@ -1,5 +1,5 @@
 import React from "react";
-import StatsGrid from "../../organisms/StatsGrid/StatsGrid";
+import StatsGrid from "@organisms/StatsGrid/StatsGrid";
 
 interface TopReader {
   email: string;

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import BarChart from "../../molecules/BarChart/BarChart";
+import BarChart from "@molecules/BarChart/BarChart";
 import Table from "@organisms/Table/Table";
 import { Skeleton } from "@mui/material";
 import StatCard from "@molecules/StatCard/StatCard";
