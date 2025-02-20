@@ -100,33 +100,49 @@ WaffleNewsletterStreaks/
 
 ### Pré-requisitos
 
-❗️ | Certifique-se de ter as seguintes ferramentas instaladas:
+❗️ Certifique-se de ter as seguintes ferramentas instaladas:
 
-- Node.js (v18 ou superior)
-- Python (3.8 ou superior)
-- PostgreSQL
-- Git
+- **Node.js** (v18 ou superior)
+- **Python** (3.8 ou superior)
+- **PostgreSQL**
+- **Git**
 
 ### Rodando o Projeto Localmente
 
-1. Clone o repositório:
+1. **Clone o repositório**:
    ```sh
    git clone https://github.com/seu-usuario/WaffleNewsletterStreaks.git
    cd WaffleNewsletterStreaks
    ```
 
-2. Instale as dependências:
-   ```sh
-   # Frontend
-   cd frontend-the-news
-   npm install
+2. **Crie e ative um ambiente virtual (venv) para o backend**:
+   - Para sistemas Unix/Linux/macOS:
+     ```sh
+     python3 -m venv venv
+     source venv/bin/activate
+     ```
+   - Para Windows:
+     ```sh
+     python -m venv venv
+     .\venv\Scripts\activate
+     ```
 
-   # Backend
-   cd ../backend-the-news
-   pip install -r requirements.txt
-   ```
+3. **Instale as dependências**:
 
-3. Configure o banco de dados:
+   - **Frontend**:
+     ```sh
+     cd frontend-the-news
+     npm install
+     ```
+
+   - **Backend**:
+     - Com o ambiente virtual ativado, instale as dependências do backend:
+       ```sh
+       cd ../backend-the-news
+       pip install -r requirements.txt
+       ```
+
+4. **Configure o banco de dados**:
    - Crie um banco de dados PostgreSQL local:
      ```sh
      createdb newsletter_streaks
@@ -137,26 +153,31 @@ WaffleNewsletterStreaks/
      DATABASE_URL=postgresql://usuario:senha@localhost/newsletter_streaks
      ```
 
-4. Execute as migrações do banco de dados:
+5. **Execute as migrações do banco de dados**:
    ```sh
-   cd backend
+   cd backend-the-news
    flask db init
    flask db migrate -m "Criação inicial do banco de dados"
    flask db upgrade
    ```
 
-5. Execute o projeto:
-   ```sh
-   # Na pasta root do backend
-   python run.py
+6. **Execute o projeto**:
+   - **Backend**:
+     - Na pasta `backend-the-news`, inicie o servidor Flask:
+       ```sh
+       python run.py
+       ```
 
-   # Frontend
-   cd ../frontend
-   npm run dev
-   ```
+   - **Frontend**:
+     - Na pasta `frontend-the-news`, inicie o servidor de desenvolvimento:
+       ```sh
+       cd ../frontend-the-news
+       npm run dev
+       ```
 
-6. Acesse o site frontend em: `http://localhost:3000` e o do backend em `http://127.0.0.1:5000` caso as rotas nao estejam ocupadas.
-
+7. **Acesse o projeto**:
+   - O **Frontend** estará disponível em: [http://localhost:3000](http://localhost:3000)
+   - O **Backend** estará disponível em: [http://127.0.0.1:5000](http://127.0.0.1:5000), caso a rota não esteja ocupada.
 
 ## Endpoints da API
 
