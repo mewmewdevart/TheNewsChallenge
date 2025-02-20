@@ -127,3 +127,8 @@ body {
 .routes__table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
+
+a:focus, button:focus {
+    outline: 3px solid var(--color-brand-primary-500);
+    outline-offset: 2px;
+}
