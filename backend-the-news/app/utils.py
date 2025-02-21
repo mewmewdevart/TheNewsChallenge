@@ -1,14 +1,18 @@
 from app.models import NewsletterRead
+from app.database import db
 
 def update_max_streak(email, current_streak):
     """
     Atualiza o max_streak do usuário se o current_streak for maior que o max_streak atual.
     """
-    # Busca o registro mais recente do usuário
     latest_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
 
     if latest_read:
-        # Se o current_streak for maior que o max_streak, atualiza o max_streak
+        # Se max_streak for None, inicializa com 0
+        if latest_read.max_streak is None:
+            latest_read.max_streak = 0
+        
+        # Atualiza se o streak atual for maior
         if current_streak > latest_read.max_streak:
             latest_read.max_streak = current_streak
             db.session.commit()
