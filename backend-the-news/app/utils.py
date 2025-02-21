@@ -1,47 +1,43 @@
 from app.models import NewsletterRead
 from app.database import db
+from datetime import datetime
 
 def update_max_streak(email, current_streak):
-    """
-    Atualiza o max_streak do usuário se o current_streak for maior que o max_streak atual.
-    """
     latest_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
-
+    
+    print(f"Última leitura para {email}: {latest_read}")  # Debug
+    
     if latest_read:
-        # Se max_streak for None, inicializa com 0
         latest_read.max_streak = latest_read.max_streak or 0
+        print(f"Max streak antes da atualização: {latest_read.max_streak}")  # Debug
         
-        # Atualiza se o streak atual for maior
         if current_streak > latest_read.max_streak:
             latest_read.max_streak = current_streak
-            db.session.flush()  # Para garantir que as mudanças sejam refletidas antes de commit
+            print(f"Max streak atualizado para: {latest_read.max_streak}")  # Debug
+            db.session.flush()
             db.session.commit()
+        else:
+            print("O current_streak não é maior que o max_streak atual.")  # Debug
+
 
 def calculate_streak(email):
-    """
-    Calcula o streak de leituras consecutivas de newsletters para um e-mail específico.
-    Ignora domingos e múltiplas leituras no mesmo dia.
-    """
-    reads = NewsletterRead.query.filter_by(email=email) \
-        .filter(NewsletterRead.timestamp.weekday() != 6).order_by(NewsletterRead.timestamp.desc()).all()
+    reads = (
+        db.session.query(NewsletterRead)
+        .filter(NewsletterRead.email == email)
+        .all()
+    )
+    filtered_reads = [read for read in reads if read.timestamp.weekday() != 6]
 
-    if not reads:
+    print(f"Ler leituras para {email}: {filtered_reads}")  # Debug
+
+    if not filtered_reads:
         return 0  # Nenhuma leitura, streak é 0
 
-    # Conjunto para armazenar as datas lidas, eliminando duplicatas
-    read_dates = {read.timestamp.date() for read in reads}
-
-    if not read_dates:
-        return 0  # Caso todas as leituras sejam domingos, retorna 0
-
-    # Ordena as datas do mais recente para o mais antigo
+    read_dates = {read.timestamp.date() for read in filtered_reads}
     sorted_dates = sorted(read_dates, reverse=True)
 
-    # Inicializa o streak
     streak = 0
     prev_date = None
-
-    # Itera sobre as datas para verificar sequência
     for read_date in sorted_dates:
         if prev_date is None:
             streak = 1
@@ -49,18 +45,15 @@ def calculate_streak(email):
             continue
 
         delta = (prev_date - read_date).days
-
-        # Verifica se os dias são consecutivos, ignorando domingos
-        if delta == 1:  # Dias consecutivos (segunda a sábado)
-            streak += 1
-        elif delta == 2 and prev_date.weekday() == 0:  # Segunda-feira após sábado
+        if delta == 1 or (delta == 2 and prev_date.weekday() == 0):
             streak += 1
         else:
-            break  # Interrompe o streak
+            break
 
         prev_date = read_date
 
-    # Atualiza o max_streak se necessário
+    print(f"Streak calculado: {streak}")  # Debug
+
     update_max_streak(email, streak)
 
     return streak
