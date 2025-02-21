@@ -13,6 +13,9 @@
     <a href="https://thenewsletterstreakschallenge.onrender.com" target="_blank">Acesse o Site</a> 
 </p>
 
+## Introdução
+
+Este projeto foi desenvolvido como parte do desafio técnico para a vaga de Desenvolvedor Full Stack Jr (Front-end Specialist) na Waffle. A solução proposta visa aumentar o engajamento dos leitores da newsletter do **The News** através de uma plataforma de gamificação, onde os leitores podem acompanhar suas sequências de leitura (streaks) e métricas de engajamento.
 
 ## Sumário
 
@@ -25,9 +28,10 @@
     - [Pré-requisitos](#pré-requisitos)
     - [Rodando o Projeto Localmente](#rodando-o-projeto-localmente)
 7. [Endpoints da API](#endpoints-da-api)
-8. [Testes](#testes)
-9. [Referências](#referências)
-10. [Licença](#licença)
+8. [Automação com GitHub Actions](#automacao-com-github-actions)
+9. [Testes](#testes)
+10. [Referências](#referências)
+11. [Licença](#licença)
 
 
 ## Desafio
@@ -38,11 +42,9 @@ O desafio consiste em criar uma plataforma de **gamificação** para aumentar o 
 2. **Dashboard Administrativo**: Para a equipe da Waffle monitorar métricas de engajamento, como streaks, rankings e padrões de abertura.
 3. **Integração com API**: Utilizando dados fornecidos via webhook da plataforma **Beehiiv**.
 
-
 ## Sobre o Projeto
 
 Este projeto foi desenvolvido para criar uma solução de gamificação que incentiva os leitores da newsletter a manterem um hábito de leitura diário. Através de streaks e métricas de engajamento, os leitores são motivados a abrir as newsletters consecutivamente, enquanto a equipe da Waffle pode monitorar o desempenho das campanhas.
-
 
 ## Funcionalidades
 
@@ -60,16 +62,16 @@ Este projeto foi desenvolvido para criar uma solução de gamificação que ince
 ### **Regras de Streak**
 - **Cálculo Automático**: O streak aumenta +1 a cada dia consecutivo de abertura.
 - **Reset**: O streak é zerado se o leitor não abrir a newsletter no dia seguinte.
+- **Exceções**: Dias específicos (como domingos) podem ser configurados para não afetar o streak.
 
 
 ## Tecnologias Utilizadas
 
-- **Frontend**: React + TypeScript
-- **Backend**: Python (Flask)
-- **Banco de Dados**: PostgreSQL
-- **Estilização**: TailwindCSS
-- **Testes**: Pytest (unitários) + Cypress (E2E)
-- **Deploy**: Render (Backend)
+| **Frontend**         | **Backend**        | **Banco de Dados** | **Outras Ferramentas**       |
+|----------------------|--------------------|--------------------|------------------------------|
+| React + TypeScript   | Python (Flask)     | PostgreSQL         | Render (Deploy)              |
+| TailwindCSS          | Pytest (unitários) |                    | 		                |
+| Cypress (E2E)        |                    |                    |                              |
 
 
 ## Estrutura do Projeto
@@ -323,6 +325,24 @@ A API oferece os seguintes endpoints:
   }
   ```
 
+## Automação com GitHub Actions
+
+Este projeto agora conta com um workflow automatizado via **GitHub Actions** para rodar um script periodicamente. 
+
+### 🔄 O que o Workflow Faz?
+- Executa o script `run_update_streaks.py` a cada **24 horas**.
+- Atualiza os dados no banco de dados automaticamente.
+- Garante que as métricas e streaks estejam sempre sincronizados sem intervenção manual.
+
+### ⚙️ Configuração do Cron Job
+O agendamento é definido no arquivo `.github/workflows/update_streaks.yml`, utilizando a seguinte expressão cron:
+
+```yaml
+on:
+  schedule:
+    - cron: "0 0 * * *" # Executa a cada 24 horas
+```
+
 
 ## Testes
 
@@ -354,8 +374,7 @@ Para garantir a qualidade do projeto, foram implementados testes unitários e en
 
 ## Licença
 
-Este projeto está licenciado sob a [MIT License](LICENSE).
-
+Este projeto está licenciado sob a [MIT License](LICENSE). Isso significa que você pode usar, modificar e distribuir o código, desde que inclua a licença original.
 
 <p align="center">
   Desenvolvido com muito ☕ por
