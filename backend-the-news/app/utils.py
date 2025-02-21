@@ -23,8 +23,7 @@ def calculate_streak(email):
     Ignora domingos e múltiplas leituras no mesmo dia.
     """
     reads = NewsletterRead.query.filter_by(email=email) \
-        .filter(NewsletterRead.timestamp.weekday() != 6)  # Ignora domingos diretamente na consulta
-        .order_by(NewsletterRead.timestamp.desc()).all()
+        .filter(NewsletterRead.timestamp.weekday() != 6).order_by(NewsletterRead.timestamp.desc()).all()
 
     if not reads:
         return 0  # Nenhuma leitura, streak é 0
