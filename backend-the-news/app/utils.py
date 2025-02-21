@@ -9,12 +9,12 @@ def update_max_streak(email, current_streak):
 
     if latest_read:
         # Se max_streak for None, inicializa com 0
-        if latest_read.max_streak is None:
-            latest_read.max_streak = 0
+        latest_read.max_streak = latest_read.max_streak or 0
         
         # Atualiza se o streak atual for maior
         if current_streak > latest_read.max_streak:
             latest_read.max_streak = current_streak
+            db.session.flush()  # Para garantir que as mudanças sejam refletidas antes de commit
             db.session.commit()
 
 def calculate_streak(email):
@@ -23,13 +23,14 @@ def calculate_streak(email):
     Ignora domingos e múltiplas leituras no mesmo dia.
     """
     reads = NewsletterRead.query.filter_by(email=email) \
+        .filter(NewsletterRead.timestamp.weekday() != 6)  # Ignora domingos diretamente na consulta
         .order_by(NewsletterRead.timestamp.desc()).all()
 
     if not reads:
         return 0  # Nenhuma leitura, streak é 0
 
-    # Conjunto para armazenar apenas as datas lidas (sem duplicação e ignorando domingos)
-    read_dates = {read.timestamp.date() for read in reads if read.timestamp.weekday() != 6}
+    # Conjunto para armazenar as datas lidas, eliminando duplicatas
+    read_dates = {read.timestamp.date() for read in reads}
 
     if not read_dates:
         return 0  # Caso todas as leituras sejam domingos, retorna 0
