@@ -16,7 +16,7 @@
 
 body {
     background-color: var(--color-brand-neutral-100);
-    padding: 30px;
+    padding: 20px;
     font-family: "Poppins", sans-serif;
     color: var(--color-brand-secondary-500);
     font-size: 16px;
@@ -24,22 +24,24 @@ body {
 
 .header {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .header__logo img {
-    height: 50px;
+    height: 40px;
 }
 
 .header__title {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     margin: 0;
+    text-align: center;
 }
 
 .intro__text {
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 20px;
 }
@@ -49,30 +51,31 @@ body {
 }
 
 .routes__title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-bottom: 20px;
 }
 
 .routes__list {
     list-style: none;
+    padding: 0;
 }
 
 .routes__item {
     background-color: var(--color-brand-neutral-100);
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
 }
 
 .routes__route {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--color-brand-primary-500);
     margin-bottom: 10px;
 }
 
 .routes__description {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--color-brand-neutral-500);
     margin-bottom: 10px;
 }
@@ -83,7 +86,7 @@ body {
     border-radius: 5px;
     color: var(--color-brand-neutral-100);
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .routes__method--get {
@@ -91,7 +94,7 @@ body {
 }
 
 .routes__example {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin-top: 10px;
     color: var(--color-brand-neutral-500);
 }
@@ -104,17 +107,20 @@ body {
     font-family: "Courier New", Courier, monospace;
     margin-top: 10px;
     word-wrap: break-word;
+    font-size: 0.8rem;
 }
 
 .routes__table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
+    overflow-x: auto;
+    display: block;
 }
 
 .routes__table th,
 .routes__table td {
-    padding: 12px;
+    padding: 10px;
     border: 1px solid #ddd;
     text-align: left;
 }
@@ -131,4 +137,79 @@ body {
 a:focus, button:focus {
     outline: 3px solid var(--color-brand-primary-500);
     outline-offset: 2px;
+}
+
+.footer {
+    text-align: center;
+}
+
+/* Media Queries para telas menores */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .header__logo img {
+        height: 30px;
+    }
+
+    .header__title {
+        font-size: 1.2rem;
+    }
+
+    .intro__text {
+        font-size: 0.9rem;
+    }
+
+    .routes__title {
+        font-size: 1.1rem;
+    }
+
+    .routes__route {
+        font-size: 1rem;
+    }
+
+    .routes__description {
+        font-size: 0.8rem;
+    }
+
+    .routes__code {
+        font-size: 0.7rem;
+    }
+
+    .routes__table th,
+    .routes__table td {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header__title {
+        font-size: 1rem;
+    }
+
+    .intro__text {
+        font-size: 0.8rem;
+    }
+
+    .routes__title {
+        font-size: 1rem;
+    }
+
+    .routes__route {
+        font-size: 0.9rem;
+    }
+
+    .routes__description {
+        font-size: 0.7rem;
+    }
+
+    .routes__code {
+        font-size: 0.6rem;
+    }
+
+    .routes__table th,
+    .routes__table td {
+        padding: 6px;
+    }
 }

@@ -162,7 +162,41 @@
                     <pre class="routes__code">
 {
     "email": "larissa@thenews.com",
-    "streak": 10
+    "streak": 10,
+    "max_streak": 15
+}</pre>
+                </li>
+
+                <!-- Rota /max-streak -->
+                <li class="routes__item">
+                    <h3 class="routes__route"><code>/max-streak</code></h3>
+                    <p class="routes__description">Retorna a maior sequência de leitura (max_streak) de um e-mail específico.</p>
+                    <span class="routes__method routes__method--get">GET</span>
+                    <p class="routes__example">Exemplo de requisição GET:</p>
+                    <code class="routes__code">
+                        GET https://thenewsletterstreakschallenge.onrender.com/max-streak?email=larissa@thenews.com
+                    </code>
+                    <table class="routes__table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Parâmetro</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Descrição</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>email</td>
+                                <td>String</td>
+                                <td>O endereço de e-mail do usuário.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="routes__example">Resposta esperada:</p>
+                    <pre class="routes__code">
+{
+    "email": "larissa@thenews.com",
+    "max_streak": 15
 }</pre>
                 </li>
 
@@ -240,9 +274,8 @@
             </ul>
         </section>
     </main>
-<!-- 
     <footer class="footer">
-        <p class="footer__text">Feito com ❤️ por Larissa</p>
-    </footer> -->
+        &copy;  Criado por <a href="https://linktr.ee/mewmewdevart" target="_blank">Larissa Cristina Benedito</a>
+    </footer>
 </body>
 </html>
