@@ -1,5 +1,17 @@
-from datetime import datetime, timedelta
 from app.models import NewsletterRead
+
+def update_max_streak(email, current_streak):
+    """
+    Atualiza o max_streak do usuário se o current_streak for maior que o max_streak atual.
+    """
+    # Busca o registro mais recente do usuário
+    latest_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
+
+    if latest_read:
+        # Se o current_streak for maior que o max_streak, atualiza o max_streak
+        if current_streak > latest_read.max_streak:
+            latest_read.max_streak = current_streak
+            db.session.commit()
 
 def calculate_streak(email):
     """
@@ -43,5 +55,8 @@ def calculate_streak(email):
             break  # Interrompe o streak
 
         prev_date = read_date
+
+    # Atualiza o max_streak se necessário
+    update_max_streak(email, streak)
 
     return streak

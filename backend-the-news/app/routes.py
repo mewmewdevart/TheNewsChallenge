@@ -120,3 +120,16 @@ def check_email():
         return jsonify({"error": "E-mail não cadastrado"}), 404
 
     return jsonify({"message": "E-mail encontrado", "email": email}), 200
+
+@routes.route('/max-streak', methods=['GET'])
+def get_max_streak():
+    email = request.args.get('email')
+    if not email:
+        return jsonify({"error": "Email é obrigatório"}), 400
+
+    latest_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
+
+    if not latest_read:
+        return jsonify({"email": email, "max_streak": 0}), 200
+
+    return jsonify({"email": email, "max_streak": latest_read.max_streak}), 200
