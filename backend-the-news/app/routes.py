@@ -99,9 +99,9 @@ def get_streak():
     last_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
 
     if not last_read:
-        return jsonify({"email": email, "streak": 0}), 200
+        return jsonify({"email": email, "streak": 0, "max_streak": 0}), 200
 
-    return jsonify({"email": email, "streak": last_read.streak}), 200
+    return jsonify({"email": email, "streak": last_read.streak, "max_streak": last_read.max_streak}), 200
 
 @routes.route('/history', methods=['GET'])
 def get_history():

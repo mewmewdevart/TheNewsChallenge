@@ -1,5 +1,5 @@
 from app.models import NewsletterRead, db
-from app.utils import calculate_streak
+from .utils import calculate_streak
 
 def update_streaks():
     """Atualiza os streaks de leitura da newsletter para todos os usuários no banco de dados."""
