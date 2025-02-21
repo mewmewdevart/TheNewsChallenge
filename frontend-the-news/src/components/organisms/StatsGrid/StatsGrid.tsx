@@ -41,6 +41,7 @@ interface StatsGridProps {
 
 const StatsGrid: React.FC<StatsGridProps> = ({
 	streakUser,
+	maxStreakUser,
 	topReaders = [],
 }) => {
 	return (
@@ -56,7 +57,7 @@ const StatsGrid: React.FC<StatsGridProps> = ({
 					{/* Cards de estatísticas */}
 					<div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
 						<StatCard icon="🔥" value={streakUser} label="Dias Seguidos" />
-						<StatCard icon="🏆" value="7" label="Recorde Pessoal" />
+						<StatCard icon="🏆" value={maxStreakUser} label="Recorde Pessoal" />
 						<StatCard icon="📰" value={streakUser} label="Total de Leituras" />
 					</div>
 

@@ -20,7 +20,7 @@ const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'email', headerName: 'Email', width: 200 },
   { field: 'post_id', headerName: 'Post ID', width: 150 },
-  { field: 'timestamp', headerName: 'Data de Leitura', width: 200 },
+  { field: 'timestamp', headerName: 'Data da ultima Leitura', width: 200 },
   { field: 'utm_campaign', headerName: 'Campanha UTM', width: 150 },
   { field: 'utm_channel', headerName: 'Canal UTM', width: 150 },
   { field: 'utm_medium', headerName: 'Médio UTM', width: 150 },

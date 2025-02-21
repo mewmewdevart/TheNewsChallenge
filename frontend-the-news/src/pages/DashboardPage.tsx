@@ -72,13 +72,11 @@ const DashboardPage: React.FC = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        // Busca os dados de leituras
         const readsResponse = await fetch(
           "https://thenewsletterstreakschallenge.onrender.com/reads"
         );
         const readsData = await readsResponse.json();
 
-        // Processa os dados para manter apenas a última leitura de cada leitor
         const uniqueReads = getUniqueLatestReads(readsData);
         setReads(uniqueReads);
 
