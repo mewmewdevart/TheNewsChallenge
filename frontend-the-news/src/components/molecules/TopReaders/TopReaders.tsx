@@ -7,7 +7,8 @@ interface TopReadersProps {
 
 const TopReaders: React.FC<TopReadersProps> = ({ topReaders }) => (
   <section className="h-[340px] w-full flex flex-col gap-4">
-    <div className="border border-gray-100 p-4 w-full">
+    <div className="border border-gray-100 p-4 w-full flex flex-col gap-4">
+    <h3 className="text-left font-bold w-full">Top 5 Leitores</h3>
       {topReaders.slice(0, 5).map((reader, index) => (
         <StatsRank
           key={`${reader.email}-${index}`}
