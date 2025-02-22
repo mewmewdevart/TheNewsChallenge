@@ -351,9 +351,46 @@ Para garantir a qualidade do projeto, foram implementados testes unitários e en
 1. **Testes Unitários**:
    - Execute com Pytest:
      ```sh
-     cd backend
-     pytest
+     cd backend-the-news
+     pytest tests/
      ```
+Foram realizados os seguintes testes no backend:
+
+**Criação de Registros**
+   - **Objetivo**: Verificar se um novo registro de leitura da newsletter é criado corretamente no banco de dados.
+   - **Esperado**: O novo registro deve ser adicionado ao banco de dados e todos os campos fornecidos (como email, post_id, utm_source, etc.) devem ser corretamente armazenados. Além disso, os valores padrão para `streak`, `max_streak` e `current_streak` devem ser `0`.
+
+**Valores Padrão**
+   - **Objetivo**: Verificar se os valores padrão são atribuídos corretamente quando um novo registro é criado, caso não sejam fornecidos valores para esses campos.
+   - **Esperado**: Quando um novo registro é criado sem valores explícitos para `streak`, `max_streak` e `current_streak`, esses campos devem ser configurados automaticamente como `0`.
+
+**Restrições de Integridade**
+   - **Objetivo**: Verificar se as restrições de integridade no banco de dados estão funcionando corretamente, como a prevenção de duplicação de registros.
+   - **Esperado**: Tentar adicionar um registro com um email já existente deve resultar em um erro de integridade (erro `IntegrityError`), impedindo que o registro seja duplicado.
+
+**Atualização de Registros**
+   - **Objetivo**: Verificar se é possível atualizar um registro existente no banco de dados.
+   - **Esperado**: O campo atualizado (como `utm_source`) deve refletir a mudança após o commit da transação. A alteração deve ser persistida no banco de dados.
+
+**Exclusão de Registros**
+   - **Objetivo**: Verificar se um registro pode ser excluído corretamente do banco de dados.
+   - **Esperado**: Após a exclusão do registro, a busca por esse registro no banco de dados deve retornar `None`, indicando que o registro foi removido com sucesso.
+
+**Validação de Email Inválido**
+   - **Objetivo**: Verificar se é lançado um erro quando um email inválido é fornecido ao criar um novo registro.
+   - **Esperado**: A tentativa de criar um registro com um email inválido deve gerar um `ValueError` com a mensagem "Invalid email address".
+
+**Validação de Campos Nulos**
+   - **Objetivo**: Verificar se é lançado um erro quando um campo obrigatório (como email) é deixado nulo.
+   - **Esperado**: A tentativa de criar um registro com valores nulos nos campos obrigatórios deve gerar um `ValueError`, com a mensagem "Invalid email address" (ou mensagem similar, dependendo da validação).
+
+**Verificação de Banco de Dados Vazio**
+   - **Objetivo**: Verificar se a consulta de um email que não existe no banco retorna `None`, indicando que o registro não foi encontrado.
+   - **Esperado**: Ao buscar um email não registrado no banco de dados, a função deve retornar `None`, confirmando que o registro não existe.
+
+**Método Personalizado**
+   - **Objetivo**: Verificar se o método personalizado de um modelo funciona corretamente.
+   - **Esperado**: O método deve retornar o valor esperado, que pode ser um resultado calculado ou formatado a partir dos dados do registro.
 
 2. **Testes E2E**:
    - Execute com Cypress:
@@ -361,7 +398,6 @@ Para garantir a qualidade do projeto, foram implementados testes unitários e en
      cd frontend
      npm run cypress
      ```
-
 
 ## Referências
 
