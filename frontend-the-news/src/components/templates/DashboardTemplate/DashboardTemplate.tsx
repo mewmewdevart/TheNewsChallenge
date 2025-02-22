@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import BarChart from "@molecules/BarChart/BarChart";
 import Table from "@organisms/Table/Table";
-import { Skeleton } from "@mui/material";
 import StatCard from "@atoms/StatCard/StatCard";
 import PeriodFilter from "@molecules/PeriodFilter/PeriodFilter";
 import TopReaders from "@molecules/TopReaders/TopReaders";
 import NewsletterFilter from "@molecules/NewsletterFilter/NewsletterFilter";
+import useResponsiveness from "../../../utils/Responsiveness"; 
+import DailyPhrase from "@atoms/DailyPhrase/DailyPhrase";
 
 interface Read {
   email: string;
@@ -34,12 +35,12 @@ interface DashboardTemplateProps {
   onNewsletterChange: (newsletter: string) => void;
   selectedStreakStatus: string;
   onStreakStatusChange: (streakStatus: string) => void;
-  reads: Read[];
   phraseOfTheDay: string;
+  reads: Read[];
 }
 
 const DashboardTemplate: React.FC<DashboardTemplateProps> = ({
-  isLoading,
+  // isLoading,
   chartData,
   chartLabels,
   selectedPeriod,
@@ -53,23 +54,20 @@ const DashboardTemplate: React.FC<DashboardTemplateProps> = ({
   selectedStreakStatus,
   onStreakStatusChange,
   phraseOfTheDay,
-  reads
+  reads,
 }) => {
-  useEffect(() => {
-    const getPhraseOfTheDay = () => {
-      const today = new Date().getDate();
-      const index = today % phraseOfTheDay.length;
-      return phraseOfTheDay[index];
-    };
+  const isMobile = useResponsiveness();
 
-    getPhraseOfTheDay();
-  }, [phraseOfTheDay]);
+
+  const chartSectionLayout = isMobile ? "flex-col" : "flex-row";
+  const chartHeight = isMobile ? "h-[280px]" : "h-[340px]";
 
   return (
-    <section className="bg-[--color-brand-neutral-100] h-screen w-full mx-auto mt-15 md:mt-16  flex flex-col gap-4">
-      <h1 className="text-xl font-bold">Dashboard / <span className="text-amber-300"> Admin </span></h1>
-
-      <section className="flex flex-row gap-4">
+    <section className={`bg-[--color-brand-neutral-100] min-h-[800px] w-full mx-auto mt-16 flex flex-col gap-4`}>
+      <h1 className="text-xl font-bold">Dashboard / <span className="text-amber-300">Admin</span></h1>
+      <DailyPhrase phrase={phraseOfTheDay} />
+      {/* Seção de cards de estatísticas */}
+      <section className={`flex ${chartSectionLayout} gap-4`}>
         <StatCard icon="👥" label="Total de Leitores" value={totalReaders} />
         <StatCard icon="🎯" label="Total de Aberturas" value={totalOpens} />
         <StatCard
@@ -79,24 +77,19 @@ const DashboardTemplate: React.FC<DashboardTemplateProps> = ({
         />
       </section>
 
+      {/* Filtro de período (afeta apenas o gráfico) */}
       <PeriodFilter selectedPeriod={selectedPeriod} onPeriodChange={onPeriodChange} />
 
-      <div className="flex flex-row gap-4">
-        {isLoading ? (
-          <Skeleton variant="rectangular" width="100%" height={355} />
-        ) : (
-          <section className="border border-gray-100 p-4 h-[340px] w-full">
+      {/* Seção de gráfico e top leitores */}
+      <div className={`flex ${chartSectionLayout} gap-4`}>
+          <section className={`border border-gray-100 p-4 ${chartHeight} w-full`}>
             <BarChart data={chartData} labels={chartLabels} />
           </section>
-        )}
 
-        {isLoading ? (
-          <Skeleton variant="rectangular" width="100%" height={355} />
-        ) : (
-          <TopReaders topReaders={topReaders} phraseOfTheDay={phraseOfTheDay} />
-        )}
+          <TopReaders topReaders={topReaders} />
       </div>
 
+      {/* Filtro de newsletter e status do streak (afeta apenas a tabela) */}
       <NewsletterFilter
         selectedNewsletter={selectedNewsletter}
         onNewsletterChange={onNewsletterChange}
@@ -106,13 +99,10 @@ const DashboardTemplate: React.FC<DashboardTemplateProps> = ({
         onStreakStatusChange={onStreakStatusChange}
       />
 
-      <section className="flex flex-row gap-4">
+      {/* Tabela de leituras */}
+      <section className="flex flex-col gap-4">
         <Table reads={reads} />
       </section>
-
-      <footer className="text-center text-sm text-gray-500 mt-8">
-        &copy; {new Date().getFullYear()} Todos os direitos reservados.
-      </footer>
     </section>
   );
 };

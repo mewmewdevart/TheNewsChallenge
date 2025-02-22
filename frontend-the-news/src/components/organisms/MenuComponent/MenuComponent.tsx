@@ -9,6 +9,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { yellow } from "@mui/material/colors";
+import useResponsiveness from "../../../utils/Responsiveness";
 
 interface MenuComponentProps {
   emailUser: string;
@@ -35,11 +36,13 @@ export default function MenuComponent({
     console.log("User logged out");
     navigate("/");
   };
-
+  const isMobile = useResponsiveness();
   const firstLetter = emailUser ? emailUser.charAt(0).toUpperCase() : "";
 
+  const containerNav = isMobile ? "px-4" : "px-40";
+
   return (
-    <div className="w-full flex justify-between items-center px-4 sm:px-10 md:px-20 lg:px-40 xl:px-80 py-2 border-b-1 border-gray-100 fixed bg-(--color-brand-neutral-100) z-50">
+    <nav className={`w-full flex justify-between items-center px-4 py-2 border-b-1 border-gray-100 fixed bg-(--color-brand-neutral-100) z-50 ${containerNav}`}>
       <a
         href="https://thenewscc.beehiiv.com/"
         target="_blank"
@@ -113,6 +116,6 @@ export default function MenuComponent({
           Sair
         </MenuItem>
       </Menu>
-    </div>
+    </nav>
   );
 }

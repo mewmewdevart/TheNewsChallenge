@@ -37,18 +37,20 @@ const StatsRank: React.FC<StatsRankProps> = ({ email, streak, rank }) => {
 	};
 
 	return (
-		<ul className="w-full list-none">
-			<li className="flex gap-4 items-center justify-between py-1">
-				<div className="flex items-center gap-4 text-[18px]">
+		<ul className="flex w-full list-none">
+			<li className="flex gap-4 items-center justify-between py-1 w-full">
+				<div className="flex items-center gap-4 text-[18px] w-full">
 					{rank && (
 						<span className="font-bold w-[20px] text-center">
 							{getRankContent(rank)}
 						</span>
 					)}
 					<Avatar sx={{ width: 32, height: 32 }}>{firstLetter}</Avatar>
-					<span>{truncateEmail(email)}</span>
+					<span className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap">
+						{truncateEmail(email)}
+					</span>
+					<span className="font-bold">{streak}</span>
 				</div>
-				<span className="font-bold">{streak}</span>
 			</li>
 		</ul>
 	);

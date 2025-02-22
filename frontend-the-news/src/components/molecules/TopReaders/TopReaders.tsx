@@ -3,7 +3,6 @@ import StatsRank from "@atoms/StatsRank/StatsRank";
 
 interface TopReadersProps {
   topReaders: { email: string; streak: number }[];
-  phraseOfTheDay: string;
 }
 
 const TopReaders: React.FC<TopReadersProps> = ({ topReaders }) => (
