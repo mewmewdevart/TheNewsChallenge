@@ -12,20 +12,24 @@ def create_app():
     app = Flask(__name__, template_folder="templates")
     app.config.from_object(Config)
 
+    # Configuração do Flask-Compress
     app.config['COMPRESS_ALGORITHM'] = 'gzip'
-    app.config['COMPRESS_MIN_SIZE'] = 500 
+    app.config['COMPRESS_MIN_SIZE'] = 500
     app.config['COMPRESS_MIMETYPES'] = [
         'text/html',
         'text/css',
         'application/json',
         'application/javascript',
     ]
-    Compress(app) 
+    Compress(app)
 
+    # Inicialize o banco de dados
     db.init_app(app)
 
+    # Inicialize o Flask-Migrate
     migrate = Migrate(app, db)
 
+    # Teste de conexão com o banco de dados
     with app.app_context():
         try:
             db.session.execute(text('SELECT 1'))
@@ -46,8 +50,11 @@ def create_app():
 
     return app
 
+# Cria a aplicação
 app = create_app()
 
+# Executa a aplicação
 if __name__ == "__main__":
-    update_streaks()
+    with app.app_context():
+        update_streaks()  # Atualiza os streaks antes de iniciar o servidor
     app.run(debug=True)
