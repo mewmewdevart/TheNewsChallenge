@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './LoginPage.css';
+import "./LoginPage.css";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -23,7 +23,9 @@ const LoginPage: React.FC = () => {
     try {
       // Verifica se o e-mail está cadastrado
       const checkEmailResponse = await fetch(
-        `https://thenewsletterstreakschallenge.onrender.com/check-email?email=${encodeURIComponent(email)}`
+        `https://thenewsletterstreakschallenge.onrender.com/check-email?email=${encodeURIComponent(
+          email
+        )}`
       );
       if (!checkEmailResponse.ok) {
         throw new Error("E-mail não cadastrado.");
@@ -31,7 +33,9 @@ const LoginPage: React.FC = () => {
 
       // Verifica o streak
       const streakResponse = await fetch(
-        `https://thenewsletterstreakschallenge.onrender.com/streak?email=${encodeURIComponent(email)}`
+        `https://thenewsletterstreakschallenge.onrender.com/streak?email=${encodeURIComponent(
+          email
+        )}`
       );
       if (!streakResponse.ok) {
         throw new Error("Erro ao buscar dados.");
@@ -74,8 +78,15 @@ const LoginPage: React.FC = () => {
             />
           </div>
           {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-          <button type="submit" className="button-57" role="button" disabled={isLoading}>
-            <span className="text">{isLoading ? "Carregando..." : "Acessar"}</span>
+          <button
+            type="submit"
+            className="button-57"
+            role="button"
+            disabled={isLoading}
+          >
+            <span className="text">
+              {isLoading ? "Carregando..." : "Acessar"}
+            </span>
             <span>{isLoading ? "Carregando..." : "Acessar"}</span>
           </button>
         </form>

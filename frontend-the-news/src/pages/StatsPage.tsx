@@ -2,6 +2,7 @@ import StatsTemplate from "@templates/StatsTemplate/StatsTemplate";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Layout from "../Layout";
+import useDailyPhrase from "../utils/DailyPhrase";
 
 interface HistoryEntry {
   post_id: string;
@@ -18,6 +19,7 @@ const StatsPage: React.FC = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const email = queryParams.get("email");
+  const phraseDaily = useDailyPhrase();
 
   const [streak, setStreak] = useState<number>(0);
   const [maxStreak, setMaxStreak] = useState<number>(0);
@@ -91,6 +93,7 @@ const StatsPage: React.FC = () => {
         streakUser={streak}
         maxStreakUser={maxStreak}
         topReaders={topReaders}
+        phraseDaily={phraseDaily}
       />
     </Layout>
   );
