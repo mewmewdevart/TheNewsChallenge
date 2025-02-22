@@ -81,14 +81,27 @@ def get_metrics():
 
 cache = Cache(config={'CACHE_TYPE': 'RedisCache', 'CACHE_REDIS_URL': 'redis://localhost:6379/0'})
 
-@routes.route('/top-readers', methods=['GET'])
-def get_top_readers():
-    top_readers = db.session.query(
-        NewsletterRead.email,
-        func.max(NewsletterRead.streak).label('streak')
-    ).group_by(NewsletterRead.email).order_by(func.max(NewsletterRead.streak).desc()).limit(10).all()
+from flask import jsonify
+from sqlalchemy.exc import SQLAlchemyError
 
-    readers_data = [{"email": reader.email, "streak": reader.streak} for reader in top_readers]
+@routes.route('/top-readers', methods=['GET'])
+@cache.cached(timeout=300)
+def get_top_readers():
+    try:
+        top_readers = (
+            db.session.query(NewsletterRead.email, func.count(NewsletterRead.id).label('reads'))
+            .group_by(NewsletterRead.email)
+            .order_by(func.count(NewsletterRead.id).desc())  # Ordenando pelo número de leituras
+            .limit(10)
+            .all()
+        )
+        readers_data = [{"email": reader.email, "reads": reader.reads} for reader in top_readers]
+        return jsonify(readers_data), 200
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+    except Exception as e:
+        return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
 @routes.route('/streak', methods=['GET'])
 def get_streak():
