@@ -5,31 +5,14 @@ import DailyPhrase from "@atoms/DailyPhrase/DailyPhrase";
 import SearchBarWithCards from "@molecules/SearchBarWithCards/SearchBarWithCards";
 import useResponsiveness from "../../../utils/Responsiveness";
 
-const cardsData = [
-  { id: 1, title: "Postagem 1", content: "Conteúdo da postagem 1" },
-  { id: 2, title: "Postagem 2", content: "Conteúdo da postagem 2" },
-  { id: 3, title: "Postagem 3", content: "Conteúdo da postagem 3" },
-  { id: 4, title: "Postagem 4", content: "Conteúdo da postagem 4" },
-  { id: 5, title: "Postagem 5", content: "Conteúdo da postagem 5" },
-  { id: 6, title: "Postagem 6", content: "Conteúdo da postagem 6" },
-  { id: 7, title: "Postagem 7", content: "Conteúdo da postagem 7" },
-  { id: 8, title: "Postagem 8", content: "Conteúdo da postagem 8" },
-  { id: 9, title: "Postagem 9", content: "Conteúdo da postagem 9" },
-  { id: 10, title: "Postagem 10", content: "Conteúdo da postagem 10" },
-  { id: 11, title: "Postagem 11", content: "Conteúdo da postagem 11" },
-  { id: 12, title: "Postagem 12", content: "Conteúdo da postagem 12" },
-  { id: 13, title: "Postagem 13", content: "Conteúdo da postagem 13" },
-  { id: 14, title: "Postagem 14", content: "Conteúdo da postagem 14" },
-  { id: 15, title: "Postagem 15", content: "Conteúdo da postagem 15" },
-  { id: 16, title: "Postagem 16", content: "Conteúdo da postagem 16" },
-  { id: 17, title: "Postagem 17", content: "Conteúdo da postagem 17" },
-  { id: 18, title: "Postagem 18", content: "Conteúdo da postagem 18" },
-  { id: 19, title: "Postagem 19", content: "Conteúdo da postagem 19" },
-];
-
 interface TopReader {
   email: string;
   streak: number;
+}
+
+interface HistoryEntry {
+  timestamp: string;
+  post_id: number;
 }
 
 interface StatsTemplateProps {
@@ -39,6 +22,7 @@ interface StatsTemplateProps {
   topReaders: TopReader[];
   maxStreakUser: number;
   phraseDaily: string;
+  history: HistoryEntry[];
 }
 
 const StatsTemplate: React.FC<StatsTemplateProps> = ({
@@ -47,6 +31,7 @@ const StatsTemplate: React.FC<StatsTemplateProps> = ({
   emailUser,
   phraseDaily,
   topReaders = [],
+  history,
 }) => {
   const isMobile = useResponsiveness();
   const gridColumns = isMobile ? "grid-cols-1 gap-4 " : " grid-cols-4 gap-6";
@@ -63,6 +48,35 @@ const StatsTemplate: React.FC<StatsTemplateProps> = ({
 	  truncatedLocalPart.charAt(0).toUpperCase() + truncatedLocalPart.slice(1)
 	);
   };
+
+  const uniqueDates = new Set<string>();
+  const cardsData = history
+	.map((entry) => {
+	  const date = new Date(entry.timestamp);
+  
+	  const formattedTitle = date.toLocaleDateString("pt-BR", {
+		weekday: "short",
+		day: "numeric",
+		month: "short",
+		year: "numeric",
+	  })
+	  .replace(/\./g, ""); 
+  
+	  const capitalizedTitle = formattedTitle.charAt(0).toUpperCase() + formattedTitle.slice(1);
+	  const day = String(date.getDate()).padStart(2, "0");
+	  const month = String(date.getMonth() + 1).padStart(2, "0");
+	  const year = date.getFullYear();
+	  const href = `https://thenewscc.beehiiv.com/p/${day}-${month}-${year}`;
+  
+	  return { id: entry.post_id, title: capitalizedTitle, href };
+	})
+	.filter((entry) => {
+	  if (uniqueDates.has(entry.title)) {
+		return false;
+	  }
+	  uniqueDates.add(entry.title);
+	  return true;
+	});
 
   return (
 	<div className="flex flex-col gap-4 w-full">

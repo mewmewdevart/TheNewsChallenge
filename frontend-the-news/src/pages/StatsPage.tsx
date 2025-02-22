@@ -5,7 +5,7 @@ import Layout from "../Layout";
 import useDailyPhrase from "../utils/DailyPhrase";
 
 interface HistoryEntry {
-  post_id: string;
+  post_id: number;
   timestamp: string;
 }
 
@@ -23,7 +23,7 @@ const StatsPage: React.FC = () => {
 
   const [streak, setStreak] = useState<number>(0);
   const [maxStreak, setMaxStreak] = useState<number>(0);
-  const [, setHistory] = useState<HistoryEntry[]>([]);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [topReaders, setTopReaders] = useState<Reader[]>([]);
@@ -94,6 +94,7 @@ const StatsPage: React.FC = () => {
         maxStreakUser={maxStreak}
         topReaders={topReaders}
         phraseDaily={phraseDaily}
+        history={history}
       />
     </Layout>
   );
