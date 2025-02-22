@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from sqlalchemy import func
 from app.utils import calculate_streak
 import logging
+from flask_caching import Cache
 
 routes = Blueprint("routes", __name__)
 
@@ -16,17 +17,15 @@ def webhook():
     utm_campaign = request.args.get('utm_campaign', "")
     utm_channel = request.args.get('utm_channel', "")
 
-    logging.info(f"Recebido: email={email}, post_id={post_id}, utm_source={utm_source}, utm_medium={utm_medium}, utm_campaign={utm_campaign}, utm_channel={utm_channel}")
+    logging.info(f"Received: email={email}, post_id={post_id}, utm_source={utm_source}, utm_medium={utm_medium}, utm_campaign={utm_campaign}, utm_channel={utm_channel}")
 
     if not email or not post_id:
-        return jsonify({"error": "Email e ID são obrigatorios"}), 400
+        return jsonify({"error": "Email and ID are required"}), 400
 
     streak = calculate_streak(email)
     
-    # Buscar a última leitura desse usuário
     latest_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
     
-    # Atualizar max_streak com o maior valor entre o atual e o streak recém-calculado
     max_streak = max(latest_read.max_streak if latest_read else 0, streak)
 
     new_read = NewsletterRead(
@@ -38,13 +37,13 @@ def webhook():
         utm_channel=utm_channel,
         streak=streak,
         max_streak=max_streak,
-        current_streak=streak  # Atualiza o current_streak
+        current_streak=streak
     )
 
     try:
         db.session.add(new_read)
         db.session.commit()
-        return jsonify({"message": "Webhook recebido e salvo com sucesso", "email": email, "id": post_id, "streak": streak, "max_streak": max_streak}), 200
+        return jsonify({"message": "Webhook received and saved successfully", "email": email, "id": post_id, "streak": streak, "max_streak": max_streak}), 200
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
@@ -80,12 +79,10 @@ def get_metrics():
         "average_opens": average_opens
     }), 200
 
-from flask_caching import Cache
-
 cache = Cache(config={'CACHE_TYPE': 'RedisCache', 'CACHE_REDIS_URL': 'redis://localhost:6379/0'})
 
 @routes.route('/top-readers', methods=['GET'])
-@cache.cached(timeout=300)  # Cache por 5 minutos
+@cache.cached(timeout=300)
 def get_top_readers():
     top_readers = (
         db.session.query(NewsletterRead.email, func.max(NewsletterRead.streak).label('streak'))
@@ -101,7 +98,7 @@ def get_top_readers():
 def get_streak():
     email = request.args.get('email')
     if not email:
-        return jsonify({"error": "Email é obrigatório"}), 400
+        return jsonify({"error": "Email is required"}), 400
 
     streak = calculate_streak(email)
     return jsonify({"email": email, "streak": streak}), 200
@@ -113,7 +110,7 @@ def get_history():
     per_page = request.args.get('per_page', default=10, type=int)
 
     if not email:
-        return jsonify({"error": "Email é obrigatório"}), 400
+        return jsonify({"error": "Email is required"}), 400
 
     history = (
         NewsletterRead.query
@@ -135,19 +132,19 @@ def get_history():
 def check_email():
     email = request.args.get('email')
     if not email:
-        return jsonify({"error": "Email é obrigatório"}), 400
+        return jsonify({"error": "Email is required"}), 400
 
     user = NewsletterRead.query.filter_by(email=email).first()
     if not user:
-        return jsonify({"error": "E-mail não cadastrado"}), 404
+        return jsonify({"error": "Email not registered."}), 404
 
-    return jsonify({"message": "E-mail encontrado", "email": email}), 200
+    return jsonify({"message": "Email found", "email": email}), 200
 
 @routes.route('/max-streak', methods=['GET'])
 def get_max_streak():
     email = request.args.get('email')
     if not email:
-        return jsonify({"error": "Email é obrigatório"}), 400
+        return jsonify({"error": "Email is required"}), 400
 
     max_streak = db.session.query(func.max(NewsletterRead.max_streak)).filter_by(email=email).scalar()
 

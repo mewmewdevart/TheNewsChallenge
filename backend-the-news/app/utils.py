@@ -1,24 +1,7 @@
-from sqlalchemy import func, text
+from sqlalchemy import text
 from app.models import NewsletterRead
 from app.database import db
 from datetime import datetime
-
-def update_max_streak(email, current_streak):
-    latest_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
-    
-    print(f"Última leitura para {email}: {latest_read}")  # Debug
-    
-    if latest_read:
-        latest_read.max_streak = latest_read.max_streak or 0
-        print(f"Max streak antes da atualização: {latest_read.max_streak}")  # Debug
-        
-        if current_streak > latest_read.max_streak:
-            latest_read.max_streak = current_streak
-            print(f"Max streak atualizado para: {latest_read.max_streak}")  # Debug
-            db.session.flush()
-            db.session.commit()
-        else:
-            print("O current_streak não é maior que o max_streak atual.")  # Debug
 
 def update_max_streak(email, current_streak):
     latest_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
@@ -31,7 +14,6 @@ def update_max_streak(email, current_streak):
             db.session.commit()
 
 def calculate_streak(email):
-    # Consulta SQL para calcular o streak diretamente no banco de dados
     query = text("""
         WITH ranked_dates AS (
             SELECT
@@ -39,13 +21,13 @@ def calculate_streak(email):
                 DATE(timestamp) AS read_date,
                 ROW_NUMBER() OVER (PARTITION BY email ORDER BY timestamp DESC) AS rn
             FROM newsletter_read
-            WHERE email = :email AND WEEKDAY(timestamp) != 6
+            WHERE email = :email AND EXTRACT(DOW FROM timestamp) != 6
         ),
         streaks AS (
             SELECT
                 email,
                 read_date,
-                DATE_SUB(read_date, INTERVAL rn DAY) AS streak_group
+                read_date - (rn || ' days')::INTERVAL AS streak_group
             FROM ranked_dates
         )
         SELECT
