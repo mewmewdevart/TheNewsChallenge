@@ -1,3 +1,4 @@
+from sqlalchemy import func, text
 from app.models import NewsletterRead
 from app.database import db
 from datetime import datetime
@@ -19,41 +20,45 @@ def update_max_streak(email, current_streak):
         else:
             print("O current_streak não é maior que o max_streak atual.")  # Debug
 
+def update_max_streak(email, current_streak):
+    latest_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
+    
+    if latest_read:
+        latest_read.max_streak = latest_read.max_streak or 0
+        
+        if current_streak > latest_read.max_streak:
+            latest_read.max_streak = current_streak
+            db.session.commit()
 
 def calculate_streak(email):
-    reads = (
-        db.session.query(NewsletterRead)
-        .filter(NewsletterRead.email == email)
-        .all()
-    )
-    filtered_reads = [read for read in reads if read.timestamp.weekday() != 6]
+    # Consulta SQL para calcular o streak diretamente no banco de dados
+    query = text("""
+        WITH ranked_dates AS (
+            SELECT
+                email,
+                DATE(timestamp) AS read_date,
+                ROW_NUMBER() OVER (PARTITION BY email ORDER BY timestamp DESC) AS rn
+            FROM newsletter_read
+            WHERE email = :email AND WEEKDAY(timestamp) != 6
+        ),
+        streaks AS (
+            SELECT
+                email,
+                read_date,
+                DATE_SUB(read_date, INTERVAL rn DAY) AS streak_group
+            FROM ranked_dates
+        )
+        SELECT
+            email,
+            COUNT(*) AS streak
+        FROM streaks
+        GROUP BY email, streak_group
+        ORDER BY streak DESC
+        LIMIT 1;
+    """)
 
-    print(f"Ler leituras para {email}: {filtered_reads}")  # Debug
-
-    if not filtered_reads:
-        return 0  # Nenhuma leitura, streak é 0
-
-    read_dates = {read.timestamp.date() for read in filtered_reads}
-    sorted_dates = sorted(read_dates, reverse=True)
-
-    streak = 0
-    prev_date = None
-    for read_date in sorted_dates:
-        if prev_date is None:
-            streak = 1
-            prev_date = read_date
-            continue
-
-        delta = (prev_date - read_date).days
-        if delta == 1 or (delta == 2 and prev_date.weekday() == 0):
-            streak += 1
-        else:
-            break
-
-        prev_date = read_date
-
-    print(f"Streak calculado: {streak}")  # Debug
+    result = db.session.execute(query, {"email": email}).fetchone()
+    streak = result.streak if result else 0
 
     update_max_streak(email, streak)
-
     return streak

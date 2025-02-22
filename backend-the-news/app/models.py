@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, Index
+from sqlalchemy import Column, Integer, String, DateTime, Index
 from .database import db
 
 class NewsletterRead(db.Model):
@@ -10,9 +10,10 @@ class NewsletterRead(db.Model):
     utm_medium = db.Column(db.String(50), nullable=False, default="")
     utm_campaign = db.Column(db.String(50), nullable=False, default="")
     utm_channel = db.Column(db.String(50), nullable=False, default="")
-    timestamp = db.Column(db.DateTime, default=db.func.current_timestamp())
+    timestamp = db.Column(db.DateTime, default=db.func.current_timestamp(), index=True)
     streak = db.Column(db.Integer, default=0)
     max_streak = db.Column(db.Integer, default=0)
+    current_streak = db.Column(db.Integer, default=0)  # Nova coluna
 
     __table_args__ = (
         Index('ix_newsletter_read_email_timestamp', 'email', 'timestamp'),

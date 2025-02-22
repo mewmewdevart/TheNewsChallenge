@@ -37,7 +37,8 @@ def webhook():
         utm_campaign=utm_campaign,
         utm_channel=utm_channel,
         streak=streak,
-        max_streak=max_streak
+        max_streak=max_streak,
+        current_streak=streak  # Atualiza o current_streak
     )
 
     try:
@@ -102,17 +103,8 @@ def get_streak():
     if not email:
         return jsonify({"error": "Email é obrigatório"}), 400
 
-    last_read = (
-        db.session.query(NewsletterRead)
-        .filter_by(email=email)
-        .order_by(NewsletterRead.timestamp.desc())
-        .first()
-    )
-
-    if not last_read:
-        return jsonify({"email": email, "streak": 0, "max_streak": 0}), 200
-
-    return jsonify({"email": email, "streak": last_read.streak, "max_streak": last_read.max_streak}), 200
+    streak = calculate_streak(email)
+    return jsonify({"email": email, "streak": streak}), 200
 
 @routes.route('/history', methods=['GET'])
 def get_history():

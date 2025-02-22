@@ -10,7 +10,7 @@ def update_streaks():
         streak = calculate_streak(email)
 
         # Atualiza o streak para todas as leituras do e-mail
-        NewsletterRead.query.filter_by(email=email).update({"streak": streak})
+        NewsletterRead.query.filter_by(email=email).update({"current_streak": streak})
 
     db.session.commit()
     print("Streaks atualizados com sucesso!")
