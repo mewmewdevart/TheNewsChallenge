@@ -82,17 +82,13 @@ def get_metrics():
 cache = Cache(config={'CACHE_TYPE': 'RedisCache', 'CACHE_REDIS_URL': 'redis://localhost:6379/0'})
 
 @routes.route('/top-readers', methods=['GET'])
-@cache.cached(timeout=300)
 def get_top_readers():
-    top_readers = (
-        db.session.query(NewsletterRead.email, func.max(NewsletterRead.streak).label('streak'))
-        .group_by(NewsletterRead.email)
-        .order_by(func.max(NewsletterRead.streak).desc())
-        .limit(10)
-        .all()
-    )
+    top_readers = db.session.query(
+        NewsletterRead.email,
+        func.max(NewsletterRead.streak).label('streak')
+    ).group_by(NewsletterRead.email).order_by(func.max(NewsletterRead.streak).desc()).limit(10).all()
+
     readers_data = [{"email": reader.email, "streak": reader.streak} for reader in top_readers]
-    return jsonify(readers_data), 200
 
 @routes.route('/streak', methods=['GET'])
 def get_streak():
