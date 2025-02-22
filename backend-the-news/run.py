@@ -7,6 +7,7 @@ from app.routes import routes
 from app.database import db
 from sqlalchemy import text
 from app.services import update_streaks
+from app.routes import init_cache 
 
 def create_app():
     app = Flask(__name__, template_folder="templates")
@@ -26,6 +27,7 @@ def create_app():
 
     migrate = Migrate(app, db)
 
+    # Verificando a conexão com o banco de dados
     with app.app_context():
         try:
             db.session.execute(text('SELECT 1'))
@@ -33,9 +35,14 @@ def create_app():
         except Exception as e:
             print(f"Error connecting to the database: {e}")
 
+    # Inicializando o CORS
     CORS(app, origins="*")
 
+    # Registrando os blueprints
     app.register_blueprint(routes)
+
+    # Inicializando o cache
+    init_cache(app)
 
     @app.route('/documentation')
     def home():

@@ -5,8 +5,14 @@ from sqlalchemy import func
 from app.utils import calculate_streak
 import logging
 from flask_caching import Cache
+from sqlalchemy.exc import SQLAlchemyError
 
 routes = Blueprint("routes", __name__)
+
+cache = Cache()
+
+def init_cache(app):
+    cache.init_app(app, config={'CACHE_TYPE': 'SimpleCache'})
 
 @routes.route('/', methods=['GET'])
 def webhook():
@@ -79,13 +85,8 @@ def get_metrics():
         "average_opens": average_opens
     }), 200
 
-cache = Cache(config={'CACHE_TYPE': 'RedisCache', 'CACHE_REDIS_URL': 'redis://localhost:6379/0'})
-
-from flask import jsonify
-from sqlalchemy.exc import SQLAlchemyError
-
 @routes.route('/top-readers', methods=['GET'])
-@cache.cached(timeout=300)
+@cache.cached(timeout=300)  # Cache com tempo de 5 minutos
 def get_top_readers():
     try:
         top_readers = (
