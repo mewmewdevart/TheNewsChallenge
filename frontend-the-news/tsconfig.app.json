@@ -30,7 +30,8 @@
       "@organisms/*": ["./src/components/organisms/*"],
       "@templates/*": ["./src/components/templates/*"],
       "@pages/*": ["./src/pages/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@utils/*": ["./src/utils/*"],
     }
   },
   "include": ["src"]

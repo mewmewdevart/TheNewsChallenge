@@ -36,14 +36,14 @@ const useDailyPhrase = () => {
   const [phrase, setPhrase] = useState("");
 
   useEffect(() => {
-    const today = new Date();
-    const startDate = new Date(2025, 0, 1);
-    const dayDifference = Math.floor(
-      (today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
-    );
-    const phraseIndex = dayDifference % listPhraseDay.length;
+	const today = new Date();
+	const startDate = new Date(2025, 0, 1);
+	const dayDifference = Math.floor(
+	  (today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
+	);
+	const phraseIndex = dayDifference % listPhraseDay.length;
 
-    setPhrase(listPhraseDay[phraseIndex]);
+	setPhrase(listPhraseDay[phraseIndex]);
   }, []);
 
   return phrase;
