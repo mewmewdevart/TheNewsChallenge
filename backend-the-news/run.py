@@ -25,7 +25,7 @@ def create_app():
         except Exception as e:
             print(f"Error connecting to the database: {e}")
 
-    CORS(app, origins=["https://the-news-letter-streaks.vercel.app/"])
+    CORS(app, origins=["https://the-news-letter-streaks.vercel.app", "https://thenewsletterstreakschallenge.onrender.com"])
 
     app.register_blueprint(routes)
 
