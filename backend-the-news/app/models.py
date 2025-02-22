@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text, Index
 from .database import db
 
 class NewsletterRead(db.Model):
@@ -13,3 +13,7 @@ class NewsletterRead(db.Model):
     timestamp = db.Column(db.DateTime, default=db.func.current_timestamp())
     streak = db.Column(db.Integer, default=0)
     max_streak = db.Column(db.Integer, default=0)
+
+    __table_args__ = (
+        Index('ix_newsletter_read_email_timestamp', 'email', 'timestamp'),
+    )

@@ -79,15 +79,21 @@ def get_metrics():
         "average_opens": average_opens
     }), 200
 
+from flask_caching import Cache
+
+cache = Cache(config={'CACHE_TYPE': 'RedisCache', 'CACHE_REDIS_URL': 'redis://localhost:6379/0'})
+
 @routes.route('/top-readers', methods=['GET'])
+@cache.cached(timeout=300)  # Cache por 5 minutos
 def get_top_readers():
-    top_readers = db.session.query(
-        NewsletterRead.email,
-        func.max(NewsletterRead.streak).label('streak')
-    ).group_by(NewsletterRead.email).order_by(func.max(NewsletterRead.streak).desc()).limit(10).all()
-
+    top_readers = (
+        db.session.query(NewsletterRead.email, func.max(NewsletterRead.streak).label('streak'))
+        .group_by(NewsletterRead.email)
+        .order_by(func.max(NewsletterRead.streak).desc())
+        .limit(10)
+        .all()
+    )
     readers_data = [{"email": reader.email, "streak": reader.streak} for reader in top_readers]
-
     return jsonify(readers_data), 200
 
 @routes.route('/streak', methods=['GET'])
@@ -96,7 +102,12 @@ def get_streak():
     if not email:
         return jsonify({"error": "Email é obrigatório"}), 400
 
-    last_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
+    last_read = (
+        db.session.query(NewsletterRead)
+        .filter_by(email=email)
+        .order_by(NewsletterRead.timestamp.desc())
+        .first()
+    )
 
     if not last_read:
         return jsonify({"email": email, "streak": 0, "max_streak": 0}), 200
@@ -106,16 +117,27 @@ def get_streak():
 @routes.route('/history', methods=['GET'])
 def get_history():
     email = request.args.get('email')
+    page = request.args.get('page', default=1, type=int)
+    per_page = request.args.get('per_page', default=10, type=int)
+
     if not email:
         return jsonify({"error": "Email é obrigatório"}), 400
 
-    history = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).all()
-    history_data = [{
-        "post_id": entry.post_id,
-        "timestamp": entry.timestamp
-    } for entry in history]
+    history = (
+        NewsletterRead.query
+        .filter_by(email=email)
+        .order_by(NewsletterRead.timestamp.desc())
+        .paginate(page=page, per_page=per_page, error_out=False)
+    )
+    history_data = [{"post_id": entry.post_id, "timestamp": entry.timestamp} for entry in history.items]
 
-    return jsonify(history_data), 200
+    return jsonify({
+        "data": history_data,
+        "page": history.page,
+        "per_page": history.per_page,
+        "total_pages": history.pages,
+        "total_items": history.total
+    }), 200
 
 @routes.route('/check-email', methods=['GET'])
 def check_email():
