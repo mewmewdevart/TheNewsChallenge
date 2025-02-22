@@ -83,7 +83,8 @@ const DashboardPage: React.FC = () => {
 			setIsLoading(true);
 			try {
 				const readsResponse = await fetch(
-					"https://thenewsletterstreakschallenge.onrender.com/reads"
+					"https://thenewsletterstreakschallenge.onrender.com/reads",
+					{ mode: 'cors' }
 				);
 				const readsData = await readsResponse.json();
 
@@ -96,7 +97,8 @@ const DashboardPage: React.FC = () => {
 				setChartData(processedData.data);
 
 				const metricsResponse = await fetch(
-					`https://thenewsletterstreakschallenge.onrender.com/metrics?newsletter=${selectedNewsletter}&period=${selectedPeriod}&streak_status=${selectedStreakStatus}`
+					`https://thenewsletterstreakschallenge.onrender.com/metrics?newsletter=${selectedNewsletter}&period=${selectedPeriod}&streak_status=${selectedStreakStatus}`,
+					{ mode: 'cors' }
 				);
 				const metricsData = await metricsResponse.json();
 				setTotalReaders(metricsData.total_readers);
@@ -104,7 +106,8 @@ const DashboardPage: React.FC = () => {
 				setAverageOpens(metricsData.average_opens);
 
 				const topReadersResponse = await fetch(
-					`https://thenewsletterstreakschallenge.onrender.com/top-readers?newsletter=${selectedNewsletter}&period=${selectedPeriod}&streak_status=${selectedStreakStatus}`
+					`https://thenewsletterstreakschallenge.onrender.com/top-readers?newsletter=${selectedNewsletter}&period=${selectedPeriod}&streak_status=${selectedStreakStatus}`,
+					{ mode: 'cors' }
 				);
 				const topReadersData = await topReadersResponse.json();
 				setTopReaders(topReadersData);
