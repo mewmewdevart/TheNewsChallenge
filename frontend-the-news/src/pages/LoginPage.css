@@ -62,3 +62,41 @@
   opacity: 1;
   transition: all 900ms cubic-bezier(0.48, 0, 0.12, 1);
 }
+
+.shakeAnimation {
+  animation: shakeanim 5s ease infinite;
+}
+
+@keyframes shakeanim {
+  0% {
+      transform: scale(1);
+  }
+  6%, 30% {
+      transform: scale(1.2);
+  }
+  8%, 40%, 60% {
+      transform: rotate(-20deg) scale(1.2);
+  }
+  10%, 50% {
+      transform: rotate(20deg) scale(1.2);
+  }
+  14%, 70% {
+      transform: rotate(0deg) scale(1.2);
+  }
+  20%, 100% {
+      transform: scale(1);
+  }
+}
+
+/* Exemplo de media query para ajustar o layout */
+@media (max-width: 768px) {
+  .max-w-md {
+    max-width: 90%;
+  }
+}
+
+/* Exemplo de ajuste de imagem */
+img {
+  max-width: 100%;
+  height: auto;
+}
