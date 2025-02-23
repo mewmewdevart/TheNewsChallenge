@@ -2,7 +2,6 @@ import React from "react";
 import MenuComponent from "./components/organisms/MenuComponent/MenuComponent";
 import imageLogo from "./assets/logo.webp";
 import useResponsiveness from "./utils/Responsiveness";
-// import { Footer } from "@organisms/Footer/Footer";
 import ErrorBoundary from "./utils/ErrorBoundary";
 
 interface LayoutProps {
@@ -20,7 +19,6 @@ const Layout: React.FC<LayoutProps> = ({ children, emailUser }) => {
 			<section className={`bg-[--color-brand-neutral-100] w-full ${sectionLayout} py-4`}>
 				<main className="flex-grow">{children}</main>
 			</section>
-			{/* <Footer /> */}
 		</ErrorBoundary>
 	);
 };
