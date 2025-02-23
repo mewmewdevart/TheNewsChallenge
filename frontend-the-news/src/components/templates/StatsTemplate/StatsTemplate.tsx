@@ -107,7 +107,7 @@ const StatsTemplate: React.FC<StatsTemplateProps> = ({
           {isMobile && (
             <div className="flex flex-col gap-4">
               <div className="border border-gray-100 w-full items-center gap-4 px-4 py-4 flex flex-col">
-                <h3 className="text-left font-bold w-full">Top 5 Leitores</h3>
+                <h3 className="text-left font-bold w-full">Top 5 Leitores (Streaks)</h3>
                 {topReaders.slice(0, 5).map((reader, index) => (
                   <StatsRank
                     key={`${reader.email}-${index}`}
@@ -128,7 +128,7 @@ const StatsTemplate: React.FC<StatsTemplateProps> = ({
         {!isMobile && (
           <div className="flex flex-col gap-4">
             <div className="border border-gray-100 w-full items-center gap-4 px-4 py-4 flex flex-col">
-              <h3 className="text-left font-bold w-full">Top 5 Leitores</h3>
+              <h3 className="text-left font-bold w-full">Top 5 Leitores (Streaks)</h3>
               {topReaders.slice(0, 5).map((reader, index) => (
                 <StatsRank
                   key={`${reader.email}-${index}`}

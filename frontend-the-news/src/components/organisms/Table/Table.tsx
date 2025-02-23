@@ -2,14 +2,18 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 
 interface Read {
-  id: number;
   email: string;
+  id: number;
   post_id: string;
   timestamp: string;
   utm_campaign: string;
   utm_channel: string;
   utm_medium: string;
   utm_source: string;
+  title: string;
+  content: string;
+  streak: number;
+  max_streak: number;
 }
 
 interface TableProps {
@@ -25,6 +29,8 @@ const columns: GridColDef[] = [
   { field: 'utm_channel', headerName: 'Canal UTM', width: 150 },
   { field: 'utm_medium', headerName: 'Médio UTM', width: 150 },
   { field: 'utm_source', headerName: 'Fonte UTM', width: 150 },
+  { field: 'streak', headerName: 'Streak', width: 100 },
+  { field: 'max_streak', headerName: 'Max Streak', width: 100 },
 ];
 
 const paginationModel = { page: 0, pageSize: 5 };

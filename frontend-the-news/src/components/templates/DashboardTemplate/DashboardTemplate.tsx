@@ -19,6 +19,8 @@ interface Read {
   utm_source: string;
   title: string;
   content: string;
+  streak: number;
+  max_streak: number;
 }
 
 interface DashboardTemplateProps {
@@ -30,7 +32,7 @@ interface DashboardTemplateProps {
   totalReaders: number;
   totalOpens: number;
   averageOpens: number;
-  topReaders: { email: string; streak: number }[];
+  topReaders: { email: string; streak: number; max_streak: number; reads: number }[];
   selectedNewsletter: string;
   onNewsletterChange: (newsletter: string) => void;
   selectedStreakStatus: string;
@@ -86,7 +88,11 @@ const DashboardTemplate: React.FC<DashboardTemplateProps> = ({
             <BarChart data={chartData} labels={chartLabels} />
           </section>
 
-          <TopReaders topReaders={topReaders} />
+          <TopReaders topReaders={topReaders.map(reader => ({
+            ...reader,
+            max_streak: reader.max_streak || 0,
+            reads: reader.reads || 0,
+          }))} />
       </div>
 
       {/* Filtro de newsletter e status do streak (afeta apenas a tabela) */}

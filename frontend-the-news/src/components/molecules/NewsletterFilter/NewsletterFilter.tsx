@@ -25,20 +25,22 @@ const NewsletterFilter: React.FC<NewsletterFilterProps> = ({
     <section>
       <div className={`flex ${containerFilter} gap-4`}>
         <select
-          className="p-2 border rounded-lg text-gray-500 border-gray-500"
+          className="p-2 border rounded-lg text-gray-300 border-gray-300"
           value={selectedNewsletter}
           onChange={(e) => onNewsletterChange(e.target.value)}
           aria-label="Selecione uma Newsletter"
+          disabled
         >
           <option value="">Selecione uma Newsletter</option>
           <option value="newsletter1">Newsletter 1</option>
           <option value="newsletter2">Newsletter 2</option>
         </select>
         <select
-          className="p-2 border rounded-lg text-gray-500 border-gray-500"
+          className="p-2 border rounded-lg text-gray-300 border-gray-300"
           value={selectedPeriod}
           onChange={(e) => onPeriodChange(e.target.value as "week" | "month")}
           aria-label="Selecione o período"
+          disabled
         >
           <option value="week">Última Semana</option>
           <option value="month">Último Mês</option>

@@ -93,7 +93,7 @@ const LoginPage: React.FC = () => {
 				>
 					<header>
 						<img
-							src="../../src/assets/logo.webp"
+							src="/src/assets/logo.webp"
 							alt="Logo do The News"
 							className={`${isMobile ? "w-48" : "w-64"}`}
 						/>
