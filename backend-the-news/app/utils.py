@@ -1,3 +1,4 @@
+from sqlalchemy import text
 from app.models import NewsletterRead, db
 from datetime import timedelta
 
@@ -14,14 +15,12 @@ def update_max_streak(email, streak):
 
     if latest_read and (latest_read.max_streak is None or streak > latest_read.max_streak):
         latest_read.max_streak = streak
-        with db.session.no_autoflush:
-            db.session.commit()
+        db.session.commit()
 
 def calculate_streak(email):
     """
     Calculates the current streak and the maximum streak for an email, considering that Sundays do not break the sequence.
     """
-
     reads = (
         NewsletterRead.query
         .filter_by(email=email)
@@ -43,16 +42,25 @@ def calculate_streak(email):
             if current_date.weekday() != 6:
                 streak += 1
         elif delta_days > 1:
-            if not all((current_date + timedelta(days=i)).weekday() == 6 for i in range(1, delta_days)):
+            is_all_sundays = all(
+                (current_date + timedelta(days=i)).weekday() == 6
+                for i in range(1, delta_days)
+            )
+            if not is_all_sundays:
                 break
 
         previous_date = current_date
 
-    max_streak = (
-        db.session.query(db.func.max(NewsletterRead.max_streak))
-        .filter_by(email=email)
-        .scalar()
-    ) or 0
+    if previous_date.weekday() == 6: 
+        streak -= 1
+
+    max_streak_query = text("""
+        SELECT COALESCE(MAX(max_streak), 0) AS max_streak
+        FROM newsletter_read
+        WHERE email = :email
+    """)
+    max_streak_result = db.session.execute(max_streak_query, {"email": email}).fetchone()
+    max_streak = max_streak_result.max_streak
 
     if streak > max_streak:
         max_streak = streak
