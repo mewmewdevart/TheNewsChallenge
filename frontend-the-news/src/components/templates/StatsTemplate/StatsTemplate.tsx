@@ -3,7 +3,7 @@ import StatCard from "@atoms/StatCard/StatCard";
 import StatsRank from "@atoms/StatsRank/StatsRank";
 import DailyPhrase from "@atoms/DailyPhrase/DailyPhrase";
 import SearchBarWithCards from "@molecules/SearchBarWithCards/SearchBarWithCards";
-import useResponsiveness from "../../../utils/Responsiveness";
+import useResponsiveness from "@utils/Responsiveness";
 
 interface TopReader {
   email: string;
@@ -51,6 +51,10 @@ const StatsTemplate: React.FC<StatsTemplateProps> = ({
 
   const uniqueDates = new Set<string>();
   const cardsData = history
+    .filter((entry) => {
+      const date = new Date(entry.timestamp);
+      return date.getDay() !== 0;
+    })
     .map((entry) => {
       const date = new Date(entry.timestamp);
 

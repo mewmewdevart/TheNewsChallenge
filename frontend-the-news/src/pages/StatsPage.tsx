@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "../Layout";
-import useDailyPhrase from "../utils/DailyPhrase";
+import useDailyPhrase from "@utils/DailyPhrase";
 
 interface HistoryEntry {
 	post_id: number;

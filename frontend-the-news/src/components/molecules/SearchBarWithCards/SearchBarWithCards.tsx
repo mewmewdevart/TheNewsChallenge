@@ -67,7 +67,7 @@ const SearchBarWithCards: React.FC<SearchBarWithCardsProps> = ({
         </span>
       </div>
 
-      <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-4 min-h-[325px]">
+      <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-4 ">
         {currentCards.length > 0 ? (
           currentCards.map((card) => (
             <div
