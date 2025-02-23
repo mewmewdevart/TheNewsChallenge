@@ -1,9 +1,8 @@
 import React from "react";
 import MenuComponent from "./components/organisms/MenuComponent/MenuComponent";
-// import Footer from "@organisms/Footer/Footer";
 import imageLogo from "./assets/logo.webp";
 import useResponsiveness from "./utils/Responsiveness";
-import { Footer } from "@organisms/Footer/Footer";
+// import { Footer } from "@organisms/Footer/Footer";
 import ErrorBoundary from "./utils/ErrorBoundary";
 
 interface LayoutProps {
