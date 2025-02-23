@@ -1,21 +1,19 @@
 from sqlalchemy import text
 from app.models import NewsletterRead, db
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 def update_max_streak(email, streak):
     """
-    Updates the max_streak in the database if the current streak is higher.
+    Updates the user's max_streak in the database if the current streak is higher.
     """
-    latest_read = (
-        NewsletterRead.query
-        .filter_by(email=email)
-        .order_by(NewsletterRead.timestamp.desc())
-        .first()
-    )
-
-    if latest_read and (latest_read.max_streak is None or streak > latest_read.max_streak):
-        latest_read.max_streak = streak
-        db.session.commit()
+    latest_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
+    
+    if latest_read:
+        latest_read.max_streak = latest_read.max_streak or 0
+        
+        if streak > latest_read.max_streak:
+            latest_read.max_streak = streak
+            db.session.commit()
 
 def calculate_streak(email):
     """
@@ -39,7 +37,7 @@ def calculate_streak(email):
         delta_days = (previous_date - current_date).days
 
         if delta_days == 1:
-            if current_date.weekday() != 6:
+            if previous_date.weekday() != 6:  # 6 = Sunday
                 streak += 1
         elif delta_days > 1:
             is_all_sundays = all(
@@ -48,11 +46,10 @@ def calculate_streak(email):
             )
             if not is_all_sundays:
                 break
+        else:
+            pass
 
         previous_date = current_date
-
-    if previous_date.weekday() == 6: 
-        streak -= 1
 
     max_streak_query = text("""
         SELECT COALESCE(MAX(max_streak), 0) AS max_streak
