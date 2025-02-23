@@ -1,6 +1,17 @@
+<p align="center">
+  <img src="https://github.com/seu-usuario/repo/assets/logo.png" alt="The News logo" style="width: 200px;">
+</p>
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/5c353b0b-9d46-4cf6-941f-82aa42f0de3f" alt="The News logo" style="width: 200px;">
+  <a href="https://github.com/seu-usuario/WaffleNewsletterStreaks/actions">
+    <img src="https://github.com/seu-usuario/WaffleNewsletterStreaks/workflows/CI/CD/badge.svg" alt="Status do CI/CD">
+  </a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="Licença MIT">
+  </a>
+  <a href="https://thenewsletterstreakschallenge.onrender.com">
+    <img src="https://img.shields.io/badge/Demo-Online-green.svg" alt="Demo Online">
+  </a>
 </p>
 
 <p align="center">
@@ -12,44 +23,38 @@
 <p align="center">
     <a href="https://thenewsletterstreakschallenge.onrender.com" target="_blank">Acesse o Site</a> 
 </p>
-
-## Introdução
+## 📖 Introdução
 
 Este projeto foi desenvolvido como parte do desafio técnico para a vaga de Desenvolvedor Full Stack Jr (Front-end Specialist) na Waffle. A solução proposta visa aumentar o engajamento dos leitores da newsletter do **The News** através de uma plataforma de gamificação, onde os leitores podem acompanhar suas sequências de leitura (streaks) e métricas de engajamento.
+## 📚 Sumário
 
-## Sumário
-
-1. [Desafio](#desafio)
-2. [Sobre o Projeto](#sobre-o-projeto)
-3. [Funcionalidades](#funcionalidades)
-4. [Tecnologias Utilizadas](#tecnologias-utilizadas)
-5. [Estrutura do Projeto](#estrutura-do-projeto)
-6. [Instruções de Uso](#instruções-de-uso)
-    - [Pré-requisitos](#pré-requisitos)
-    - [Rodando o Projeto Localmente](#rodando-o-projeto-localmente)
-7. [Endpoints da API](#endpoints-da-api)
-8. [Automação com GitHub Actions](#automacao-com-github-actions)
-9. [Testes](#testes)
-10. [Referências](#referências)
-11. [Licença](#licença)
-
-
-## Desafio
+1. [Desafio](#-desafio)
+2. [Sobre o Projeto](#-sobre-o-projeto)
+3. [Funcionalidades](#-funcionalidades)
+4. [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+5. [Estrutura do Projeto](#-estrutura-do-projeto)
+6. [Instruções de Uso](#-instruções-de-uso)
+    - [Pré-requisitos](#-pré-requisitos)
+    - [Rodando o Projeto Localmente](#-rodando-o-projeto-localmente)
+7. [Endpoints da API](#-endpoints-da-api)
+8. [Automação com GitHub Actions](#-automação-com-github-actions)
+9. [Testes](#-testes)
+10. [Referências](#-referências)
+11. [Licença](#-licença)
+## 🎯 Desafio
 
 O desafio consiste em criar uma plataforma de **gamificação** para aumentar o engajamento dos leitores da newsletter do **The News**. A solução deve incluir:
 
 1. **Área Logada**: Onde os leitores podem visualizar seu **streak** (sequência de aberturas consecutivas) e estatísticas pessoais.
 2. **Dashboard Administrativo**: Para a equipe da Waffle monitorar métricas de engajamento, como streaks, rankings e padrões de abertura.
 3. **Integração com API**: Utilizando dados fornecidos via webhook da plataforma **Beehiiv**.
-
-## Sobre o Projeto
+## 🚀 Sobre o Projeto
 
 Este projeto foi desenvolvido para criar uma solução de gamificação que incentiva os leitores da newsletter a manterem um hábito de leitura diário. Através de streaks e métricas de engajamento, os leitores são motivados a abrir as newsletters consecutivamente, enquanto a equipe da Waffle pode monitorar o desempenho das campanhas.
-
-## Funcionalidades
+## 💡 Funcionalidades
 
 ### **Área Logada para Leitores**
-- **Login Simples**: Acesso via e-mail (o email precisa estar cadastrado no sistema)
+- **Login Simples**: Acesso via e-mail (o email precisa estar cadastrado no sistema).
 - **Streak de Leituras**: Exibição da sequência de aberturas consecutivas.
 - **Histórico de Aberturas**: Visualização das newsletters abertas.
 - **Mensagens Motivacionais**: Incentivos para manter o streak.
@@ -62,21 +67,15 @@ Este projeto foi desenvolvido para criar uma solução de gamificação que ince
 ### **Regras de Streak**
 - **Cálculo Automático**: O streak aumenta +1 a cada dia consecutivo de abertura.
 - **Reset**: O streak é zerado se o leitor não abrir a newsletter no dia seguinte.
-- **Exceções**: Dias específicos (como domingos) podem ser configurados para não afetar o streak.
-
-
-## Tecnologias Utilizadas
+- **Exceções**: Domingos não quebram o streak, mantendo a sequência intacta.
+## 🛠️ Tecnologias Utilizadas
 
 | **Frontend**         | **Backend**        | **Banco de Dados** | **Outras Ferramentas**       |
 |----------------------|--------------------|--------------------|------------------------------|
 | React + TypeScript   | Python (Flask)     | PostgreSQL         | Render (Deploy)              |
-| TailwindCSS          | Pytest (unitários) |                    | 		                |
+| TailwindCSS          | Pytest (unitários) |                    | GitHub Actions (CI/CD)       |
 | Cypress (E2E)        |                    |                    |                              |
-
-
-## Estrutura do Projeto
-
-(Mais relevantes)
+## 📂 Estrutura do Projeto
 
 ```
 WaffleNewsletterStreaks/
@@ -89,16 +88,14 @@ WaffleNewsletterStreaks/
 │   ├── app/                # Aplicação principal
 │   │   ├── routes.py       # Endpoints da API
 │   │   ├── models.py       # Modelo do banco de dados
-│   │   ├── services.py     # Register do weebhook
-│   │   └── utils.py        # Lógica de negócio
+│   │   ├── services.py     # Lógica de negócio
+│   │   └── utils.py        # Funções utilitárias (ex: cálculo de streaks)
 │   ├── tests/              # Testes unitários
 │   └── requirements.txt    # Dependências do Python
 ├── tests/                  # Testes E2E (Cypress)
 └── README.md               # Documentação do projeto
 ```
-
-
-## Instruções de Uso
+## 🚀 Instruções de Uso
 
 ### Pré-requisitos
 
@@ -130,19 +127,16 @@ WaffleNewsletterStreaks/
      ```
 
 3. **Instale as dependências**:
-
    - **Frontend**:
      ```sh
      cd frontend-the-news
      npm install
      ```
-
    - **Backend**:
-     - Com o ambiente virtual ativado, instale as dependências do backend:
-       ```sh
-       cd ../backend-the-news
-       pip install -r requirements.txt
-       ```
+     ```sh
+     cd ../backend-the-news
+     pip install -r requirements.txt
+     ```
 
 4. **Configure o banco de dados**:
    - Crie um banco de dados PostgreSQL local:
@@ -165,23 +159,19 @@ WaffleNewsletterStreaks/
 
 6. **Execute o projeto**:
    - **Backend**:
-     - Na pasta `backend-the-news`, inicie o servidor Flask:
-       ```sh
-       python run.py
-       ```
-
+     ```sh
+     python run.py
+     ```
    - **Frontend**:
-     - Na pasta `frontend-the-news`, inicie o servidor de desenvolvimento:
-       ```sh
-       cd ../frontend-the-news
-       npm run dev
-       ```
+     ```sh
+     cd ../frontend-the-news
+     npm run dev
+     ```
 
 7. **Acesse o projeto**:
    - O **Frontend** estará disponível em: [http://localhost:3000](http://localhost:3000)
-   - O **Backend** estará disponível em: [http://127.0.0.1:5000](http://127.0.0.1:5000), caso a rota não esteja ocupada.
-
-## Endpoints da API
+   - O **Backend** estará disponível em: [http://127.0.0.1:5000](http://127.0.0.1:5000)
+## 📡 Endpoints da API
 
 Para facilitar a visualização e compreensão das rotas implementadas no projeto, criei uma página HTML que oferece um design mais agradável. Acesse a documentação completa das rotas da API clicando no link abaixo:
 
@@ -189,28 +179,37 @@ Para facilitar a visualização e compreensão das rotas implementadas no projet
 
 A API oferece os seguintes endpoints:
 
-### **`/`**
+<details>
+<summary><strong>GET /</strong></summary>
+
 - **Descrição**: Registra os dados enviados via webhook.
-- **Método**: GET
 - **Parâmetros**:
-  - `email`: O endereço de e-mail do usuário.
-  - `post_id`: O ID do post associado.
+  - `email` (obrigatório): O endereço de e-mail do usuário.
+  - `post_id` (obrigatório): O ID do post associado.
+  - `utm_source` (opcional): Fonte da campanha UTM.
+  - `utm_medium` (opcional): Meio da campanha UTM.
+  - `utm_campaign` (opcional): Nome da campanha UTM.
+  - `utm_channel` (opcional): Canal da campanha UTM.
 - **Exemplo de Requisição**:
   ```bash
-  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/?email=teste@example.com&id=123"
+  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/?email=teste@example.com&post_id=123&utm_source=newsletter&utm_medium=email"
   ```
 - **Resposta Esperada**:
   ```json
   {
-    "message": "Webhook recebido e salvo com sucesso",
+    "message": "Webhook received and saved successfully",
     "email": "teste@example.com",
-    "id": "123"
+    "id": "123",
+    "streak": 3,
+    "max_streak": 5
   }
   ```
+</details>
 
-### **`/reads`**
+<details>
+<summary><strong>GET /reads</strong></summary>
+
 - **Descrição**: Lista todas as leituras registradas no banco de dados.
-- **Método**: GET
 - **Exemplo de Requisição**:
   ```bash
   curl -X GET "https://thenewsletterstreakschallenge.onrender.com/reads"
@@ -219,21 +218,37 @@ A API oferece os seguintes endpoints:
   ```json
   [
     {
+      "id": 1,
+      "email": "larissa@thenews.com",
+      "post_id": "1",
+      "utm_source": "google",
+      "utm_medium": "email",
+      "utm_campaign": "promo",
+      "utm_channel": "social",
+      "timestamp": "2025-02-20T03:46:29.986297",
+      "streak": 3,
+      "max_streak": 1
+    },
+    {
+      "id": 2,
       "email": "teste@example.com",
-      "id": 7,
-      "post_id": "123",
-      "timestamp": "Sun, 16 Feb 2025 23:11:06 GMT",
-      "utm_campaign": null,
-      "utm_channel": null,
-      "utm_medium": null,
-      "utm_source": null
+      "post_id": "2",
+      "utm_source": "tiktok",
+      "utm_medium": "socialpaid",
+      "utm_campaign": "12/12/2024",
+      "utm_channel": "web",
+      "timestamp": "2025-02-20T17:04:36.362509",
+      "streak": 2,
+      "max_streak": 1
     }
   ]
   ```
+</details>
 
-### **`/metrics`**
+<details>
+<summary><strong>GET /metrics</strong></summary>
+
 - **Descrição**: Retorna métricas sobre as leituras, como total de leitores, total de aberturas e média de aberturas por leitor.
-- **Método**: GET
 - **Exemplo de Requisição**:
   ```bash
   curl -X GET "https://thenewsletterstreakschallenge.onrender.com/metrics"
@@ -246,10 +261,12 @@ A API oferece os seguintes endpoints:
     "average_opens": 5.0
   }
   ```
+</details>
 
-### **`/top-readers`**
-- **Descrição**: Retorna os 10 leitores com as maiores sequências de leitura (streaks).
-- **Método**: GET
+<details>
+<summary><strong>GET /top-readers</strong></summary>
+
+- **Descrição**: Retorna os 10 leitores com mais leituras registradas.
 - **Exemplo de Requisição**:
   ```bash
   curl -X GET "https://thenewsletterstreakschallenge.onrender.com/top-readers"
@@ -258,76 +275,102 @@ A API oferece os seguintes endpoints:
   ```json
   [
     {
-      "email": "teste@example.com",
-      "streak": 10
+      "email": "larissa@thenews.com",
+      "reads": 4
     },
     {
-      "email": "joao@thenews.com",
-      "streak": 8
+      "email": "teste@example.com",
+      "reads": 2
     }
   ]
   ```
+</details>
 
-### **`/streak`**
-- **Descrição**: Retorna a sequência de leitura (streak) de um e-mail específico.
-- **Método**: GET
+<details>
+<summary><strong>GET /streak</strong></summary>
+
+- **Descrição**: Retorna a sequência de leitura (streak) atual e a máxima de um e-mail específico.
 - **Parâmetros**:
-  - `email`: O endereço de e-mail do usuário.
+  - `email` (obrigatório): O endereço de e-mail do usuário.
 - **Exemplo de Requisição**:
   ```bash
-  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/streak?email=teste@example.com"
+  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/streak?email=larissa@thenews.com"
   ```
 - **Resposta Esperada**:
   ```json
   {
-    "email": "teste@example.com",
-    "streak": 10
+    "email": "larissa@thenews.com",
+    "streak": 3,
+    "max_streak": 3
   }
   ```
+</details>
 
-### **`/history`**
+<details>
+<summary><strong>GET /history</strong></summary>
+
 - **Descrição**: Retorna o histórico de leituras de um e-mail específico.
-- **Método**: GET
 - **Parâmetros**:
-  - `email`: O endereço de e-mail do usuário.
+  - `email` (obrigatório): O endereço de e-mail do usuário.
 - **Exemplo de Requisição**:
   ```bash
-  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/history?email=teste@example.com"
+  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/history?email=larissa@thenews.com"
   ```
 - **Resposta Esperada**:
   ```json
   [
     {
-      "post_id": "123",
-      "timestamp": "Sun, 16 Feb 2025 23:11:06 GMT"
+      "post_id": "10",
+      "timestamp": "2025-02-22T03:15:43.475157"
     },
     {
-      "post_id": "456",
-      "timestamp": "Mon, 17 Feb 2025 10:15:30 GMT"
+      "post_id": "6",
+      "timestamp": "2025-02-21T19:07:04.591965"
     }
   ]
   ```
+</details>
 
-### **`/check-email`**
+<details>
+<summary><strong>GET /check-email</strong></summary>
+
 - **Descrição**: Verifica se um e-mail está registrado no banco de dados.
-- **Método**: GET
 - **Parâmetros**:
-  - `email`: O endereço de e-mail do usuário.
+  - `email` (obrigatório): O endereço de e-mail do usuário.
 - **Exemplo de Requisição**:
   ```bash
-  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/check-email?email=teste@example.com"
+  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/check-email?email=larissa@thenews.com"
   ```
 - **Resposta Esperada**:
   ```json
   {
-    "message": "E-mail encontrado",
-    "email": "teste@example.com"
+    "message": "Email found",
+    "email": "larissa@thenews.com"
   }
   ```
+</details>
 
-## Automação com GitHub Actions
+<details>
+<summary><strong>GET /max-streak</strong></summary>
 
-Este projeto agora conta com um workflow automatizado via **GitHub Actions** para rodar um script periodicamente. 
+- **Descrição**: Retorna a maior sequência de leituras (max_streak) de um e-mail específico.
+- **Parâmetros**:
+  - `email` (obrigatório): O endereço de e-mail do usuário.
+- **Exemplo de Requisição**:
+  ```bash
+  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/max-streak?email=larissa@thenews.com"
+  ```
+- **Resposta Esperada**:
+  ```json
+  {
+    "email": "larissa@thenews.com",
+    "max_streak": 3
+  }
+  ```
+</details>
+## 🤖 Automação com GitHub Actions
+
+Este projeto conta com um workflow automatizado via **GitHub Actions** para rodar um script periodicamente. 
 
 ### 🔄 O que o Workflow Faz?
 - Executa o script `run_update_streaks.py` a cada **24 horas**.
@@ -342,9 +385,7 @@ on:
   schedule:
     - cron: "0 0 * * *" # Executa a cada 24 horas
 ```
-
-
-## Testes
+## 🧪 Testes
 
 Para garantir a qualidade do projeto, foram implementados testes unitários e end-to-end (E2E):
 
@@ -354,43 +395,6 @@ Para garantir a qualidade do projeto, foram implementados testes unitários e en
      cd backend-the-news
      pytest tests/
      ```
-Foram realizados os seguintes testes no backend:
-
-**Criação de Registros**
-   - **Objetivo**: Verificar se um novo registro de leitura da newsletter é criado corretamente no banco de dados.
-   - **Esperado**: O novo registro deve ser adicionado ao banco de dados e todos os campos fornecidos (como email, post_id, utm_source, etc.) devem ser corretamente armazenados. Além disso, os valores padrão para `streak`, `max_streak` e `current_streak` devem ser `0`.
-
-**Valores Padrão**
-   - **Objetivo**: Verificar se os valores padrão são atribuídos corretamente quando um novo registro é criado, caso não sejam fornecidos valores para esses campos.
-   - **Esperado**: Quando um novo registro é criado sem valores explícitos para `streak`, `max_streak` e `current_streak`, esses campos devem ser configurados automaticamente como `0`.
-
-**Restrições de Integridade**
-   - **Objetivo**: Verificar se as restrições de integridade no banco de dados estão funcionando corretamente, como a prevenção de duplicação de registros.
-   - **Esperado**: Tentar adicionar um registro com um email já existente deve resultar em um erro de integridade (erro `IntegrityError`), impedindo que o registro seja duplicado.
-
-**Atualização de Registros**
-   - **Objetivo**: Verificar se é possível atualizar um registro existente no banco de dados.
-   - **Esperado**: O campo atualizado (como `utm_source`) deve refletir a mudança após o commit da transação. A alteração deve ser persistida no banco de dados.
-
-**Exclusão de Registros**
-   - **Objetivo**: Verificar se um registro pode ser excluído corretamente do banco de dados.
-   - **Esperado**: Após a exclusão do registro, a busca por esse registro no banco de dados deve retornar `None`, indicando que o registro foi removido com sucesso.
-
-**Validação de Email Inválido**
-   - **Objetivo**: Verificar se é lançado um erro quando um email inválido é fornecido ao criar um novo registro.
-   - **Esperado**: A tentativa de criar um registro com um email inválido deve gerar um `ValueError` com a mensagem "Invalid email address".
-
-**Validação de Campos Nulos**
-   - **Objetivo**: Verificar se é lançado um erro quando um campo obrigatório (como email) é deixado nulo.
-   - **Esperado**: A tentativa de criar um registro com valores nulos nos campos obrigatórios deve gerar um `ValueError`, com a mensagem "Invalid email address" (ou mensagem similar, dependendo da validação).
-
-**Verificação de Banco de Dados Vazio**
-   - **Objetivo**: Verificar se a consulta de um email que não existe no banco retorna `None`, indicando que o registro não foi encontrado.
-   - **Esperado**: Ao buscar um email não registrado no banco de dados, a função deve retornar `None`, confirmando que o registro não existe.
-
-**Método Personalizado**
-   - **Objetivo**: Verificar se o método personalizado de um modelo funciona corretamente.
-   - **Esperado**: O método deve retornar o valor esperado, que pode ser um resultado calculado ou formatado a partir dos dados do registro.
 
 2. **Testes E2E**:
    - Execute com Cypress:
@@ -398,21 +402,13 @@ Foram realizados os seguintes testes no backend:
      cd frontend
      npm run cypress
      ```
-
-## Referências
+## 📚 Referências
 
 - [Documentação do React](https://reactjs.org/docs/getting-started.html)
 - [Documentação do TypeScript](https://www.typescriptlang.org/docs/)
 - [Documentação do Flask](https://flask.palletsprojects.com/)
 - [Documentação do PostgreSQL](https://www.postgresql.org/docs/)
 - [Documentação do Render](https://render.com/docs)
+## 📜 Licença
 
-
-## Licença
-
-Este projeto está licenciado sob a [MIT License](LICENSE). Isso significa que você pode usar, modificar e distribuir o código, desde que inclua a licença original.
-
-<p align="center">
-  Desenvolvido com muito ☕ por
-  <a href="https://linktr.ee/mewmewdevart" target="_blank">Larissa Cristina Benedito</a>
-</p>
+Este projeto está licenciado sob a [
