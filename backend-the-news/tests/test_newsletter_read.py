@@ -26,7 +26,6 @@ def test_create_newsletter_read(session):
     assert retrieved_entry.utm_channel == "social"
     assert retrieved_entry.streak == 0  # Default
     assert retrieved_entry.max_streak == 0  # Default
-    assert retrieved_entry.current_streak == 0  # Default
 
 def test_update_newsletter_read(session):
     new_entry = NewsletterRead(

@@ -15,7 +15,6 @@ class NewsletterRead(db.Model):
     timestamp = db.Column(db.DateTime, default=db.func.current_timestamp(), index=True)
     streak = db.Column(db.Integer, default=0)
     max_streak = db.Column(db.Integer, default=0)
-    current_streak = db.Column(db.Integer, default=0)
 
     __table_args__ = (
         Index('ix_newsletter_read_email_timestamp', 'email', 'timestamp'),

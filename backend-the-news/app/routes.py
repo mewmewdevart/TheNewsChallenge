@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from .models import NewsletterRead, db
 from datetime import datetime, timedelta
 from sqlalchemy import func
-from app.utils import calculate_streak
+from app.utils import calculate_streak, update_max_streak
 import logging
 from flask_caching import Cache
 from sqlalchemy.exc import SQLAlchemyError
@@ -28,12 +28,12 @@ def webhook():
     if not email or not post_id:
         return jsonify({"error": "Email and ID are required"}), 400
 
-    streak = calculate_streak(email)
-    
-    latest_read = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).first()
-    
-    max_streak = max(latest_read.max_streak if latest_read else 0, streak)
+    # Calcula o streak e max_streak
+    streak_data = calculate_streak(email)
+    streak = streak_data["streak"]
+    max_streak = streak_data["max_streak"]
 
+    # Cria uma nova entrada no banco de dados
     new_read = NewsletterRead(
         email=email,
         post_id=post_id,
@@ -43,7 +43,6 @@ def webhook():
         utm_channel=utm_channel,
         streak=streak,
         max_streak=max_streak,
-        current_streak=streak
     )
 
     try:
@@ -53,7 +52,6 @@ def webhook():
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
-
 
 @routes.route('/reads', methods=['GET'])
 def list_reads():
@@ -70,13 +68,10 @@ def list_reads():
     } for read in reads]
     return jsonify(reads_data), 200
 
-
 @routes.route('/metrics', methods=['GET'])
 def get_metrics():
     total_readers = db.session.query(func.count(func.distinct(NewsletterRead.email))).scalar()
-
     total_opens = db.session.query(func.count(NewsletterRead.id)).scalar()
-
     average_opens = total_opens / total_readers if total_readers > 0 else 0
 
     return jsonify({
@@ -92,7 +87,7 @@ def get_top_readers():
         top_readers = (
             db.session.query(NewsletterRead.email, func.count(NewsletterRead.id).label('reads'))
             .group_by(NewsletterRead.email)
-            .order_by(func.count(NewsletterRead.id).desc())  # Ordenando pelo número de leituras
+            .order_by(func.count(NewsletterRead.id).desc())
             .limit(10)
             .all()
         )
@@ -110,33 +105,22 @@ def get_streak():
     if not email:
         return jsonify({"error": "Email is required"}), 400
 
-    streak = calculate_streak(email)
-    return jsonify({"email": email, "streak": streak}), 200
+    streak_data = calculate_streak(email)
+    return jsonify({"email": email, "streak": streak_data["streak"], "max_streak": streak_data["max_streak"]}), 200
 
 @routes.route('/history', methods=['GET'])
 def get_history():
     email = request.args.get('email')
-    page = request.args.get('page', default=1, type=int)
-    per_page = request.args.get('per_page', default=10, type=int)
-
     if not email:
         return jsonify({"error": "Email is required"}), 400
 
-    history = (
-        NewsletterRead.query
-        .filter_by(email=email)
-        .order_by(NewsletterRead.timestamp.desc())
-        .paginate(page=page, per_page=per_page, error_out=False)
-    )
-    history_data = [{"post_id": entry.post_id, "timestamp": entry.timestamp} for entry in history.items]
+    history = NewsletterRead.query.filter_by(email=email).order_by(NewsletterRead.timestamp.desc()).all()
+    history_data = [{
+        "post_id": entry.post_id,
+        "timestamp": entry.timestamp
+    } for entry in history]
 
-    return jsonify({
-        "data": history_data,
-        "page": history.page,
-        "per_page": history.per_page,
-        "total_pages": history.pages,
-        "total_items": history.total
-    }), 200
+    return jsonify(history_data), 200
 
 @routes.route('/check-email', methods=['GET'])
 def check_email():

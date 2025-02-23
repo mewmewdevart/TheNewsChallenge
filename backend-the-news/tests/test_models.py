@@ -53,7 +53,6 @@ def test_create_newsletter_read(session):
     assert retrieved_entry.utm_channel == "social"
     assert retrieved_entry.streak == 0  # Default
     assert retrieved_entry.max_streak == 0  # Default
-    assert retrieved_entry.current_streak == 0  # Default
 
 def test_newsletter_read_defaults(session):
     new_entry = NewsletterRead(
@@ -71,7 +70,6 @@ def test_newsletter_read_defaults(session):
     retrieved_entry = session.query(NewsletterRead).filter_by(email="default@example.com").first()
     assert retrieved_entry.streak == 0
     assert retrieved_entry.max_streak == 0
-    assert retrieved_entry.current_streak == 0
 
 def test_newsletter_read_constraints(session):
     new_entry = NewsletterRead(
