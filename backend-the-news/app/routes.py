@@ -28,12 +28,10 @@ def webhook():
     if not email or not post_id:
         return jsonify({"error": "Email and ID are required"}), 400
 
-    # Calcula o streak e max_streak
     streak_data = calculate_streak(email)
     streak = streak_data["streak"]
     max_streak = streak_data["max_streak"]
 
-    # Cria uma nova entrada no banco de dados
     new_read = NewsletterRead(
         email=email,
         post_id=post_id,
@@ -81,17 +79,29 @@ def get_metrics():
     }), 200
 
 @routes.route('/top-readers', methods=['GET'])
-@cache.cached(timeout=300)  # Cache com tempo de 5 minutos
+@cache.cached(timeout=300)  # Cache with a timeout of 5 minutes
 def get_top_readers():
     try:
         top_readers = (
-            db.session.query(NewsletterRead.email, func.count(NewsletterRead.id).label('reads'))
+            db.session.query(
+                NewsletterRead.email,
+                func.count(NewsletterRead.id).label('reads')
+            )
             .group_by(NewsletterRead.email)
             .order_by(func.count(NewsletterRead.id).desc())
             .limit(10)
             .all()
         )
-        readers_data = [{"email": reader.email, "reads": reader.reads} for reader in top_readers]
+        
+        readers_data = []
+        for reader in top_readers:
+            streak_data = calculate_streak(reader.email)
+            readers_data.append({
+                "email": reader.email,
+                "reads": reader.reads,
+                "streak": streak_data["streak"]
+            })
+        
         return jsonify(readers_data), 200
     except SQLAlchemyError as e:
         db.session.rollback()
