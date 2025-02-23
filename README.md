@@ -187,16 +187,16 @@ A API oferece os seguintes endpoints:
   - `utm_channel` (opcional): Canal da campanha UTM.
 - **Exemplo de Requisição**:
   ```bash
-  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/?email=teste@example.com&post_id=123&utm_source=newsletter&utm_medium=email"
+  curl -X GET "https://thenewsletterstreakschallenge.onrender.com/?email=joao@gmail.com&post_id=7&utm_source=newsletter&utm_medium=email"
   ```
 - **Resposta Esperada**:
   ```json
   {
     "message": "Webhook received and saved successfully",
-    "email": "teste@example.com",
-    "id": "123",
-    "streak": 3,
-    "max_streak": 5
+    "email": "joao@gmail.com",
+    "id": "7",
+    "streak": 1,
+    "max_streak": 1
   }
   ```
 </details>
@@ -213,27 +213,15 @@ A API oferece os seguintes endpoints:
   ```json
   [
     {
-      "id": 1,
-      "email": "larissa@thenews.com",
-      "post_id": "1",
-      "utm_source": "google",
+      "id": 9,
+      "email": "joao@gmail.com",
+      "post_id": "7",
+      "utm_source": "newsletter",
       "utm_medium": "email",
-      "utm_campaign": "promo",
-      "utm_channel": "social",
-      "timestamp": "2025-02-20T03:46:29.986297",
-      "streak": 3,
-      "max_streak": 1
-    },
-    {
-      "id": 2,
-      "email": "teste@example.com",
-      "post_id": "2",
-      "utm_source": "tiktok",
-      "utm_medium": "socialpaid",
-      "utm_campaign": "12/12/2024",
-      "utm_channel": "web",
-      "timestamp": "2025-02-20T17:04:36.362509",
-      "streak": 2,
+      "utm_campaign": "weekly",
+      "utm_channel": "marketing",
+      "timestamp": "2025-02-21T19:11:14.484658",
+      "streak": 1,
       "max_streak": 1
     }
   ]
@@ -252,8 +240,8 @@ A API oferece os seguintes endpoints:
   ```json
   {
     "total_readers": 10,
-    "total_opens": 50,
-    "average_opens": 5.0
+    "total_opens": 14,
+    "average_opens": 1.4
   }
   ```
 </details>
@@ -271,11 +259,15 @@ A API oferece os seguintes endpoints:
   [
     {
       "email": "larissa@thenews.com",
-      "reads": 4
+      "reads": 7,
+      "streak": 3,
+      "max_streak": 3
     },
     {
       "email": "teste@example.com",
-      "reads": 2
+      "reads": 2,
+      "streak": 2,
+      "max_streak": 2
     }
   ]
   ```
@@ -316,11 +308,15 @@ A API oferece os seguintes endpoints:
   [
     {
       "post_id": "10",
-      "timestamp": "2025-02-22T03:15:43.475157"
+      "timestamp": "2025-02-22T03:15:43.475157",
+      "streak": 3,
+      "max_streak": 3
     },
     {
       "post_id": "6",
-      "timestamp": "2025-02-21T19:07:04.591965"
+      "timestamp": "2025-02-21T19:07:04.591965",
+      "streak": 3,
+      "max_streak": 3
     }
   ]
   ```

@@ -21,7 +21,7 @@
                 Bem-vindo ao guia de rotas da API! 👋 <br>
                 Esta página faz parte do backend do <span class="intro__highlight">TheNewsLetterStreaks</span>, um projeto que tem como objetivo processar dados recebidos via webhook e desenvolver funcionalidades específicas com base nessas informações.
             </p>
-            <h2 class="intro__subtitle">Como usar a API</h2>
+            <h2 class="intro__subtitle">Como Usar a API</h2>
             <p class="intro__text">
                 Para testar as rotas da API, você pode usar ferramentas como <code>curl</code> ou <code>Postman</code>. Abaixo estão exemplos de como usar cada rota:
             </p>
@@ -41,7 +41,7 @@
                     <span class="routes__method routes__method--get">GET</span>
                     <p class="routes__example">Exemplo de requisição GET:</p>
                     <code class="routes__code">
-                        GET https://thenewsletterstreakschallenge.onrender.com/?email=teste@example.com&post_id=123
+                        GET https://thenewsletterstreakschallenge.onrender.com/?email=joao@gmail.com&post_id=7
                     </code>
                     <table class="routes__table">
                         <thead>
@@ -88,10 +88,10 @@
                     <pre class="routes__code">
 {
     "message": "Webhook received and saved successfully",
-    "email": "teste@example.com",
-    "id": "123",
-    "streak": 3,
-    "max_streak": 5
+    "email": "joao@gmail.com",
+    "id": "7",
+    "streak": 1,
+    "max_streak": 1
 }</pre>
                     <p class="routes__example">Exemplo de resposta de erro:</p>
                     <pre class="routes__code">
@@ -101,7 +101,7 @@
                     <p class="routes__example">Erro 500 (erro interno no servidor):</p>
                     <pre class="routes__code">
 {
-    "error": "Erro ao salvar no banco de dados"
+    "error": "Internal server error"
 }</pre>
                 </li>
 
@@ -118,22 +118,22 @@
                     <pre class="routes__code">
 [
     {
-        "id": 1,
-        "email": "larissa@thenews.com",
-        "post_id": "1",
-        "utm_source": "google",
+        "id": 9,
+        "email": "joao@gmail.com",
+        "post_id": "7",
+        "utm_source": "newsletter",
         "utm_medium": "email",
-        "utm_campaign": "promo",
-        "utm_channel": "social",
-        "timestamp": "2025-02-20T03:46:29.986297",
-        "streak": 3,
+        "utm_campaign": "weekly",
+        "utm_channel": "marketing",
+        "timestamp": "2025-02-21T19:11:14.484658",
+        "streak": 1,
         "max_streak": 1
     }
 ]</pre>
                     <p class="routes__example">Erro 500 (erro interno no servidor):</p>
                     <pre class="routes__code">
 {
-    "error": "Erro ao buscar leituras"
+    "error": "Internal server error"
 }</pre>
                 </li>
 
@@ -150,13 +150,13 @@
                     <pre class="routes__code">
 {
     "total_readers": 10,
-    "total_opens": 50,
-    "average_opens": 5.0
+    "total_opens": 14,
+    "average_opens": 1.4
 }</pre>
                     <p class="routes__example">Erro 500 (erro interno no servidor):</p>
                     <pre class="routes__code">
 {
-    "error": "Erro ao calcular métricas"
+    "error": "Internal server error"
 }</pre>
                 </li>
 
@@ -174,17 +174,21 @@
 [
     {
         "email": "larissa@thenews.com",
-        "reads": 4
+        "reads": 7,
+        "streak": 3,
+        "max_streak": 3
     },
     {
         "email": "teste@example.com",
-        "reads": 2
+        "reads": 2,
+        "streak": 2,
+        "max_streak": 2
     }
 ]</pre>
                     <p class="routes__example">Erro 500 (erro interno no servidor):</p>
                     <pre class="routes__code">
 {
-    "error": "Erro ao buscar top leitores"
+    "error": "Internal server error"
 }</pre>
                 </li>
 
@@ -202,7 +206,7 @@
 {
     "email": "larissa@thenews.com",
     "streak": 3,
-    "max_streak": 5
+    "max_streak": 3
 }</pre>
                     <p class="routes__example">Erro 400 (e-mail não fornecido):</p>
                     <pre class="routes__code">
@@ -225,11 +229,15 @@
 [
     {
         "post_id": "10",
-        "timestamp": "2025-02-22T03:15:43.475157"
+        "timestamp": "2025-02-22T03:15:43.475157",
+        "streak": 3,
+        "max_streak": 3
     },
     {
         "post_id": "6",
-        "timestamp": "2025-02-21T19:07:04.591965"
+        "timestamp": "2025-02-21T19:07:04.591965",
+        "streak": 3,
+        "max_streak": 3
     }
 ]</pre>
                     <p class="routes__example">Erro 400 (e-mail não fornecido):</p>
@@ -279,7 +287,7 @@
                     <pre class="routes__code">
 {
     "email": "larissa@thenews.com",
-    "max_streak": 5
+    "max_streak": 3
 }</pre>
                     <p class="routes__example">Erro 400 (e-mail não fornecido):</p>
                     <pre class="routes__code">
