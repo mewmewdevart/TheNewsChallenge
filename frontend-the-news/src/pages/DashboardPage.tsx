@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import Layout from "../Layout";
 import DashboardTemplate from "@templates/DashboardTemplate/DashboardTemplate";
-import useDailyPhrase from "../utils/DailyPhrase";
+import useDailyPhrase from "@utils/DailyPhrase";
 
 interface Read {
 	email: string;

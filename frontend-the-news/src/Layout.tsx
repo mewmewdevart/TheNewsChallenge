@@ -1,8 +1,8 @@
 import React from "react";
 import MenuComponent from "./components/organisms/MenuComponent/MenuComponent";
 import imageLogo from "./assets/logo.webp";
-import useResponsiveness from "./utils/Responsiveness";
-import ErrorBoundary from "./utils/ErrorBoundary";
+import useResponsiveness from "@utils/Responsiveness";
+import ErrorBoundary from "@utils/ErrorBoundary";
 
 interface LayoutProps {
 	children: React.ReactNode;

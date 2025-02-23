@@ -5,7 +5,7 @@ import StatCard from "@atoms/StatCard/StatCard";
 import PeriodFilter from "@molecules/PeriodFilter/PeriodFilter";
 import TopReaders from "@molecules/TopReaders/TopReaders";
 import NewsletterFilter from "@molecules/NewsletterFilter/NewsletterFilter";
-import useResponsiveness from "../../../utils/Responsiveness"; 
+import useResponsiveness from "@utils/Responsiveness"; 
 import DailyPhrase from "@atoms/DailyPhrase/DailyPhrase";
 
 interface Read {

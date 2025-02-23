@@ -1,5 +1,5 @@
 import React from "react";
-import useResponsiveness from "../../../utils/Responsiveness";
+import useResponsiveness from "@utils/Responsiveness";
 
 interface NewsletterFilterProps {
   selectedNewsletter: string;
