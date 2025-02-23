@@ -31,24 +31,24 @@ const StatsPage: React.FC = () => {
 
 	useEffect(() => {
 		if (!email) {
-			navigate("/"); // Redireciona para a página de login se o e-mail não estiver presente
+			// navigate("/");
 			return;
 		}
-
+	
 		const fetchData = async () => {
 			setIsLoading(true);
 			setError("");
-
+	
 			try {
 				// Verifica se o e-mail está cadastrado
 				const checkEmailResponse = await fetch(
 					`https://thenewsletterstreakschallenge.onrender.com/check-email?email=${encodeURIComponent(email)}`
 				);
-
+	
 				if (!checkEmailResponse.ok) {
 					throw new Error("E-mail não cadastrado.");
 				}
-
+	
 				const [streakResponse, historyResponse, topReadersResponse] =
 					await Promise.all([
 						fetch(
@@ -61,7 +61,7 @@ const StatsPage: React.FC = () => {
 							`https://thenewsletterstreakschallenge.onrender.com/top-readers`
 						),
 					]);
-
+	
 				if (
 					!streakResponse.ok ||
 					!historyResponse.ok ||
@@ -69,15 +69,15 @@ const StatsPage: React.FC = () => {
 				) {
 					throw new Error("Error fetching data.");
 				}
-
+	
 				const streakData = await streakResponse.json();
 				const historyData = await historyResponse.json();
-				// Ensure historyData is an array
+				// Acessa a chave "data" do objeto retornado
 				if (!Array.isArray(historyData)) {
 					throw new Error("Invalid history data.");
-				}
+				  }
 				const topReadersData: Reader[] = await topReadersResponse.json();
-
+	
 				setTimeout(() => {
 					setStreak(streakData.streak);
 					setMaxStreak(streakData.max_streak);
@@ -90,10 +90,10 @@ const StatsPage: React.FC = () => {
 					error instanceof Error ? error.message : "Error loading data."
 				);
 				setIsLoading(false);
-				navigate("/");
+				// navigate("/");
 			}
 		};
-
+	
 		fetchData();
 	}, [email, navigate]);
 
@@ -104,7 +104,7 @@ const StatsPage: React.FC = () => {
 	const emailUser = queryParams.get("email") || undefined;
 
 	return (
-		<Layout emailUser={emailUser}>
+		<Layout emailUser={emailUser !== "" ? emailUser : undefined}>
 			<StatsTemplate
 				isLoading={isLoading}
 				emailUser={emailUser}
