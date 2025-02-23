@@ -1,16 +1,10 @@
 <p align="center">
-  <img src="https://github.com/seu-usuario/repo/assets/logo.png" alt="The News logo" style="width: 200px;">
+  <img src="https://github.com/user-attachments/assets/5c353b0b-9d46-4cf6-941f-82aa42f0de3f" alt="The News logo" style="width: 200px;">
 </p>
 
 <p align="center">
-  <a href="https://github.com/seu-usuario/WaffleNewsletterStreaks/actions">
-    <img src="https://github.com/seu-usuario/WaffleNewsletterStreaks/workflows/CI/CD/badge.svg" alt="Status do CI/CD">
-  </a>
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="Licença MIT">
-  </a>
-  <a href="https://thenewsletterstreakschallenge.onrender.com">
-    <img src="https://img.shields.io/badge/Demo-Online-green.svg" alt="Demo Online">
   </a>
 </p>
 
@@ -21,8 +15,9 @@
 </p>
 
 <p align="center">
-    <a href="https://thenewsletterstreakschallenge.onrender.com" target="_blank">Acesse o Site</a> 
+    <a href="https://the-news-letter-streaks.vercel.app/" target="_blank">Acesso o resultado </a> 
 </p>
+
 ## 📖 Introdução
 
 Este projeto foi desenvolvido como parte do desafio técnico para a vaga de Desenvolvedor Full Stack Jr (Front-end Specialist) na Waffle. A solução proposta visa aumentar o engajamento dos leitores da newsletter do **The News** através de uma plataforma de gamificação, onde os leitores podem acompanhar suas sequências de leitura (streaks) e métricas de engajamento.
@@ -78,7 +73,7 @@ Este projeto foi desenvolvido para criar uma solução de gamificação que ince
 ## 📂 Estrutura do Projeto
 
 ```
-WaffleNewsletterStreaks/
+TheNewsLetterStreaks/
 ├── frontend-the-news/               # Pasta do Frontend (React + TypeScript)
 │   ├── src/
 │   │   ├── components/     # Componentes reutilizáveis
@@ -389,14 +384,53 @@ on:
 
 Para garantir a qualidade do projeto, foram implementados testes unitários e end-to-end (E2E):
 
-1. **Testes Unitários**:
+1. **Testes Unitários (Backend)**:
    - Execute com Pytest:
      ```sh
      cd backend-the-news
      pytest tests/
      ```
 
-2. **Testes E2E**:
+Foram realizados os seguintes testes no backend:
+
+**Criação de Registros**
+   - **Objetivo**: Verificar se um novo registro de leitura da newsletter é criado corretamente no banco de dados.
+   - **Esperado**: O novo registro deve ser adicionado ao banco de dados e todos os campos fornecidos (como email, post_id, utm_source, etc.) devem ser corretamente armazenados. Além disso, os valores padrão para `streak`, `max_streak` e `current_streak` devem ser `0`.
+
+**Valores Padrão**
+   - **Objetivo**: Verificar se os valores padrão são atribuídos corretamente quando um novo registro é criado, caso não sejam fornecidos valores para esses campos.
+   - **Esperado**: Quando um novo registro é criado sem valores explícitos para `streak`, `max_streak` e `current_streak`, esses campos devem ser configurados automaticamente como `0`.
+
+**Restrições de Integridade**
+   - **Objetivo**: Verificar se as restrições de integridade no banco de dados estão funcionando corretamente, como a prevenção de duplicação de registros.
+   - **Esperado**: Tentar adicionar um registro com um email já existente deve resultar em um erro de integridade (erro `IntegrityError`), impedindo que o registro seja duplicado.
+
+**Atualização de Registros**
+   - **Objetivo**: Verificar se é possível atualizar um registro existente no banco de dados.
+   - **Esperado**: O campo atualizado (como `utm_source`) deve refletir a mudança após o commit da transação. A alteração deve ser persistida no banco de dados.
+
+**Exclusão de Registros**
+   - **Objetivo**: Verificar se um registro pode ser excluído corretamente do banco de dados.
+   - **Esperado**: Após a exclusão do registro, a busca por esse registro no banco de dados deve retornar `None`, indicando que o registro foi removido com sucesso.
+
+**Validação de Email Inválido**
+   - **Objetivo**: Verificar se é lançado um erro quando um email inválido é fornecido ao criar um novo registro.
+   - **Esperado**: A tentativa de criar um registro com um email inválido deve gerar um `ValueError` com a mensagem "Invalid email address".
+
+**Validação de Campos Nulos**
+   - **Objetivo**: Verificar se é lançado um erro quando um campo obrigatório (como email) é deixado nulo.
+   - **Esperado**: A tentativa de criar um registro com valores nulos nos campos obrigatórios deve gerar um `ValueError`, com a mensagem "Invalid email address" (ou mensagem similar, dependendo da validação).
+
+**Verificação de Banco de Dados Vazio**
+   - **Objetivo**: Verificar se a consulta de um email que não existe no banco retorna `None`, indicando que o registro não foi encontrado.
+   - **Esperado**: Ao buscar um email não registrado no banco de dados, a função deve retornar `None`, confirmando que o registro não existe.
+
+**Método Personalizado**
+   - **Objetivo**: Verificar se o método personalizado de um modelo funciona corretamente.
+   - **Esperado**: O método deve retornar o valor esperado, que pode ser um resultado calculado ou formatado a partir dos dados do registro.
+
+
+2. **Testes E2E (Frontend)**:
    - Execute com Cypress:
      ```sh
      cd frontend
