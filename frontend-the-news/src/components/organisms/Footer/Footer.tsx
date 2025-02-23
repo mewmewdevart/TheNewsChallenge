@@ -7,7 +7,7 @@ export const Footer = () => {
     <div
       className={`w-full flex justify-between items-center px-4 py-4 ${
         isMobile ? "px-4" : "px-10 md:px-40"
-      } absolute bottom-0 bg-(--color-brand-neutral-100) z-50`}
+      } absolute bottom-0 bg-white z-50`}
     >
       <div className="w-full flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0">
         <p className="text-sm text-gray-600 text-center md:text-left">

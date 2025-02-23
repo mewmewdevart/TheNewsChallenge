@@ -1,5 +1,6 @@
 import StatsTemplate from "@templates/StatsTemplate/StatsTemplate";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "../Layout";
 import useDailyPhrase from "../utils/DailyPhrase";
@@ -34,21 +35,23 @@ const StatsPage: React.FC = () => {
 			// navigate("/");
 			return;
 		}
-	
+
 		const fetchData = async () => {
 			setIsLoading(true);
 			setError("");
-	
+
 			try {
-				// Verifica se o e-mail está cadastrado
+				// Check if the email is registered
 				const checkEmailResponse = await fetch(
-					`https://thenewsletterstreakschallenge.onrender.com/check-email?email=${encodeURIComponent(email)}`
+					`https://thenewsletterstreakschallenge.onrender.com/check-email?email=${encodeURIComponent(
+						email
+					)}`
 				);
-	
+
 				if (!checkEmailResponse.ok) {
-					throw new Error("E-mail não cadastrado.");
+					throw new Error("Email not registered.");
 				}
-	
+
 				const [streakResponse, historyResponse, topReadersResponse] =
 					await Promise.all([
 						fetch(
@@ -61,7 +64,7 @@ const StatsPage: React.FC = () => {
 							`https://thenewsletterstreakschallenge.onrender.com/top-readers`
 						),
 					]);
-	
+
 				if (
 					!streakResponse.ok ||
 					!historyResponse.ok ||
@@ -69,15 +72,15 @@ const StatsPage: React.FC = () => {
 				) {
 					throw new Error("Error fetching data.");
 				}
-	
+
 				const streakData = await streakResponse.json();
 				const historyData = await historyResponse.json();
-				// Acessa a chave "data" do objeto retornado
+				// Access the "data" key of the returned object
 				if (!Array.isArray(historyData)) {
 					throw new Error("Invalid history data.");
-				  }
+				}
 				const topReadersData: Reader[] = await topReadersResponse.json();
-	
+
 				setTimeout(() => {
 					setStreak(streakData.streak);
 					setMaxStreak(streakData.max_streak);
@@ -93,7 +96,7 @@ const StatsPage: React.FC = () => {
 				// navigate("/");
 			}
 		};
-	
+
 		fetchData();
 	}, [email, navigate]);
 
@@ -105,6 +108,27 @@ const StatsPage: React.FC = () => {
 
 	return (
 		<Layout emailUser={emailUser !== "" ? emailUser : undefined}>
+			<Helmet>
+				<title>Perfil - Newsletter Streak Challenge</title>
+				<meta
+					name="description"
+					content="Veja suas estatísticas e progresso no Desafio de Streak de Newsletter."
+				/>
+				<meta
+					name="keywords"
+					content="newsletter, streak, desafio, estatísticas, progresso"
+				/>
+				<meta
+					property="og:title"
+					content="Estatísticas - Desafio de Streak de Newsletter"
+				/>
+				<meta
+					property="og:description"
+					content="Veja suas estatísticas e progresso no Desafio de Streak de Newsletter."
+				/>
+				<meta property="og:type" content="website" />
+				<meta property="og:url" content={window.location.href} />
+			</Helmet>
 			<StatsTemplate
 				isLoading={isLoading}
 				emailUser={emailUser}

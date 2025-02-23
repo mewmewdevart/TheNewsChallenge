@@ -21,7 +21,7 @@ const Layout: React.FC<LayoutProps> = ({ children, emailUser }) => {
 			<section className={`bg-[--color-brand-neutral-100] w-full ${sectionLayout} py-4`}>
 				<main className="flex-grow">{children}</main>
 			</section>
-			<Footer />
+			{/* <Footer /> */}
 		</ErrorBoundary>
 	);
 };

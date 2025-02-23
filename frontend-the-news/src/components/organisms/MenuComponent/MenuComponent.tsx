@@ -9,7 +9,8 @@ import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { yellow } from "@mui/material/colors";
-import useResponsiveness from "../../../utils/Responsiveness";
+import useResponsiveness from "@utils/Responsiveness";
+import { Typography } from "@mui/material";
 
 interface MenuComponentProps {
   emailUser: string;
@@ -36,13 +37,18 @@ export default function MenuComponent({
     console.log("User logged out");
     navigate("/");
   };
+
+  const handleDashboardClick = () => {
+    navigate("/dashboardPage");
+  };
+
   const isMobile = useResponsiveness();
   const firstLetter = emailUser ? emailUser.charAt(0).toUpperCase() : "";
 
   const containerNav = isMobile ? "px-4" : "px-40";
 
   return (
-    <nav className={`w-full flex justify-between items-center px-4 py-2 border-b-1 border-gray-100 fixed bg-(--color-brand-neutral-100) z-50 ${containerNav}`}>
+    <nav className={`w-full flex justify-between items-center px-4 py-2 border-b-1 border-gray-100 fixed z-50 bg-(--color-brand-neutral-100) ${containerNav}`}>
       <a
         href="https://thenewscc.beehiiv.com/"
         target="_blank"
@@ -51,6 +57,9 @@ export default function MenuComponent({
         <img src={imageLogo} alt="" className="w-[150px] sm:w-[120px]" />
       </a>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
+        <Typography sx={{ minWidth: 100, cursor: "pointer" }} onClick={handleDashboardClick} className="hover:font-bold">
+          Dashboard
+        </Typography>
         <Tooltip title="Menu">
           <IconButton
             onClick={handleClick}
