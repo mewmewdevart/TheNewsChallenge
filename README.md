@@ -21,29 +21,32 @@
 ## 📖 Introdução
 
 Este projeto foi desenvolvido como parte do desafio técnico para a vaga de Desenvolvedor Full Stack Jr (Front-end Specialist) na Waffle. A solução proposta visa aumentar o engajamento dos leitores da newsletter do **The News** através de uma plataforma de gamificação, onde os leitores podem acompanhar suas sequências de leitura (streaks) e métricas de engajamento.
+
 ## 📚 Sumário
 
 1. [Desafio](#-desafio)
-2. [Sobre o Projeto](#-sobre-o-projeto)
-3. [Funcionalidades](#-funcionalidades)
-4. [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-5. [Estrutura do Projeto](#-estrutura-do-projeto)
-6. [Instruções de Uso](#-instruções-de-uso)
+2. [Funcionalidades](#-funcionalidades)
+    - [Área Logada para Leitores](#-área-logada-para-leitores)
+    - [Dashboard Administrativo](#-dashboard-administrativo)
+    - [Regras de Streak](#-regras-de-streak)
+3. [Relatorio](#-relatorio)
+   - [Perguntas a serem Respondidas](#-perguntas-a-serem-resposdidas)
+5. [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+6. [Estrutura do Projeto](#-estrutura-do-projeto)
+7. [Instruções de Uso](#-instruções-de-uso)
     - [Pré-requisitos](#-pré-requisitos)
     - [Rodando o Projeto Localmente](#-rodando-o-projeto-localmente)
-7. [Endpoints da API](#-endpoints-da-api)
-8. [Automação com GitHub Actions](#-automação-com-github-actions)
-9. [Testes](#-testes)
-10. [Referências](#-referências)
-11. [Licença](#-licença)
-    
+8. [Endpoints da API](#-endpoints-da-api)
+9. [Automação com GitHub Actions](#-automação-com-github-actions)
+10. [Testes](#-testes)
+11. [Referências](#-referências)
+12. [Licença](#-licença)
+
 ## 🎯 Desafio
 
 Este projeto foi desenvolvido para criar uma solução de gamificação que incentiva os leitores da newsletter a manterem um hábito de leitura diário. Através de streaks e métricas de engajamento, os leitores são motivados a abrir as newsletters consecutivamente, enquanto a equipe da Waffle pode monitorar o desempenho das campanhas.
 
 ## 💡 Funcionalidades
-
-Aqui está uma versão melhorada das suas anotações em formato Markdown, com melhor organização, clareza e adição de detalhes para facilitar a leitura e compreensão:
 
 ### 📖 Área Logada para Leitores  
 
@@ -158,9 +161,98 @@ Aqui está uma versão melhorada das suas anotações em formato Markdown, com m
 </details>
 
   
-## 🚀 Minha experiencia
+## 🚀 Relatorio
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in est feugiat, ultricies nulla sed, convallis nulla. Aliquam sed pharetra erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin sit amet interdum augue. Vestibulum at nunc et nunc consequat dictum.
+Quando recebi o desafio por e-mail, fiquei extremamente animada com a proposta, mas também senti um certo receio de não conseguir desenvolver tudo o que estava sendo pedido. No entanto, a vida é feita de desafios e oportunidades de crescimento. Mesmo com medo, decidi encarar de frente. Assim, já no primeiro dia, criei o repositório no GitHub e comecei a planejar o projeto como um todo.
+
+Conforme fui desenvolvendo, percebi que o desafio realmente exigia bastante, e meu receio inicial fazia sentido, haha. Enfrentei funcionalidades que nunca tinha implementado antes (ou que havia explorado apenas superficialmente). Meu conhecimento em SQL e Python era básico, pois tenho mais experiência com C e TypeScript. Mas agora, olhando para o projeto finalizado, vejo o quanto evoluí em poucos dias. Foi como correr uma maratona: a cada 100 metros conquistados, vinha uma enxurrada de novos aprendizados (comandos e macetes).
+
+Pude colocar à prova minhas habilidades em Figma para a criação das interfaces, trabalhar com PostgreSQL para integrar o banco de dados ao backend e configurar um workflow no GitHub para executar um script a cada 24 horas. Essa solução foi necessária devido à limitação do serviço gratuito do Render, que impõe restrições na execução contínua de aplicações.
+
+No final, ver o projeto funcional me motiva bastante. Gostaria de ter tido mais tempo e uma organização melhor para implementar novas funcionalidades, como:
+- Criar uma lógica robusta para a utilização das tabelas.
+- Implementar a exportação *CSV* dos dados do dashboard.
+- Adicionar testes no frontend com o Cypress.
+- Implementar um SEO e Acessibilidade mais robustos.
+- Adicionar regras de Marketing, como um rodapé com redirecionamento para os Termos de Serviço e um texto sobre privacidade (seguindo as normas de LGPD).
+
+Existem muitas formas de polir o projeto e espero que possamos trabalhar no **The News** verdadeiro,  trazendo várias features 👀. O desafio me proporcionou um crescimento rápido e grandioso (sim, me sinto assim, haha). Por mais desafiador que fosse, a jornada de conseguir, falhar e conseguir novamente, diante de vários obstáculos, foi essencial para que eu conseguisse chegar até aqui.
+
+Claro! Aqui está o conteúdo completo em formato Markdown:
+
+### Perguntas a serem Respondidas 🔍 
+
+<details>
+  <summary> Stacks </summary>
+	
+1. **Stacks?**  
+   Tecnologias Usadas: React, TypeScript, Material UI, Python, PyTest, PostgreSQL, Figma.
+   
+2. **Quais problemas você enfrentou ao desenvolver?**  
+   Enfrentei vários problemas no backend, principalmente com a função de cálculo do streak, que quebrava com frequência. Deveria ter implementado testes (TDD) logo quando desenvolvia o backend em conjunto com o banco de dados, isso teria me poupado muito tempo ao tentar entender por que os dados no banco de dados não estavam fazendo sentido.
+
+3. **Qual a organização que escolheu e por quê?**  
+   - **Front-End:** Optei pela metodologia **Atomic Design**, uma abordagem eficaz para a criação de Design Systems. Ela permite quebrar a interface em componentes menores e mais reutilizáveis, que se agrupam em estruturas mais complexas à medida que subimos na hierarquia. O Atomic Design começa com átomos (elementos simples como botões ou campos de texto), formando moléculas (ex: campo de pesquisa com botão), organismos (conjuntos de moléculas, como uma seção de formulário) e, finalmente, páginas ou templates completos. Isso facilita a construção de interfaces escaláveis e consistentes.
+   - **Back-End:** Segui o padrão esperado para projetos em Python, garantindo uma estrutura organizada e funcional.
+</details>
+
+<details>
+  <summary> Dados </summary>
+	
+1. **Qual a estrutura do seu SQL?**  
+   A estrutura do banco de dados segue o modelo de tabela para a `newsletter_read`, que lida com os dados dos leitores. Exemplo de como a tabela é estruturada:
+
+```python
+class NewsletterRead(db.Model):
+    __tablename__ = 'newsletter_read'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False, index=True)
+    post_id = db.Column(db.String(255), unique=True, nullable=False, index=True)
+    utm_source = db.Column(db.String(50), nullable=False, default="")
+    utm_medium = db.Column(db.String(50), nullable=False, default="")
+    utm_campaign = db.Column(db.String(50), nullable=False, default="")
+    utm_channel = db.Column(db.String(50), nullable=False, default="")
+    timestamp = db.Column(db.DateTime, default=db.func.current_timestamp(), index=True)
+    streak = db.Column(db.Integer, default=0)
+    max_streak = db.Column(db.Integer, default=0)
+
+    __table_args__ = (
+        Index('ix_newsletter_read_email_timestamp', 'email', 'timestamp'),
+    )
+```
+
+2. **Como você lida com as inserções e consultas dos leitores?**
+
+   **Inserções:**  
+   O endpoint de webhook lida com a inserção de novos registros de leitura de newsletters. O processo envolve:
+   1. **Recebimento de Dados:** Os dados são recebidos via parâmetros de consulta (email, post_id, utm_source, utm_medium, utm_campaign, utm_channel).
+   2. **Validação:** Verifica se `email` e `post_id` estão presentes. Se faltar algum dado, retorna um erro 400.
+   3. **Cálculo de Streak:** A função `calculate_streak` calcula o streak atual e o máximo para o e-mail fornecido.
+   4. **Criação de Registro:** Cria um novo objeto `NewsletterRead` com os dados recebidos e os valores de streak calculados.
+   5. **Inserção no Banco de Dados:** Adiciona o novo registro à sessão do banco de dados e faz o commit.
+   6. **Tratamento de Erros:** Se ocorrer um erro, faz rollback e retorna um erro 500.
+
+   **Consultas:**  
+   - **Listagem de Leituras (/reads):** Consulta todos os registros na tabela `newsletter_read`.
+   - **Métricas Gerais (/metrics):** Consulta o total de leitores e aberturas.
+   - **Top Leitores (/top-readers):** Consulta os 10 leitores com mais leituras, utilizando cache para melhorar a performance.
+   - **Streak de um Usuário (/streak):** Consulta o streak atual e o máximo de um e-mail específico.
+
+3. **Ele é escalável? Explique.**  
+   Sim, o projeto é escalável. O uso de índices e cache (em `/top-readers`) melhora a performance de consultas frequentes. O formato atual permite que ele seja facilmente particionado conforme necessário, mas pode ser ajustado conforme as demandas aumentem.
+
+</details>
+
+<details>
+  <summary> Testes </summary>
+	
+1. **Quais testes você realizou?**  
+   Utilizei o **PyTest** para testar o backend em Python. Gostaria de ter usado o **Cypress** no frontend, mas não foi possível.
+   
+2. **Quanto tempo levou o desenvolvimento e testes?**  
+   O desenvolvimento dos testes com PyTest levou um dia, e ao todo, foram criados **10 testes** para validar o backend.
+
+</details>
 
   
 ## 🛠️ Tecnologias Utilizadas
