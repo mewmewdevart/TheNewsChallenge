@@ -29,18 +29,18 @@ Este projeto foi desenvolvido como parte do desafio técnico para a vaga de Dese
     - [Área Logada para Leitores](#-área-logada-para-leitores)
     - [Dashboard Administrativo](#-dashboard-administrativo)
     - [Regras de Streak](#-regras-de-streak)
-3. [Relatorio](#-relatorio)
-   - [Perguntas a serem Respondidas](#-perguntas-a-serem-resposdidas)
-5. [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-6. [Estrutura do Projeto](#-estrutura-do-projeto)
-7. [Instruções de Uso](#-instruções-de-uso)
+3. [Relatório](#-relatório)
+    - [Perguntas a serem Respondidas](#-perguntas-a-serem-respondidas)
+4. [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+5. [Estrutura do Projeto](#-estrutura-do-projeto)
+6. [Instruções de Uso](#-instruções-de-uso)
     - [Pré-requisitos](#-pré-requisitos)
     - [Rodando o Projeto Localmente](#-rodando-o-projeto-localmente)
-8. [Endpoints da API](#-endpoints-da-api)
-9. [Automação com GitHub Actions](#-automação-com-github-actions)
-10. [Testes](#-testes)
-11. [Referências](#-referências)
-12. [Licença](#-licença)
+7. [Endpoints da API](#-endpoints-da-api)
+8. [Automação com GitHub Actions](#-automação-com-github-actions)
+9. [Testes](#-testes)
+10. [Referências](#-referências)
+11. [Licença](#-licença)
 
 ## 🎯 Desafio
 
@@ -53,10 +53,10 @@ Este projeto foi desenvolvido para criar uma solução de gamificação que ince
 <details>
   <summary> Funcionalidades Principais</summary>
 
-- ** Login Simples**  
+- **Login Simples**  
   - Acesso via e-mail.  
 
-- ** Streak de Leituras**  
+- **Streak de Leituras**  
   - Exibição da sequência de aberturas consecutivas de newsletters.  
 
 - **Histórico de Aberturas**  
@@ -70,44 +70,43 @@ Este projeto foi desenvolvido para criar uma solução de gamificação que ince
 <details>
   <summary> Funcionalidades Bônus</summary>
 
-- ** Cadastro Obrigatório**  
+- **Cadastro Obrigatório**  
   - O e-mail precisa estar cadastrado no sistema para permitir o login.  
 
-- ** Acompanhamento de Desempenho**  
+- **Acompanhamento de Desempenho**  
   - O usuário poderá visualizar:  
     - A sequência atual de streaks.  
     - O recorde pessoal (maior streak alcançado).  
     - O total de newsletters lidas.  
 
-- ** Ranking de Leitores**  
+- **Ranking de Leitores**  
   - Exibição de um ranking dos **Top 5 Leitores**, baseado em streaks.  
 
-- ** Histórico com Paginação e Busca**  
+- **Histórico com Paginação e Busca**  
   - Lista paginada das newsletters lidas, com funcionalidade de busca.  
   - Cada item do histórico exibe:  
-    -  A newsletter lida.  
-    -  A data de leitura.  
-    -  Um link para releitura da newsletter (*caso a URL esteja no formato correto: `https://thenewscc.beehiiv.com/p/data`*).  
+    - A newsletter lida.  
+    - A data de leitura.  
+    - Um link para releitura da newsletter (*caso a URL esteja no formato correto: `https://thenewscc.beehiiv.com/p/data`*).  
   - ⚠️ **Observação**: Se a URL não estiver no formato esperado, o card será criado, mas sem link, podendo resultar em erro.  
 
 </details>
-
 
 ### 🛠️ Dashboard Administrativo  
 
 <details>
   <summary> Funcionalidades Principais</summary>
 
-- ** Métricas de Engajamento**  
+- **Métricas de Engajamento**  
   - Visualização de streaks, rankings e padrões de abertura dos usuários.  
 
-- ** Filtros**  
+- **Filtros**  
   - Filtragem por:  
-    -   Newsletter específica.  
-    -  Período de tempo.  
-    -  Status do streak (ativo ou inativo).  
+    - Newsletter específica.  
+    - Período de tempo.  
+    - Status do streak (ativo ou inativo).  
 
-- ** Gráficos**  
+- **Gráficos**  
   - Análise visual de engajamento dos usuários.  
 
 </details>
@@ -115,53 +114,51 @@ Este projeto foi desenvolvido para criar uma solução de gamificação que ince
 <details>
   <summary> Funcionalidades Bônus</summary>
 
-- ** Exibição de E-mails**  
+- **Exibição de E-mails**  
   - O mesmo e-mail que o leitor vê no perfil será exibido na área administrativa.  
 
-- **  Ranking de Top 5 Leitores**  
+- **Ranking de Top 5 Leitores**  
   - Repetição do ranking baseado em streaks.  
 
-- ** Gráficos de Engajamento**  
+- **Gráficos de Engajamento**  
   - Exibição de gráficos com:  
-    -  Número de leitores por dia, semana ou mês.  
+    - Número de leitores por dia, semana ou mês.  
 
-- ** Tabela de Dados**  
+- **Tabela de Dados**  
   - Exibição de informações sobre os usuários, incluindo:  
-    -   Maior streak alcançado (`max_streak`).  
-    -   Streak atual de cada usuário.  
+    - Maior streak alcançado (`max_streak`).  
+    - Streak atual de cada usuário.  
   - Filtros disponíveis:  
-    -   Usuários ativos (`streak > 0`).  
-    -   Usuários inativos (`streak = 0`).  
+    - Usuários ativos (`streak > 0`).  
+    - Usuários inativos (`streak = 0`).  
 
 </details>
-
 
 ### 🔥 Regras de Streak  
 
 <details>
   <summary> Funcionalidades Principais</summary>
 
-- ** Cálculo Automático**  
+- **Cálculo Automático**  
   - O streak aumenta em **+1** a cada dia consecutivo de abertura da newsletter.  
 
-- ** Reset Automático**  
+- **Reset Automático**  
   - O streak é zerado se o leitor não abrir a newsletter no dia seguinte.  
 
-- **  Exceções**  
-  -  Domingos **não quebram o streak**, mantendo a sequência intacta.  
+- **Exceções**  
+  - Domingos **não quebram o streak**, mantendo a sequência intacta.  
 
 </details>
 
 <details>
   <summary> Funcionalidades Bônus</summary>
 
-- ** Registro de Recorde Pessoal**  
+- **Registro de Recorde Pessoal**  
   - Armazena o maior streak já alcançado por cada usuário no campo `max_streak`.  
 
 </details>
 
-  
-## 🚀 Relatorio
+## 🚀 Relatório
 
 Quando recebi o desafio por e-mail, fiquei extremamente animada com a proposta, mas também senti um certo receio de não conseguir desenvolver tudo o que estava sendo pedido. No entanto, a vida é feita de desafios e oportunidades de crescimento. Mesmo com medo, decidi encarar de frente. Assim, já no primeiro dia, criei o repositório no GitHub e comecei a planejar o projeto como um todo.
 
@@ -176,9 +173,7 @@ No final, ver o projeto funcional me motiva bastante. Gostaria de ter tido mais 
 - Implementar um SEO e Acessibilidade mais robustos.
 - Adicionar regras de Marketing, como um rodapé com redirecionamento para os Termos de Serviço e um texto sobre privacidade (seguindo as normas de LGPD).
 
-Existem muitas formas de polir o projeto e espero que possamos trabalhar no **The News** verdadeiro,  trazendo várias features 👀. O desafio me proporcionou um crescimento rápido e grandioso (sim, me sinto assim, haha). Por mais desafiador que fosse, a jornada de conseguir, falhar e conseguir novamente, diante de vários obstáculos, foi essencial para que eu conseguisse chegar até aqui.
-
-Claro! Aqui está o conteúdo completo em formato Markdown:
+Existem muitas formas de polir o projeto e espero que possamos trabalhar no **The News** verdadeiro, trazendo várias features 👀. O desafio me proporcionou um crescimento rápido e grandioso (sim, me sinto assim, haha). Por mais desafiador que fosse, a jornada de conseguir, falhar e conseguir novamente, diante de vários obstáculos, foi essencial para que eu conseguisse chegar até aqui.
 
 ### Perguntas a serem Respondidas 🔍 
 
@@ -254,14 +249,14 @@ class NewsletterRead(db.Model):
 
 </details>
 
-  
 ## 🛠️ Tecnologias Utilizadas
 
 | **Frontend**         | **Backend**        | **Banco de Dados** | **Outras Ferramentas**       |
 |----------------------|--------------------|--------------------|------------------------------|
-| React + TypeScript   | Python (Flask)     | PostgreSQL         | Render (Deploy do Backend)              |
-| TailwindCSS + Material UI         | Pytest (unitários) |                    | GitHub Actions (CI/CD)       |
-|  ̶C̶y̶p̶r̶e̶s̶s̶ ̶(̶E̶2̶E̶)̶        |                    |                    |    Vercel (Deploy do FrontEnd)                          |
+| React + TypeScript   | Python (Flask)     | PostgreSQL         | Render (Deploy do Backend)   |
+| TailwindCSS + Material UI | Pytest (unitários) |                    | GitHub Actions (CI/CD)       |
+|                      |                    |                    | Vercel (Deploy do FrontEnd)  |
+
 ## 📂 Estrutura do Projeto
 
 ```
@@ -282,6 +277,7 @@ TheNewsLetterStreaks/
 ├── tests/                  # Testes E2E (Cypress)
 └── README.md               # Documentação do projeto
 ```
+
 ## 🚀 Instruções de Uso
 
 ### Pré-requisitos
@@ -358,6 +354,7 @@ TheNewsLetterStreaks/
 7. **Acesse o projeto**:
    - O **Frontend** estará disponível em: [http://localhost:3000](http://localhost:3000)
    - O **Backend** estará disponível em: [http://127.0.0.1:5000](http://127.0.0.1:5000)
+
 ## 📡 Endpoints da API
 
 Para facilitar a visualização e compreensão das rotas implementadas no projeto, criei uma página HTML que oferece um design mais agradável. Acesse a documentação completa das rotas da API clicando no link abaixo:
@@ -569,6 +566,7 @@ on:
   schedule:
     - cron: "0 0 * * *" # Executa a cada 24 horas
 ```
+
 ## 🧪 Testes
 
 Para garantir a qualidade do projeto, foram implementados testes unitários e end-to-end (E2E):
@@ -653,7 +651,6 @@ Foram realizados os seguintes testes no backend:
 - [Documentação do PostgreSQL](https://www.postgresql.org/docs/)
 - [Documentação do Render](https://render.com/docs)
 
-
 ## 📜 Licença
 
-Este projeto está licenciado sob a [
+Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT).
