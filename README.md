@@ -36,40 +36,102 @@ Este projeto foi desenvolvido como parte do desafio técnico para a vaga de Dese
 9. [Testes](#-testes)
 10. [Referências](#-referências)
 11. [Licença](#-licença)
+    
 ## 🎯 Desafio
 
-O desafio consiste em criar uma plataforma de **gamificação** para aumentar o engajamento dos leitores da newsletter do **The News**. A solução deve incluir:
-
-1. **Área Logada**: Onde os leitores podem visualizar seu **streak** (sequência de aberturas consecutivas) e estatísticas pessoais.
-2. **Dashboard Administrativo**: Para a equipe da Waffle monitorar métricas de engajamento, como streaks, rankings e padrões de abertura.
-3. **Integração com API**: Utilizando dados fornecidos via webhook da plataforma **Beehiiv**.
-## 🚀 Sobre o Projeto
-
 Este projeto foi desenvolvido para criar uma solução de gamificação que incentiva os leitores da newsletter a manterem um hábito de leitura diário. Através de streaks e métricas de engajamento, os leitores são motivados a abrir as newsletters consecutivamente, enquanto a equipe da Waffle pode monitorar o desempenho das campanhas.
+
 ## 💡 Funcionalidades
 
-### **Área Logada para Leitores**
-- **Login Simples**: Acesso via e-mail (o email precisa estar cadastrado no sistema).
-- **Streak de Leituras**: Exibição da sequência de aberturas consecutivas.
-- **Histórico de Aberturas**: Visualização das newsletters abertas.
-- **Mensagens Motivacionais**: Incentivos para manter o streak.
+Aqui está uma versão melhorada das suas anotações em formato Markdown, com melhor organização, clareza e adição de detalhes para facilitar a leitura e compreensão:
 
-### **Dashboard Administrativo**
-- **Métricas de Engajamento**: Visualização de streaks, rankings e padrões de abertura.
-- **Filtros**: Por newsletter, período de tempo e status do streak.
-- **Gráficos**: Para análise de engajamento.
 
-### **Regras de Streak**
-- **Cálculo Automático**: O streak aumenta +1 a cada dia consecutivo de abertura.
-- **Reset**: O streak é zerado se o leitor não abrir a newsletter no dia seguinte.
-- **Exceções**: Domingos não quebram o streak, mantendo a sequência intacta.
+**Área Logada para Leitores**
+
+Funcionalidades Principais/
+- **Login Simples**: 
+  - Acesso via e-mail.
+- **Streak de Leituras**:
+  - Exibição da sequência de aberturas consecutivas de newsletters.
+- **Histórico de Aberturas**:
+  - Visualização das newsletters já abertas pelo usuário.
+- **Mensagens Motivacionais**:
+  - Incentivos para manter o streak ativo.
+
+Funcionalidades Bônus/
+
+- **Cadastro Obrigatório**:
+  - O e-mail precisa estar cadastrado no sistema para permitir o login.
+- **Acompanhamento de Desempenho**:
+  - O usuário poderá visualizar:
+    - A sequência atual de streaks.
+    - O recorde pessoal (maior streak alcançado).
+    - O total de newsletters lidas.
+- **Ranking de Leitores**:
+  - Exibição de um ranking dos **Top 5 Leitores**, baseado em streaks.
+- **Histórico com Paginação e Busca**:
+  - Lista paginada das newsletters lidas, com funcionalidade de busca.
+  - Cada item do histórico exibe:
+    - A newsletter lida.
+    - A data de leitura.
+    - Um link para releitura da newsletter (caso a URL esteja no formato correto: `https://thenewscc.beehiiv.com/p/data`).
+  - **Observação**: Caso a URL da newsletter não esteja no formato esperado, o card será criado, mas não estará linkado, podendo ocasionar em "erro".
+
+**Dashboard Administrativo**
+
+Funcionalidades Principais/
+- **Métricas de Engajamento**:
+  - Visualização de streaks, rankings e padrões de abertura dos usuários.
+- **Filtros**:
+  - Filtragem por:
+    - Newsletter específica.
+    - Período de tempo.
+    - Status do streak (ativo ou inativo).
+- **Gráficos**:
+  - Análise visual de engajamento dos usuários.
+
+**Funcionalidades Bônus**
+- **Exibição de E-mails**:
+  - O mesmo e-mail que o leitor vê no perfil é exibido na área administrativa.
+- **Ranking de Top 5 Leitores**:
+  - Repetição do ranking baseado em streaks.
+- **Gráficos de Engajamento**:
+  - Gráficos simples que permitem visualizar:
+    - Número de leitores por dia, semana ou mês.
+- **Tabela de Dados**:
+  - Tabela que coleta e exibe:
+    - Dados básicos dos usuários.
+    - O maior streak alcançado (`max_streak`).
+    - O streak atual de cada usuário.
+  - Filtros disponíveis:
+    - Usuários ativos (`streak > 0`).
+    - Usuários inativos (`streak = 0`).
+
+**Regras de Streak**
+Funcionalidades Principais/
+- **Cálculo Automático**:
+  - O streak aumenta em **+1** a cada dia consecutivo de abertura da newsletter.
+- **Reset**:
+  - O streak é zerado se o leitor não abrir a newsletter no dia seguinte.
+- **Exceções**:
+  - Domingos não quebram o streak, mantendo a sequência intacta.
+
+### **Funcionalidades Bônus**
+- **Registro de Recorde Pessoal**:
+  - Adição do campo `max_streak` para armazenar o maior streak alcançado por cada usuário.
+
+  
+## 🚀 Minha experiencia
+
+
+  
 ## 🛠️ Tecnologias Utilizadas
 
 | **Frontend**         | **Backend**        | **Banco de Dados** | **Outras Ferramentas**       |
 |----------------------|--------------------|--------------------|------------------------------|
-| React + TypeScript   | Python (Flask)     | PostgreSQL         | Render (Deploy)              |
-| TailwindCSS          | Pytest (unitários) |                    | GitHub Actions (CI/CD)       |
-| Cypress (E2E)        |                    |                    |                              |
+| React + TypeScript   | Python (Flask)     | PostgreSQL         | Render (Deploy do Backend)              |
+| TailwindCSS + Material UI         | Pytest (unitários) |                    | GitHub Actions (CI/CD)       |
+|  ̶C̶y̶p̶r̶e̶s̶s̶ ̶(̶E̶2̶E̶)̶        |                    |                    |    Vercel (Deploy do FrontEnd)                          |
 ## 📂 Estrutura do Projeto
 
 ```
@@ -444,15 +506,18 @@ Foram realizados os seguintes testes no backend:
    - **Esperado**: O método deve retornar o valor esperado, que pode ser um resultado calculado ou formatado a partir dos dados do registro.
 </details>
 
+<!-- 
 2. **Testes E2E (Frontend)**:
    - Execute com Cypress:
      ```sh
      cd frontend
      npm run cypress
-     ```
+     ``` -->
+
 ## 📚 Referências
 
 - [Documentação do React](https://reactjs.org/docs/getting-started.html)
+- [Documentação do Material UI](https://mui.com/material-ui/getting-started/)
 - [Documentação do TypeScript](https://www.typescriptlang.org/docs/)
 - [Documentação do Flask](https://flask.palletsprojects.com/)
 - [Documentação do PostgreSQL](https://www.postgresql.org/docs/)
