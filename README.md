@@ -378,8 +378,15 @@ Para facilitar a visualização e compreensão das rotas implementadas no projet
 </p>
 
 
+( ⚠️ Caso insira algum dado na API e os dados estejam desatualizados , execute em seguida o script run_update_streaks.py no backend para manter o banco de dados atualizado ou aguarde até 00h01 para que o Git Workflow execute o script e atualize o banco de dados. ) 
+
+**Backend**:
+```sh
+     python run_update_streaks.py 
+```
 
 A API oferece os seguintes endpoints:
+
 
 <details>
 <summary><strong>GET /</strong></summary>
@@ -569,7 +576,7 @@ A API oferece os seguintes endpoints:
 
 ## 🤖 Automação com GitHub Actions
 
-Este projeto conta com um workflow automatizado via **GitHub Actions** para rodar um script periodicamente. 
+O projeto conta com um workflow automatizado via **GitHub Actions** para rodar um script periodicamente. 
 
 ### 🔄 O que o Workflow Faz?
 - Executa o script `run_update_streaks.py` a cada **24 horas**.
