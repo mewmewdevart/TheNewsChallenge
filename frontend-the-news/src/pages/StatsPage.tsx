@@ -1,9 +1,10 @@
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import StatsTemplate from "@templates/StatsTemplate/StatsTemplate";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Layout from "../Layout";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+
+import StatsTemplate from "@templates/StatsTemplate/StatsTemplate";
 import useDailyPhrase from "@utils/DailyPhrase";
+import Layout from "../Layout";
 
 interface HistoryEntry {
 	post_id: number;
@@ -32,7 +33,7 @@ const StatsPage: React.FC = () => {
 
 	useEffect(() => {
 		if (!email) {
-			// navigate("/");
+			navigate("/");
 			return;
 		}
 
@@ -41,7 +42,6 @@ const StatsPage: React.FC = () => {
 			setError("");
 
 			try {
-				// Check if the email is registered
 				const checkEmailResponse = await fetch(
 					`https://thenewsletterstreakschallenge.onrender.com/check-email?email=${encodeURIComponent(
 						email
@@ -75,7 +75,6 @@ const StatsPage: React.FC = () => {
 
 				const streakData = await streakResponse.json();
 				const historyData = await historyResponse.json();
-				// Access the "data" key of the returned object
 				if (!Array.isArray(historyData)) {
 					throw new Error("Invalid history data.");
 				}

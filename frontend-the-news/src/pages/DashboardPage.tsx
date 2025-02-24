@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import Layout from "../Layout";
+
 import DashboardTemplate from "@templates/DashboardTemplate/DashboardTemplate";
 import useDailyPhrase from "@utils/DailyPhrase";
+import Layout from "../Layout";
 
 interface Read {
   email: string;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+
 import LoginTemplate from "@templates/LoginTemplate/LoginTemplate";
 
 const LoginPage: React.FC = () => {
@@ -41,7 +42,6 @@ const LoginPage: React.FC = () => {
 
 			await streakResponse.json();
 
-			// Navega para a página de estatísticas
 			navigate(`/statsPage?email=${encodeURIComponent(email)}`);
 		} catch (error) {
 			setError(
