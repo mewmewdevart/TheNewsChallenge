@@ -79,7 +79,6 @@ const SearchBarWithCards: React.FC<SearchBarWithCardsProps> = ({
               onClick={() => handleCardClick(card.href)} 
               onKeyDown={(e) => handleCardKeyDown(e, card.href)}
             >
-				<img src="" alt="" />
               <h3 className="font-bold">{card.title}</h3>
             </div>
           ))

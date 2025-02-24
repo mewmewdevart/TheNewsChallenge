@@ -13,7 +13,7 @@ import useResponsiveness from "@utils/Responsiveness";
 import { Typography } from "@mui/material";
 
 interface MenuComponentProps {
-  emailUser: string;
+  emailUser: string | null;
   imageLogo: string;
 }
 
@@ -54,7 +54,7 @@ export default function MenuComponent({
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src={imageLogo} alt="" className="w-[150px] sm:w-[120px]" />
+        <img src={imageLogo} alt="Logo do Thew News" className="w-[150px] sm:w-[120px]" />
       </a>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Typography sx={{ minWidth: 100, cursor: "pointer" }} onClick={handleDashboardClick} className="hover:font-bold">

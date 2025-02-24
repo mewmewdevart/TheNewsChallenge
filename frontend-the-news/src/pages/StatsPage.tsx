@@ -1,6 +1,6 @@
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import StatsTemplate from "@templates/StatsTemplate/StatsTemplate";
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
 import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "../Layout";
 import useDailyPhrase from "@utils/DailyPhrase";
@@ -107,38 +107,40 @@ const StatsPage: React.FC = () => {
 	const emailUser = queryParams.get("email") || undefined;
 
 	return (
-		<Layout emailUser={emailUser !== "" ? emailUser : undefined}>
-			<Helmet>
-				<title>Perfil - Newsletter Streak Challenge</title>
-				<meta
-					name="description"
-					content="Veja suas estatísticas e progresso no Desafio de Streak de Newsletter."
-				/>
-				<meta
-					name="keywords"
-					content="newsletter, streak, desafio, estatísticas, progresso"
-				/>
-				<meta
-					property="og:title"
-					content="Estatísticas - Desafio de Streak de Newsletter"
-				/>
-				<meta
-					property="og:description"
-					content="Veja suas estatísticas e progresso no Desafio de Streak de Newsletter."
-				/>
-				<meta property="og:type" content="website" />
-				<meta property="og:url" content={window.location.href} />
-			</Helmet>
-			<StatsTemplate
-				isLoading={isLoading}
-				emailUser={emailUser}
-				streakUser={streak}
-				maxStreakUser={maxStreak}
-				topReaders={topReaders}
-				phraseDaily={phraseDaily}
-				history={history}
-			/>
-		</Layout>
+			<HelmetProvider>
+				<Layout emailUser={emailUser}>
+					<Helmet>
+						<title>Perfil - Newsletter Streak Challenge</title>
+						<meta
+							name="description"
+							content="Veja suas estatísticas e progresso no Desafio de Streak de Newsletter."
+						/>
+						<meta
+							name="keywords"
+							content="newsletter, streak, desafio, estatísticas, progresso"
+						/>
+						<meta
+							property="og:title"
+							content="Estatísticas - Desafio de Streak de Newsletter"
+						/>
+						<meta
+							property="og:description"
+							content="Veja suas estatísticas e progresso no Desafio de Streak de Newsletter."
+						/>
+						<meta property="og:type" content="website" />
+						<meta property="og:url" content={window.location.href} />
+					</Helmet>
+					<StatsTemplate
+						isLoading={isLoading}
+						emailUser={emailUser}
+						streakUser={streak}
+						maxStreakUser={maxStreak}
+						topReaders={topReaders}
+						phraseDaily={phraseDaily}
+						history={history}
+					/>
+				</Layout>
+			</HelmetProvider>
 	);
 };
 

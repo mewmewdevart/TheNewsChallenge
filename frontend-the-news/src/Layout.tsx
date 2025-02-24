@@ -15,7 +15,7 @@ const Layout: React.FC<LayoutProps> = ({ children, emailUser }) => {
 
 	return (
 		<ErrorBoundary>
-			<MenuComponent emailUser={emailUser || ""} imageLogo={imageLogo} />
+			<MenuComponent emailUser={emailUser ?? null} imageLogo={imageLogo} />
 			<section className={`bg-[--color-brand-neutral-100] w-full ${sectionLayout} py-4`}>
 				<main className="flex-grow">{children}</main>
 			</section>

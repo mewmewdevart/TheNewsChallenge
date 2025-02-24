@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import Layout from "../Layout";
 import DashboardTemplate from "@templates/DashboardTemplate/DashboardTemplate";
 import useDailyPhrase from "@utils/DailyPhrase";
@@ -192,46 +192,48 @@ const DashboardPage: React.FC = () => {
   };
 
   return (
-    <Layout emailUser={"☕"}>
-      <Helmet>
-        <title>Dashboard - Newsletter Streak Challenge</title>
-        <meta
-          name="description"
-          content="Acompanhe seu progresso e estatísticas no Dashboard do Desafio de Streak de Newsletter."
+    <HelmetProvider>
+      <Layout emailUser={"☕"}>
+        <Helmet>
+          <title>Dashboard - Newsletter Streak Challenge</title>
+          <meta
+            name="description"
+            content="Acompanhe seu progresso e estatísticas no Dashboard do Desafio de Streak de Newsletter."
+          />
+          <meta
+            name="keywords"
+            content="dashboard, newsletter, streak, desafio, estatísticas, progresso"
+          />
+          <meta
+            property="og:title"
+            content="Dashboard - Desafio de Streak de Newsletter"
+          />
+          <meta
+            property="og:description"
+            content="Acompanhe seu progresso e estatísticas no Dashboard do Desafio de Streak de Newsletter."
+          />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={window.location.href} />
+        </Helmet>
+        <DashboardTemplate
+          isLoading={isLoading}
+          chartData={chartData}
+          chartLabels={chartLabels}
+          selectedPeriod={selectedPeriod}
+          onPeriodChange={setSelectedPeriod}
+          totalReaders={totalReaders}
+          totalOpens={totalOpens}
+          averageOpens={averageOpens}
+          topReaders={topReaders}
+          selectedNewsletter={selectedNewsletter}
+          onNewsletterChange={handleNewsletterChange}
+          selectedStreakStatus={selectedStreakStatus}
+          onStreakStatusChange={handleStreakStatusChange}
+          reads={filteredReads}
+          phraseOfTheDay={phraseDaily}
         />
-        <meta
-          name="keywords"
-          content="dashboard, newsletter, streak, desafio, estatísticas, progresso"
-        />
-        <meta
-          property="og:title"
-          content="Dashboard - Desafio de Streak de Newsletter"
-        />
-        <meta
-          property="og:description"
-          content="Acompanhe seu progresso e estatísticas no Dashboard do Desafio de Streak de Newsletter."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={window.location.href} />
-      </Helmet>
-      <DashboardTemplate
-        isLoading={isLoading}
-        chartData={chartData}
-        chartLabels={chartLabels}
-        selectedPeriod={selectedPeriod}
-        onPeriodChange={setSelectedPeriod}
-        totalReaders={totalReaders}
-        totalOpens={totalOpens}
-        averageOpens={averageOpens}
-        topReaders={topReaders}
-        selectedNewsletter={selectedNewsletter}
-        onNewsletterChange={handleNewsletterChange}
-        selectedStreakStatus={selectedStreakStatus}
-        onStreakStatusChange={handleStreakStatusChange}
-        reads={filteredReads}
-        phraseOfTheDay={phraseDaily}
-      />
-    </Layout>
+      </Layout>
+    </HelmetProvider>
   );
 };
 
