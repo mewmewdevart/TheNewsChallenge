@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://opensource.org/licenses/MIT">
+  <a href="https://opensource.org/licenses/MIT" target="_blank">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="Licença MIT">
   </a>
 </p>
