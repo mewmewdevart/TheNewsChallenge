@@ -239,7 +239,7 @@ class NewsletterRead(db.Model):
    - **Streak de um Usuário (/streak):** Consulta o streak atual e o máximo de um e-mail específico.
 
 3. **Ele é escalável? Explique.**  
-   Sim, o projeto é escalável. O uso de índices e cache (em `/top-readers`) melhora a performance de consultas frequentes. O formato atual permite que ele seja facilmente particionado conforme necessário, mas pode ser ajustado conforme as demandas aumentem.
+   Sim, o projeto é escalável. O uso de índices e cache (em `/top-readers`) melhora a performance de consultas frequentes. O formato atual permite que ele seja facilmente particionado conforme necessário, mas pode ser ajustado conforme as demandas aumentem. 
 
 </details>
 
@@ -378,15 +378,14 @@ Para facilitar a visualização e compreensão das rotas implementadas no projet
 </p>
 
 
-( ⚠️ Caso insira algum dado na API e os dados estejam desatualizados , execute em seguida o script run_update_streaks.py no backend para manter o banco de dados atualizado ou aguarde até 00h01 para que o Git Workflow execute o script e atualize o banco de dados. ) 
+⚠️ Caso insira algum dado na API e os dados estejam desatualizados , execute em seguida o script run_update_streaks.py no backend para manter o banco de dados atualizado ou aguarde até 00h01 para que o Git Workflow execute o script e atualize o banco de dados.
 
 **Backend**:
 ```sh
-     python run_update_streaks.py 
+python run_update_streaks.py 
 ```
 
 A API oferece os seguintes endpoints:
-
 
 <details>
 <summary><strong>GET /</strong></summary>
