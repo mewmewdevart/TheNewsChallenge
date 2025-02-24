@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-    <a href="https://the-news-letter-streaks.vercel.app/" target="_blank">Acesso o resultado </a> 
+    <a href="https://the-news-letter-streaks.vercel.app/" target="_blank">Acessar o resultado </a> 
 </p>
 
 ## 📖 Introdução
