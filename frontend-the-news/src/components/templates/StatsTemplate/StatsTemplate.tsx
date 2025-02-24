@@ -1,8 +1,8 @@
 import React from "react";
-import StatCard from "@atoms/StatCard/StatCard";
-import StatsRank from "@atoms/StatsRank/StatsRank";
-import DailyPhrase from "@atoms/DailyPhrase/DailyPhrase";
-import SearchBarWithCards from "@molecules/SearchBarWithCards/SearchBarWithCards";
+import StatCard from "@atoms/StatCardComponent/StatCardComponent";
+import StatsRank from "@atoms/StatsRankComponent/StatsRankComponent";
+import DailyPhrase from "@atoms/DailyPhraseComponent/DailyPhraseComponent";
+import SearchBarWithCards from "@molecules/SearchBarWithCardsComponent/SearchBarWithCardsComponent";
 import useResponsiveness from "@utils/Responsiveness";
 
 interface TopReader {

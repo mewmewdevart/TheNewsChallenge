@@ -1,6 +1,6 @@
 import React from "react";
 import useResponsiveness from "@utils/Responsiveness";
-import LoginForm from "@molecules/LoginForm/LoginForm";
+import LoginForm from "@molecules/LoginFormComponent/LoginFormComponent";
 import logoLoginPage from "@assets/logo.webp";
 
 import "./LoginTemplate.css";

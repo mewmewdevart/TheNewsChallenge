@@ -1,12 +1,12 @@
 import React from "react";
-import BarChart from "@molecules/BarChart/BarChart";
-import Table from "@organisms/Table/Table";
-import StatCard from "@atoms/StatCard/StatCard";
-import PeriodFilter from "@molecules/PeriodFilter/PeriodFilter";
-import TopReaders from "@molecules/TopReaders/TopReaders";
-import NewsletterFilter from "@molecules/NewsletterFilter/NewsletterFilter";
+import BarChart from "@molecules/BarChartComponent/BarChartComponent";
+import Table from "@organisms/TableComponent/TableComponent";
+import StatCard from "@atoms/StatCardComponent/StatCardComponent";
+import PeriodFilter from "@molecules/PeriodFilterComponent/PeriodFilterComponent";
+import TopReaders from "@molecules/TopReadersComponent/TopReadersComponent";
+import NewsletterFilter from "@molecules/NewsletterFilterComponent/NewsletterFilterComponent";
 import useResponsiveness from "@utils/Responsiveness";
-import DailyPhrase from "@atoms/DailyPhrase/DailyPhrase";
+import DailyPhrase from "@atoms/DailyPhraseComponent/DailyPhraseComponent";
 
 interface Read {
 	email: string;
