@@ -93,7 +93,11 @@ Este projeto foi desenvolvido para criar uma solução de gamificação que ince
 
 </details>
 
-### 🛠️ Dashboard Administrativo  
+
+### 🛠️ Dashboard Administrativo
+
+
+
 
 <details>
   <summary> Funcionalidades Principais</summary>
@@ -176,7 +180,7 @@ No final, ver o projeto funcional me motiva bastante. Gostaria de ter tido mais 
 
 Existem muitas formas de polir o projeto e espero que possamos trabalhar no **The News** verdadeiro, trazendo várias features 👀. O desafio me proporcionou um crescimento rápido e grandioso (sim, me sinto assim, haha). Por mais desafiador que fosse, a jornada de conseguir, falhar e conseguir novamente, diante de vários obstáculos, foi essencial para que eu conseguisse chegar até aqui.
 
-### Perguntas a serem Respondidas 🔍 
+### 🔍 Perguntas a serem Respondidas
 
 <details>
   <summary> Stacks </summary>
@@ -250,7 +254,11 @@ class NewsletterRead(db.Model):
 
 </details>
 
+
+
 ## 🛠️ Tecnologias Utilizadas
+
+
 
 | **Frontend**         | **Backend**        | **Banco de Dados** | **Outras Ferramentas**       |
 |----------------------|--------------------|--------------------|------------------------------|
@@ -280,7 +288,9 @@ TheNewsLetterStreaks/
 
 ## 🚀 Instruções de Uso
 
-### Pré-requisitos
+
+### 🧰 Pré-requisitos
+
 
 ❗️ Certifique-se de ter as seguintes ferramentas instaladas:
 
@@ -289,7 +299,7 @@ TheNewsLetterStreaks/
 - **PostgreSQL**
 - **Git**
 
-### Rodando o Projeto Localmente
+### ⚙️ Rodando o Projeto Localmente
 
 1. **Clone o repositório**:
    ```sh
@@ -642,16 +652,9 @@ Foram realizados os seguintes testes no backend:
    - **Esperado**: O método deve retornar o valor esperado, que pode ser um resultado calculado ou formatado a partir dos dados do registro.
 </details>
 
-<!-- 
-2. **Testes E2E (Frontend)**:
-   - Execute com Cypress:
-     ```sh
-     cd frontend
-     npm run cypress
-     ``` -->
 
 
-## Resultado
+## 📋 Resultado
 
 
 #### Wireframes do Figma:
