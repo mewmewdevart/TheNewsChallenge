@@ -45,84 +45,122 @@ Este projeto foi desenvolvido para criar uma solução de gamificação que ince
 
 Aqui está uma versão melhorada das suas anotações em formato Markdown, com melhor organização, clareza e adição de detalhes para facilitar a leitura e compreensão:
 
+### 📖 Área Logada para Leitores  
 
-**Área Logada para Leitores**
+<details>
+  <summary> Funcionalidades Principais</summary>
 
-Funcionalidades Principais/
-- **Login Simples**: 
-  - Acesso via e-mail.
-- **Streak de Leituras**:
-  - Exibição da sequência de aberturas consecutivas de newsletters.
-- **Histórico de Aberturas**:
-  - Visualização das newsletters já abertas pelo usuário.
-- **Mensagens Motivacionais**:
-  - Incentivos para manter o streak ativo.
+- ** Login Simples**  
+  - Acesso via e-mail.  
 
-Funcionalidades Bônus/
+- ** Streak de Leituras**  
+  - Exibição da sequência de aberturas consecutivas de newsletters.  
 
-- **Cadastro Obrigatório**:
-  - O e-mail precisa estar cadastrado no sistema para permitir o login.
-- **Acompanhamento de Desempenho**:
-  - O usuário poderá visualizar:
-    - A sequência atual de streaks.
-    - O recorde pessoal (maior streak alcançado).
-    - O total de newsletters lidas.
-- **Ranking de Leitores**:
-  - Exibição de um ranking dos **Top 5 Leitores**, baseado em streaks.
-- **Histórico com Paginação e Busca**:
-  - Lista paginada das newsletters lidas, com funcionalidade de busca.
-  - Cada item do histórico exibe:
-    - A newsletter lida.
-    - A data de leitura.
-    - Um link para releitura da newsletter (caso a URL esteja no formato correto: `https://thenewscc.beehiiv.com/p/data`).
-  - **Observação**: Caso a URL da newsletter não esteja no formato esperado, o card será criado, mas não estará linkado, podendo ocasionar em "erro".
+- **Histórico de Aberturas**  
+  - Visualização das newsletters já abertas pelo usuário.  
 
-**Dashboard Administrativo**
+- **Mensagens Motivacionais**  
+  - Incentivos para manter o streak ativo.  
 
-Funcionalidades Principais/
-- **Métricas de Engajamento**:
-  - Visualização de streaks, rankings e padrões de abertura dos usuários.
-- **Filtros**:
-  - Filtragem por:
-    - Newsletter específica.
-    - Período de tempo.
-    - Status do streak (ativo ou inativo).
-- **Gráficos**:
-  - Análise visual de engajamento dos usuários.
+</details>
 
-**Funcionalidades Bônus**
-- **Exibição de E-mails**:
-  - O mesmo e-mail que o leitor vê no perfil é exibido na área administrativa.
-- **Ranking de Top 5 Leitores**:
-  - Repetição do ranking baseado em streaks.
-- **Gráficos de Engajamento**:
-  - Gráficos simples que permitem visualizar:
-    - Número de leitores por dia, semana ou mês.
-- **Tabela de Dados**:
-  - Tabela que coleta e exibe:
-    - Dados básicos dos usuários.
-    - O maior streak alcançado (`max_streak`).
-    - O streak atual de cada usuário.
-  - Filtros disponíveis:
-    - Usuários ativos (`streak > 0`).
-    - Usuários inativos (`streak = 0`).
+<details>
+  <summary> Funcionalidades Bônus</summary>
 
-**Regras de Streak**
-Funcionalidades Principais/
-- **Cálculo Automático**:
-  - O streak aumenta em **+1** a cada dia consecutivo de abertura da newsletter.
-- **Reset**:
-  - O streak é zerado se o leitor não abrir a newsletter no dia seguinte.
-- **Exceções**:
-  - Domingos não quebram o streak, mantendo a sequência intacta.
+- ** Cadastro Obrigatório**  
+  - O e-mail precisa estar cadastrado no sistema para permitir o login.  
 
-### **Funcionalidades Bônus**
-- **Registro de Recorde Pessoal**:
-  - Adição do campo `max_streak` para armazenar o maior streak alcançado por cada usuário.
+- ** Acompanhamento de Desempenho**  
+  - O usuário poderá visualizar:  
+    - A sequência atual de streaks.  
+    - O recorde pessoal (maior streak alcançado).  
+    - O total de newsletters lidas.  
+
+- ** Ranking de Leitores**  
+  - Exibição de um ranking dos **Top 5 Leitores**, baseado em streaks.  
+
+- ** Histórico com Paginação e Busca**  
+  - Lista paginada das newsletters lidas, com funcionalidade de busca.  
+  - Cada item do histórico exibe:  
+    -  A newsletter lida.  
+    -  A data de leitura.  
+    -  Um link para releitura da newsletter (*caso a URL esteja no formato correto: `https://thenewscc.beehiiv.com/p/data`*).  
+  - ⚠️ **Observação**: Se a URL não estiver no formato esperado, o card será criado, mas sem link, podendo resultar em erro.  
+
+</details>
+
+
+### 🛠️ Dashboard Administrativo  
+
+<details>
+  <summary> Funcionalidades Principais</summary>
+
+- ** Métricas de Engajamento**  
+  - Visualização de streaks, rankings e padrões de abertura dos usuários.  
+
+- ** Filtros**  
+  - Filtragem por:  
+    -   Newsletter específica.  
+    -  Período de tempo.  
+    -  Status do streak (ativo ou inativo).  
+
+- ** Gráficos**  
+  - Análise visual de engajamento dos usuários.  
+
+</details>
+
+<details>
+  <summary> Funcionalidades Bônus</summary>
+
+- ** Exibição de E-mails**  
+  - O mesmo e-mail que o leitor vê no perfil será exibido na área administrativa.  
+
+- **  Ranking de Top 5 Leitores**  
+  - Repetição do ranking baseado em streaks.  
+
+- ** Gráficos de Engajamento**  
+  - Exibição de gráficos com:  
+    -  Número de leitores por dia, semana ou mês.  
+
+- ** Tabela de Dados**  
+  - Exibição de informações sobre os usuários, incluindo:  
+    -   Maior streak alcançado (`max_streak`).  
+    -   Streak atual de cada usuário.  
+  - Filtros disponíveis:  
+    -   Usuários ativos (`streak > 0`).  
+    -   Usuários inativos (`streak = 0`).  
+
+</details>
+
+
+### 🔥 Regras de Streak  
+
+<details>
+  <summary> Funcionalidades Principais</summary>
+
+- ** Cálculo Automático**  
+  - O streak aumenta em **+1** a cada dia consecutivo de abertura da newsletter.  
+
+- ** Reset Automático**  
+  - O streak é zerado se o leitor não abrir a newsletter no dia seguinte.  
+
+- **  Exceções**  
+  -  Domingos **não quebram o streak**, mantendo a sequência intacta.  
+
+</details>
+
+<details>
+  <summary> Funcionalidades Bônus</summary>
+
+- ** Registro de Recorde Pessoal**  
+  - Armazena o maior streak já alcançado por cada usuário no campo `max_streak`.  
+
+</details>
 
   
 ## 🚀 Minha experiencia
 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in est feugiat, ultricies nulla sed, convallis nulla. Aliquam sed pharetra erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin sit amet interdum augue. Vestibulum at nunc et nunc consequat dictum.
 
   
 ## 🛠️ Tecnologias Utilizadas
