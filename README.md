@@ -39,8 +39,9 @@ Este projeto foi desenvolvido como parte do desafio técnico para a vaga de Dese
 7. [Endpoints da API](#-endpoints-da-api)
 8. [Automação com GitHub Actions](#-automação-com-github-actions)
 9. [Testes](#-testes)
-10. [Referências](#-referências)
-11. [Licença](#-licença)
+10. [Resultado](#-resultado)
+11. [Referências](#-referências)
+12. [Licença](#-licença)
 
 ## 🎯 Desafio
 
@@ -71,7 +72,7 @@ Este projeto foi desenvolvido para criar uma solução de gamificação que ince
   <summary> Funcionalidades Bônus</summary>
 
 - **Cadastro Obrigatório**  
-  - O e-mail precisa estar cadastrado no sistema para permitir o login.  
+  - O e-mail precisa estar cadastrado no sistema para permitir o login, mas não está barrando o usuario caso o acesso seja feito via URL. 😢
 
 - **Acompanhamento de Desempenho**  
   - O usuário poderá visualizar:  
@@ -88,7 +89,7 @@ Este projeto foi desenvolvido para criar uma solução de gamificação que ince
     - A newsletter lida.  
     - A data de leitura.  
     - Um link para releitura da newsletter (*caso a URL esteja no formato correto: `https://thenewscc.beehiiv.com/p/data`*).  
-  - ⚠️ **Observação**: Se a URL não estiver no formato esperado, o card será criado, mas sem link, podendo resultar em erro.  
+  - ⚠️ **Observação**: Se a URL não estiver no formato esperado, o card será criado, mas sem link de direcionamento. 
 
 </details>
 
@@ -274,7 +275,6 @@ TheNewsLetterStreaks/
 │   │   └── utils.py        # Funções utilitárias (ex: cálculo de streaks)
 │   ├── tests/              # Testes unitários
 │   └── requirements.txt    # Dependências do Python
-├── tests/                  # Testes E2E (Cypress)
 └── README.md               # Documentação do projeto
 ```
 
@@ -352,14 +352,22 @@ TheNewsLetterStreaks/
      ```
 
 7. **Acesse o projeto**:
-   - O **Frontend** estará disponível em: [http://localhost:3000](http://localhost:3000)
-   - O **Backend** estará disponível em: [http://127.0.0.1:5000](http://127.0.0.1:5000)
+   - O **Frontend** estará disponível em: [http://localhost:3000](http://localhost:3000). <br>
+     Você pode logar utilizando um dos e-mails criados via GET ou acessar o projeto diretamente pela URL do deploy: [https://the-news-letter-streaks.vercel.app/](https://the-news-letter-streaks.vercel.app/), usando o meu e-mail de teste: `larissa@thenews.com`.
+   - O **Backend** estará disponível em: [http://127.0.0.1:5000](http://127.0.0.1:5000) ou, se preferir, utilize o meu endpoint hospedado: [https://thenewsletterstreakschallenge.onrender.com/](https://thenewsletterstreakschallenge.onrender.com/).
 
 ## 📡 Endpoints da API
 
 Para facilitar a visualização e compreensão das rotas implementadas no projeto, criei uma página HTML que oferece um design mais agradável. Acesse a documentação completa das rotas da API clicando no link abaixo:
 
-<a href="https://thenewsletterstreakschallenge.onrender.com/documentation" target="_blank">Documentação da API - Visualização Melhorada</a> 
+
+![Captura de tela de 2025-02-24 01-10-54](https://github.com/user-attachments/assets/1f7fbe5b-38e2-4feb-a8a7-4a052d42529d)
+
+<p align="center">
+    <a href="https://thenewsletterstreakschallenge.onrender.com/documentation" target="_blank">Documentação da API - Visualização Melhorada< </a> 
+</p>
+
+
 
 A API oferece os seguintes endpoints:
 
@@ -642,6 +650,57 @@ Foram realizados os seguintes testes no backend:
      npm run cypress
      ``` -->
 
+
+## Resultado
+
+
+#### Wireframes do Figma:
+
+![Captura de tela de 2025-02-24 00-54-49](https://github.com/user-attachments/assets/1487c8ad-11bf-4970-a8fa-34e11b841983)
+
+<p align="center">
+    <a href="https://www.figma.com/design/9AGtCVgixIWjcjXDGSH2kF/Wireframes---Desafio-Tecnico-(Thew-News)?node-id=2035-40&t=YvBuWCfwbA7zNC7K-1" target="_blank">Acesso aos Wireframes (Prototipos) </a> 
+</p>
+
+
+#### Video do Projeto:
+Video da Tela de Login, Tela do Usuario e do Dashboard + Responsividade do Projeto
+
+https://github.com/user-attachments/assets/af16ddc4-63b0-4083-90fa-360d777aaff4
+
+#### Printscreen das Telas:
+##### Tela de Login / <br>
+
+![screencapture-localhost-5173-2025-02-24-00_50_35](https://github.com/user-attachments/assets/1e49fae6-41c7-4d36-a177-30fe0fe5aa55)
+
+
+(Clique na imagem e dê zoom para visualizar os diferentes tipos de responsividade)
+
+![screencapture-localhost-5173-202![screencapture-localhost-5173-2025-02-24-00_44_32](https://github.com/user-attachments/assets/00b5938a-024a-4e4c-861c-53676a2d52d0)
+5-02-24-00_44_32](https://github.com/user-attachments/assets/443caacc-a4a5-405b-a118-e8a0bed17836)
+
+##### Tela do Usuario / <br>
+
+![screencapture-localhost-5173-statsPage-2025-02-24-00_51_07](https://github.com/user-attachments/assets/2273797e-6f2e-4751-8759-d156fbbeacce)
+
+
+(Clique na imagem e dê zoom para visualizar os diferentes tipos de responsividade)
+
+![screencapture-localhost-5173-statsPage-2025-02-24-00_46_42](https://github.com/user-attachments/assets/aeec8717-c086-4425-b1dc-47bdda3f0272)
+
+
+##### Tela Dashboard / <br>
+
+![screencapture-localhost-5173-dashboardPage-2025-02-24-00_51_52](https://github.com/user-attachments/assets/ad48cafc-413c-49ca-a209-0b7bfcbee918)
+
+
+(Clique na imagem e dê zoom para visualizar os diferentes tipos de responsividade)
+
+![screencapture-localhost-5173-dashboardPage-2025-02-24-00_49_42](https://github.com/user-attachments/assets/269ffe8d-b047-4d5d-b888-b353012584dc)
+
+
+
+
 ## 📚 Referências
 
 - [Documentação do React](https://reactjs.org/docs/getting-started.html)
@@ -651,6 +710,19 @@ Foram realizados os seguintes testes no backend:
 - [Documentação do PostgreSQL](https://www.postgresql.org/docs/)
 - [Documentação do Render](https://render.com/docs)
 
+
+
+
+
 ## 📜 Licença
 
 Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT).
+
+<p align="center">
+  Desenvolvido com muito ☕ por
+  <a href="https://linktr.ee/mewmewdevart" target="_blank">Larissa Cristina Benedito</a>
+</p>
+
+
+
+
