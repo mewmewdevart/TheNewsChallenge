@@ -14,9 +14,16 @@
   </i></b><br>
 </p>
 
+
 <p align="center">
     <a href="https://the-news-letter-streaks.vercel.app/" target="_blank">Acessar o resultado </a> 
 </p>
+
+#### ⚠️ Projeto não avaliado e não avancei para a próxima fase
+Recebi um retorno do RH na quarta-feira (12 de março de 2025), informando que meu desafio não avançou para a próxima fase do processo seletivo. A justificativa apresentada foi que, devido à alta demanda de entregas, não foi possível fornecer um feedback sobre a solução que apresentei. Fiquei surpresa com o e-mail, especialmente considerando que levei 10 dias para concluir o desafio e esperava, no mínimo, ser convidada para a próxima fase ou receber um feedback técnico sobre as falhas encontradas por consideração ao tempo gasto. Logo em seguida, enviei uma mensagem educada pedindo um feedback técnico, a fim de entender os motivos que levaram à decisão e aprimorar minhas soluções para futuras oportunidades. Até o momento, não obtive retorno.
+
+Ao verificar o status das contribuições/convite de visualização do meu repositório, que estava inicialmente privado com o acesso de visualização enviado ao avaliador, constatei que meu pedido de acesso não foi aceito, ou seja, eles não visualizaram nem testaram a minha solução. No entanto, enviaram um e-mail dando a entender que haviam avaliado o repositório. Mencionei esse ponto no e-mail e estou aguardando uma resposta. Não sei se a situação será corrigida, mas assim que eu obtiver um retorno, atualizarei este texto. (Última atualização: 15 de março de 2025).
+
 
 ## 📖 Introdução
 
