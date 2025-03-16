@@ -20,7 +20,7 @@
 </p>
 
 #### ⚠️ Não avancei no processo seletivo + aguardando Feedback Tecnico
-Recebi um retorno do RH na quarta-feira (12 de março de 2025), informando que meu desafio não avançou para a próxima fase do processo seletivo e devido à alta demanda de entregas, não foi possível fornecer um feedback sobre a solução que apresentei. Pedi por um feedback tecnico sobre o projeto e estou aguardando um retorno, caso eu receba o feedback tecnico irei atualizar esse repositorio com mais informações.
+Recebi um retorno do RH na quarta-feira (12 de março de 2025), informando que meu desafio não avançou para a próxima fase do processo seletivo e devido à alta demanda de entregas, não foi possível fornecer um feedback sobre a solução que apresentei. Pedi por um feedback tecnico sobre o projeto e estou aguardando um retorno, caso eu receba o feedback tecnico irei atualizar esse repositorio com mais informações. (O repositorio estava privado, tornei ele publico após o processo).
 
 
 ## 📖 Introdução
