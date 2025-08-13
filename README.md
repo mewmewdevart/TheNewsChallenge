@@ -8,6 +8,22 @@
   </a>
 </p>
 
+> [!WARNING]
+> Este projeto foi desenvolvido como um desafio técnico para a vaga de **Desenvolvedora Fullstack Júnior** na empresa **The News**, do grupo **The Waffle**.
+>
+> **Aviso Importante sobre o Processo Seletivo:**
+>
+> A experiência com este processo seletivo foi extremamente negativa e desrespeitosa. O desafio proposto, para ser concluído em apenas 10 dias, exigia a implementação de uma extensa lista de requisitos técnicos, muito além do que seria razoavelmente esperado para uma vaga de nível júnior.
+>
+> Apesar de ter dedicado o tempo necessário para entregar um projeto completo e funcional, enfrentando inclusive problemas técnicos com o webhook fornecido pela própria empresa, que confirmou a falha e sugeriu uma solução paliativa, o projeto não foi devidamente avaliado.
+>
+> A empresa exigiu que o repositório fosse privado e que eu enviasse um vídeo demonstrativo, com convites de acesso para o avaliador. Eu cumpri todas as exigências, mas o convite do GitHub nunca foi aceito e o vídeo nunca foi visualizado. Após semanas sem qualquer retorno, recebi uma resposta genérica informando que meu projeto havia sido avaliado e que eu não seguiria para a próxima fase.
+>
+> A justificativa de que o projeto foi avaliado é inconsistente, já que não houve acesso ao repositório ou ao vídeo. Diante da falta de consideração com o tempo e o trabalho do candidato  e da ausência de feedback, decidi tornar este repositório público para expor o ocorrido.
+>
+> ❗ **Não recomendo** que outros desenvolvedores participem deste processo seletivo, pois o esforço e o tempo dedicados podem ser completamente invalidados. 
+
+
 <p align="center">
 	<b><i>
     🚀 | Minha solução para o desafio técnico da vaga de Desenvolvedor Full Stack Jr (Front-end Specialist) na Waffle.
